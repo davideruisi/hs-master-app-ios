@@ -1,0 +1,47 @@
+name: HSMaster
+
+options:
+  bundleIdPrefix: com.davideruisi
+  createIntermediateGroups: true
+  usesTabs: false
+  indentWidth: 2
+  xcodeVersion: "12.5"
+  deploymentTarget: 
+    iOS: "13.0"
+  generateEmptyDirectories: true
+
+configs:
+  TestDebug: debug
+  TestRelease: release
+  ProductionDebug: debug
+  ProductionRelease: release
+
+settings:
+  TARGETED_DEVICE_FAMILY: 1
+
+targets:
+  HSMaster:
+    type: application
+    platform: iOS
+    sources:
+      - HSMaster
+    scheme:
+      configVariants:
+        - Test
+        - Production
+    info:
+      path: HSMaster/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
+        CFBundleExecutable: "$(EXECUTABLE_NAME)"
+        CFBundleIdentifier: "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        CFBundleInfoDictionaryVersion: "6.0"
+        CFBundleName: "$(PRODUCT_NAME)"
+        CFBundlePackageType: "$(PRODUCT_BUNDLE_PACKAGE_TYPE)"
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        LSRequiresIPhoneOS: true
+        UIApplicationSupportsIndirectInputEvents: true
+        UILaunchStoryboardName: "LaunchScreen"
+        UIRequiredDeviceCapabilities: ["armv7"]
+        UISupportedInterfaceOrientations: ["UIInterfaceOrientationPortrait"]
