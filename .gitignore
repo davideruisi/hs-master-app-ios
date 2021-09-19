@@ -55,3 +55,4 @@ xcuserdata/
 ## Ignore project files as we generate them with xcodegen ([https://github.com/yonaskolb/XcodeGen](https://github.com/yonaskolb/XcodeGen))  
 *.xcodeproj  
 *.xcworkspace
+Info.plist
