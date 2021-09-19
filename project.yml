@@ -16,9 +16,6 @@ configs:
   ProductionDebug: debug
   ProductionRelease: release
 
-settings:
-  TARGETED_DEVICE_FAMILY: 1
-
 targets:
   HSMaster:
     type: application
@@ -45,3 +42,5 @@ targets:
         UILaunchStoryboardName: "LaunchScreen"
         UIRequiredDeviceCapabilities: ["armv7"]
         UISupportedInterfaceOrientations: ["UIInterfaceOrientationPortrait"]
+    settings:
+      TARGETED_DEVICE_FAMILY: 1
