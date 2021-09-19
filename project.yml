@@ -30,7 +30,7 @@ targets:
         - Test
         - Production
     info:
-      path: HSMaster/Info.plist
+      path: HSMaster/Resources/Info.plist
       properties:
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundleExecutable: "$(EXECUTABLE_NAME)"
