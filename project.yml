@@ -10,22 +10,12 @@ options:
     iOS: "13.0"
   generateEmptyDirectories: true
 
-configs:
-  TestDebug: debug
-  TestRelease: release
-  ProductionDebug: debug
-  ProductionRelease: release
-
 targets:
   HSMaster:
     type: application
     platform: iOS
     sources:
       - HSMaster
-    scheme:
-      configVariants:
-        - Test
-        - Production
     info:
       path: HSMaster/SupportingFiles/Info.plist
       properties:

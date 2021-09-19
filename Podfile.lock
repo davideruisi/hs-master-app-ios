@@ -2,25 +2,29 @@ PODS:
   - HydraAsync (2.0.6)
   - Katana (6.0.3):
     - HydraAsync (< 3, >= 2.0.6)
+  - SwiftLint (0.44.0)
   - Tempura (9.0.1):
     - HydraAsync (< 3, >= 2.0.6)
     - Katana (< 7, >= 6.0)
 
 DEPENDENCIES:
   - Katana (~> 6.0)
+  - SwiftLint (~> 0.44)
   - Tempura (~> 9.0)
 
 SPEC REPOS:
   trunk:
     - HydraAsync
     - Katana
+    - SwiftLint
     - Tempura
 
 SPEC CHECKSUMS:
   HydraAsync: 8d589bd725b0224f899afafc9a396327405f8063
   Katana: 12acb436b3b473ff5379dbad98ae7d603ecb5deb
+  SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Tempura: f88a4dc78f93fe04acf313491cfdd922317ebf63
 
-PODFILE CHECKSUM: 70effdbcabcbe5d91ca1c7901c7b481061cae97f
+PODFILE CHECKSUM: 7171417b3134189c943155df26cacea42a526594
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.2
