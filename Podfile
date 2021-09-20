@@ -3,9 +3,13 @@ platform :ios, '13.0'
 target 'HSMaster' do
   use_frameworks!
 
+  # Architecture
   pod 'Katana', '~> 6.0'
-  pod 'SwiftLint', '~> 0.44'
+  pod 'PinLayout', '~> 1.10'
   pod 'Tempura', '~> 9.0'
+
+  # Developer Tools
+  pod 'SwiftLint', '~> 0.44'
 end
 
 post_install do |installer|
