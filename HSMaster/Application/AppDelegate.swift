@@ -18,14 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var store: Store<AppState, AppDependencies>?
   
-  // MARK: App Life-cycle
+  // MARK: App Lifecycle
 
   func application(
     _ application: UIApplication,
     // swiftlint:disable:next discouraged_optional_collection
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    // Create the window and unwrap it.
+    // Create the window.
     let window = UIWindow(frame: UIScreen.main.bounds)
     self.window = window
     window.makeKeyAndVisible()
