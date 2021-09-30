@@ -55,6 +55,10 @@ extension TabBarController.Tab {
     }
   }
 
+  
+  /// Creates and returns the UIViewController related to this tab.
+  /// - Parameter store: The `Store` needed to initialize the ViewController.
+  /// - Returns: The UIViewController related to this tab,
   func viewController(store: Store<AppState, AppDependencies>) -> UIViewController {
     switch self {
     case .home:
