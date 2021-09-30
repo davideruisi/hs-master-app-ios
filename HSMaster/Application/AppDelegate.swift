@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   var store: Store<AppState, AppDependencies>?
-  
+
   // MARK: App Lifecycle
 
   func application(
@@ -31,10 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window.makeKeyAndVisible()
 
     // Initialize the store.
-    store = Store<AppState, AppDependencies>(interceptors: [], stateInitializer: AppState.init)
+    self.store = Store<AppState, AppDependencies>(interceptors: [], stateInitializer: AppState.init)
 
     // Start the navigation.
-    store?.dependencies?.navigator.start(using: self, in: window, at: "initialScreen")
+    self.store?.dependencies?.navigator.start(using: self, in: window, at: Screen.tabBar)
 
     return true
   }
@@ -44,16 +44,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: RootInstaller {
   func installRoot(identifier: RouteElementIdentifier, context: Any?, completion: @escaping Navigator.Completion) -> Bool {
-      if identifier == "initialScreen" {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        self.window?.rootViewController = vc
-
-        completion()
-
-        return true
-      }
-
+    guard
+      let store = store,
+      let rootScreen = Screen(rawValue: identifier)
+    else {
       return false
     }
+
+    switch rootScreen {
+    case .tabBar:
+      let tabBarController = TabBarController(store: store)
+      self.window?.rootViewController = tabBarController
+
+      completion()
+
+      return true
+    }
+  }
 }
