@@ -9,6 +9,7 @@ target 'HSMaster' do
   pod 'Tempura', '~> 9.0'
 
   # Developer Tools
+  pod 'SwiftGen', '~> 6.4'
   pod 'SwiftLint', '~> 0.44'
 end
 

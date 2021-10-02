@@ -3,6 +3,7 @@ PODS:
   - Katana (6.0.3):
     - HydraAsync (< 3, >= 2.0.6)
   - PinLayout (1.10.0)
+  - SwiftGen (6.4.0)
   - SwiftLint (0.44.0)
   - Tempura (9.0.1):
     - HydraAsync (< 3, >= 2.0.6)
@@ -11,6 +12,7 @@ PODS:
 DEPENDENCIES:
   - Katana (~> 6.0)
   - PinLayout (~> 1.10)
+  - SwiftGen (~> 6.4)
   - SwiftLint (~> 0.44)
   - Tempura (~> 9.0)
 
@@ -19,6 +21,7 @@ SPEC REPOS:
     - HydraAsync
     - Katana
     - PinLayout
+    - SwiftGen
     - SwiftLint
     - Tempura
 
@@ -26,9 +29,10 @@ SPEC CHECKSUMS:
   HydraAsync: 8d589bd725b0224f899afafc9a396327405f8063
   Katana: 12acb436b3b473ff5379dbad98ae7d603ecb5deb
   PinLayout: e50e9a748b632905fca6e67043ea4b05d6c92186
+  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
   Tempura: f88a4dc78f93fe04acf313491cfdd922317ebf63
 
-PODFILE CHECKSUM: 85a906bd6912dbfc82c8821cfff98a32e17ed343
+PODFILE CHECKSUM: 533d017071093f43a8e74da4faffea6c48df600a
 
 COCOAPODS: 1.11.2
