@@ -55,16 +55,25 @@ extension TabBarController.Tab {
     }
   }
 
-  
   /// Creates and returns the UIViewController related to this tab.
   /// - Parameter store: The `Store` needed to initialize the ViewController.
   /// - Returns: The UIViewController related to this tab,
   func viewController(store: Store<AppState, AppDependencies>) -> UIViewController {
     switch self {
     case .home:
-      let homeViewController = UIViewController()
+      let homeViewController = HomeVC(store: store)
+
       homeViewController.tabBarItem = UITabBarItem(title: title, image: deselectedImage, selectedImage: selectedImage)
-      return UINavigationController(rootViewController: homeViewController)
+      if #available(iOS 15.0, *) {
+        homeViewController.setContentScrollView(homeViewController.rootView.collectionView)
+      }
+
+      homeViewController.navigationItem.title = title
+
+      let navigationController = UINavigationController(rootViewController: homeViewController)
+      navigationController.navigationBar.prefersLargeTitles = true
+
+      return navigationController
 
     case .search:
       let searchViewController = UIViewController()
