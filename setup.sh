@@ -1,5 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 set -e
+
+# Create SwiftGen files if not existing yet.
+touch HSMaster/Resources/Color.swift
 
 # Install XcodeGen if needed.
 if ! command -v xcodegen &> /dev/null
