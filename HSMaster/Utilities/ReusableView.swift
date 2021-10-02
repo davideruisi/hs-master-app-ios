@@ -7,7 +7,8 @@
 
 import UIKit
 
-/// A protocol that augments an `UIView` with a reuse identifier. Meant to be used for `UICollectionViewCell` and `UICollectionReusableView`.
+/// A protocol that augments an `UIView` with a reuse identifier.
+/// Meant to be used for `UICollectionViewCell` and `UICollectionReusableView`.
 public protocol ReusableView: UIView {
   /// The reusable identifier of the cell.
   static var reuseIdentifier: String { get }
