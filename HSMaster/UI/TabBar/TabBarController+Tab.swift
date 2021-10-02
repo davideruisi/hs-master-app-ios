@@ -48,10 +48,10 @@ extension TabBarController.Tab {
   var title: String {
     switch self {
     case .home:
-      return "News"
+      return Localization.HomeTab.title
 
     case .search:
-      return "Search"
+      return Localization.SearchTab.title
     }
   }
 

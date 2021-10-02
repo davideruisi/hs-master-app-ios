@@ -5,3 +5,11 @@ xcassets:
     params:
       enumName: Color
     output: HSMaster/Resources/Color.swift
+
+strings:
+  inputs: HSMaster/Resources/en.lproj
+  outputs:
+    templateName: structured-swift5
+    params:
+      enumName: Localization
+    output: HSMaster/Resources/Localization.swift

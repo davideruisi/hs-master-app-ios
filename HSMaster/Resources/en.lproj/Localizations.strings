@@ -1,0 +1,10 @@
+/* 
+  Localizations.strings
+  HSMaster
+
+  Created by Davide Ruisi on 03/10/21.
+  
+*/
+
+"homeTab.title" = "News";
+"searchTab.title" = "Search";

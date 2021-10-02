@@ -59,3 +59,5 @@ Info.plist
 
 ## Ignore SwiftGen generated files
 HSMaster/Resources/Color.swift
+HSMaster/Resources/Localization.swift
+
