@@ -56,3 +56,6 @@ xcuserdata/
 *.xcodeproj  
 *.xcworkspace
 Info.plist
+
+## Ignore SwiftGen generated files
+HSMaster/Resources/Color.swift

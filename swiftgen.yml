@@ -2,5 +2,6 @@ xcassets:
   inputs: HSMaster/Resources/Colors.xcassets
   outputs:
     templateName: swift5
-    enumName: Color
+    params:
+      enumName: Color
     output: HSMaster/Resources/Color.swift
