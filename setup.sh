@@ -2,7 +2,7 @@
 set -e
 
 # Create SwiftGen files if not existing yet.
-touch HSMaster/Resources/Color.swift
+touch HSMaster/Resources/Palette.swift
 touch HSMaster/Resources/Localization.swift
 
 # Install XcodeGen if needed.

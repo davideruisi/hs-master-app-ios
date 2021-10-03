@@ -58,6 +58,6 @@ xcuserdata/
 Info.plist
 
 ## Ignore SwiftGen generated files
-HSMaster/Resources/Color.swift
+HSMaster/Resources/Palette.swift
 HSMaster/Resources/Localization.swift
 

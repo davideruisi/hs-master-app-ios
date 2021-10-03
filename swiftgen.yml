@@ -3,8 +3,8 @@ xcassets:
   outputs:
     templateName: swift5
     params:
-      enumName: Color
-    output: HSMaster/Resources/Color.swift
+      enumName: Palette
+    output: HSMaster/Resources/Palette.swift
 
 strings:
   inputs: HSMaster/Resources/en.lproj
