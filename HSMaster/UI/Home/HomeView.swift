@@ -8,7 +8,12 @@
 import PinLayout
 import Tempura
 
+/// The main view of the Home tab. It contains news and articles.
 final class HomeView: UIView, ViewControllerModellableView {
+
+  // MARK: - Constants
+
+  static let cellMargin: CGFloat = 16
 
   // MARK: - UI Elements
 
@@ -24,8 +29,8 @@ final class HomeView: UIView, ViewControllerModellableView {
   }
 
   func style() {
-    backgroundColor = .systemBackground
-    collectionView.backgroundColor = .clear
+    Self.Style.view(self)
+    Self.Style.collectionView(collectionView)
   }
 
   func update(oldModel: HomeVM?) {
@@ -47,8 +52,28 @@ final class HomeView: UIView, ViewControllerModellableView {
       return
     }
     collectionViewLayout.itemSize = UICollectionViewFlowLayout.automaticSize
-    collectionViewLayout.estimatedItemSize = CGSize(width: collectionView.bounds.width, height: 50)
-    collectionViewLayout.minimumLineSpacing = 16
+    collectionViewLayout.estimatedItemSize = CGSize(width: collectionView.bounds.width - 2 * Self.cellMargin, height: 256)
+    collectionViewLayout.minimumLineSpacing = Self.cellMargin * 2
+    collectionViewLayout.sectionInset = UIEdgeInsets(
+      top: Self.cellMargin,
+      left: Self.cellMargin,
+      bottom: Self.cellMargin,
+      right: Self.cellMargin
+    )
+  }
+}
+
+// MARK: - Styling Functions
+
+private extension HomeView {
+  enum Style {
+    static func view(_ view: HomeView) {
+      view.backgroundColor = Palette.backgroundPrimary.color
+    }
+
+    static func collectionView(_ collectionView: UICollectionView) {
+      collectionView.backgroundColor = .clear
+    }
   }
 }
 
@@ -65,7 +90,7 @@ extension HomeView: UICollectionViewDataSource {
       return cell
     }
 
-    typedCell.model = ArticleCardCellVM(title: "Title", body: "Body", backgroundImage: nil)
+    typedCell.model = ArticleCardCellVM(image: nil, kicker: "KICKER", title: "TITLE", subtitle: "Subtitle")
     return typedCell
   }
 }
