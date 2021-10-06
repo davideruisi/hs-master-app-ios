@@ -5,6 +5,7 @@
 //  Created by Davide Ruisi on 01/10/21.
 //
 
+import Kingfisher
 import PinLayout
 import Tempura
 
@@ -12,7 +13,7 @@ import Tempura
 
 /// The `ViewModel` for `ArticleCardCell`.
 struct ArticleCardCellVM: ViewModel {
-  let image: UIImage?
+  let imageURL: URL?
   let kicker: String
   let title: String
   let subtitle: String
@@ -60,7 +61,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
   }
 
   func update(oldModel: ArticleCardCellVM?) {
-    Self.Style.imageView(imageView, with: model?.image)
+    Self.Style.imageView(imageView, with: model?.imageURL)
     Self.Style.kickerLabel(kickerLabel, with: model?.kicker)
     Self.Style.titleLabel(titleLabel, with: model?.title)
     Self.Style.subtitleLabel(subtitleLabel, with: model?.subtitle)
@@ -84,7 +85,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
 
     kickerLabel.pin
       .below(of: imageView)
-      .marginTop(8)
+      .marginTop(16)
       .horizontally(32)
       .sizeToFit(.width)
 
@@ -131,8 +132,10 @@ private extension ArticleCardCell {
       view.clipsToBounds = true
     }
 
-    static func imageView(_ imageView: UIImageView, with image: UIImage?) {
-      imageView.image = image
+    static func imageView(_ imageView: UIImageView, with url: URL?) {
+      imageView.contentMode = .scaleAspectFill
+      imageView.clipsToBounds = true
+      imageView.kf.setImage(with: url)
     }
 
     static func kickerLabel(_ label: UILabel, with text: String?) {
