@@ -7,6 +7,9 @@ target 'HSMaster' do
   pod 'Katana', '~> 6.0'
   pod 'PinLayout', '~> 1.10'
   pod 'Tempura', '~> 9.0'
+  
+  # Remote Images
+  pod 'Kingfisher', '~> 7.0'
 
   # Developer Tools
   pod 'SwiftGen', '~> 6.4'
