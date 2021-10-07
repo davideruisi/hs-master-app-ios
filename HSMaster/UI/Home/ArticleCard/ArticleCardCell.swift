@@ -103,15 +103,13 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
 
     containerView.pin
       .wrapContent(.vertically, padding: PEdgeInsets(top: 0, left: 0, bottom: 32, right: 0))
-
-    contentView.pin.wrapContent()
   }
 
   override func sizeThatFits(_ size: CGSize) -> CGSize {
     contentView.pin.width(size.width)
     performLayout()
 
-    return CGSize(width: size.width, height: contentView.bounds.height)
+    return CGSize(width: size.width, height: containerView.bounds.height)
   }
 }
 
