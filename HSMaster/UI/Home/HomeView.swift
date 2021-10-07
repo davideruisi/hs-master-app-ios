@@ -13,7 +13,7 @@ final class HomeView: UIView, ViewControllerModellableView {
 
   // MARK: - Constants
 
-  static let cellMargin: CGFloat = 16
+  static let cellMargin: CGFloat = SharedStyle.Spacing.medium
 
   // MARK: - UI Elements
 

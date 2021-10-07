@@ -85,24 +85,24 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
 
     kickerLabel.pin
       .below(of: imageView)
-      .marginTop(16)
-      .horizontally(32)
+      .marginTop(SharedStyle.Spacing.medium)
+      .horizontally(SharedStyle.Spacing.large)
       .sizeToFit(.width)
 
     titleLabel.pin
       .below(of: kickerLabel)
-      .marginTop(8)
-      .horizontally(32)
+      .marginTop(SharedStyle.Spacing.small)
+      .horizontally(SharedStyle.Spacing.large)
       .sizeToFit(.width)
 
     subtitleLabel.pin
       .below(of: titleLabel)
-      .marginTop(8)
-      .horizontally(32)
+      .marginTop(SharedStyle.Spacing.small)
+      .horizontally(SharedStyle.Spacing.large)
       .sizeToFit(.width)
 
     containerView.pin
-      .wrapContent(.vertically, padding: PEdgeInsets(top: 0, left: 0, bottom: 32, right: 0))
+      .wrapContent(.vertically, padding: PEdgeInsets(top: 0, left: 0, bottom: SharedStyle.Spacing.large, right: 0))
   }
 
   override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -126,7 +126,7 @@ private extension ArticleCardCell {
 
     static func containerView(_ view: UIView) {
       view.backgroundColor = Palette.backgroundSecondary.color
-      view.layer.cornerRadius = 32
+      view.layer.cornerRadius = SharedStyle.cardCornerRadius
       view.clipsToBounds = true
     }
 
