@@ -7,5 +7,5 @@
 
 import Tempura
 
-final class HomeVC: ViewController<HomeView> {
-}
+/// The ViewController managing `HomeView`.
+final class HomeVC: ViewController<HomeView> {}

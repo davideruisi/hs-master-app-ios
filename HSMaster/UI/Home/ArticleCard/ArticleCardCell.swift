@@ -14,15 +14,19 @@ import Tempura
 /// The `ViewModel` for `ArticleCardCell`.
 struct ArticleCardCellVM: ViewModel {
   let imageURL: URL?
-  let kicker: String
-  let title: String
-  let subtitle: String
+  let kicker: String?
+  let title: String?
+  let subtitle: String?
 }
 
 // MARK: - View
 
 /// A `UICollectionViewCell` displaying a card with a title, a body and an image for the relative article.
 final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView {
+
+  // MARK: Constants
+
+  static let imageViewHeight: CGFloat = 256
 
   // MARK: UI Elements
 
@@ -81,7 +85,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
     imageView.pin
       .top()
       .horizontally()
-      .height(256)
+      .height(Self.imageViewHeight)
 
     kickerLabel.pin
       .below(of: imageView)

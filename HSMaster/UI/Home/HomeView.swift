@@ -81,7 +81,7 @@ private extension HomeView {
 
 extension HomeView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    12
+    model?.numberOfArticleCardCells ?? 0
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,12 +90,7 @@ extension HomeView: UICollectionViewDataSource {
       return cell
     }
 
-    typedCell.model = ArticleCardCellVM(
-      imageURL: URL(string: "https://static.wikia.nocookie.net/hearthstone_gamepedia/images/4/4d/Greybough_full.jpg/revision/latest/scale-to-width-down/854?cb=20210123221359"),
-      kicker: "Meta Report",
-      title: "vS Data Reaper Report #208",
-      subtitle: "Welcome to the 208th edition of the Data Reaper Report! This is the first report following the nerfs to Warlock, Shaman, Priest, and Demon Hunter as well as buffs to Warrior, Mage, and Hunter."
-    )
+    typedCell.model = model?.articleCardCellVM(at: indexPath)
     return typedCell
   }
 }
