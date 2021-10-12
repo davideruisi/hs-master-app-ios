@@ -26,7 +26,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
 
   // MARK: Constants
 
-  private static let imageViewRatio: CGFloat = 4 / 3
+  private static let imageViewRatio: CGFloat = 5 / 3
 
   // MARK: UI Elements
 
