@@ -26,7 +26,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
 
   // MARK: Constants
 
-  static let imageViewHeight: CGFloat = 256
+  private static let imageViewRatio: CGFloat = 4 / 3
 
   // MARK: UI Elements
 
@@ -85,7 +85,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
     imageView.pin
       .top()
       .horizontally()
-      .height(Self.imageViewHeight)
+      .aspectRatio(Self.imageViewRatio)
 
     kickerLabel.pin
       .below(of: imageView)

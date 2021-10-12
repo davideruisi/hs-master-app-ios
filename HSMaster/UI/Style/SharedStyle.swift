@@ -15,7 +15,7 @@ enum SharedStyle {
   /// The spacing used to arrange UI elements in the app.
   enum Spacing {
     /// A spacing of 4.
-    static let extraSmall: CGFloat = 4
+    static let xSmall: CGFloat = 4
 
     /// A spacing of 8.
     static let small: CGFloat = 8
@@ -27,6 +27,6 @@ enum SharedStyle {
     static let large: CGFloat = 32
 
     /// A spacing of 64.
-    static let extraLarge: CGFloat = 64
+    static let xLarge: CGFloat = 64
   }
 }

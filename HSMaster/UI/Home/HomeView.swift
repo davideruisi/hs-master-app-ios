@@ -26,6 +26,7 @@ final class HomeView: UIView, ViewControllerModellableView {
 
     collectionView.dataSource = self
     collectionView.register(ArticleCardCell.self, forCellWithReuseIdentifier: ArticleCardCell.reuseIdentifier)
+    collectionView.register(ArticleCardSkeletonCell.self, forCellWithReuseIdentifier: ArticleCardSkeletonCell.reuseIdentifier)
   }
 
   func style() {
@@ -81,16 +82,27 @@ private extension HomeView {
 
 extension HomeView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    model?.numberOfArticleCardCells ?? 0
+    let numberOfArticles = model?.numberOfArticleCardCells ?? 0
+
+    // We return 1 more than the `numberOfArticles` for the loading skeleton cell.
+    return numberOfArticles + 1
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardCell.reuseIdentifier, for: indexPath)
-    guard let typedCell = cell as? ArticleCardCell else {
+    let numberOfArticles = model?.numberOfArticleCardCells ?? 0
+
+    // If the indexPath is for an article, dequeue an ArticleCardCell.
+    // Otherwise, dequeue an ArticleCardSkeletonView.
+    if indexPath.row < numberOfArticles {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardCell.reuseIdentifier, for: indexPath)
+      guard let typedCell = cell as? ArticleCardCell else {
+        return cell
+      }
+      typedCell.model = model?.articleCardCellVM(at: indexPath)
+      return typedCell
+    } else {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardSkeletonCell.reuseIdentifier, for: indexPath)
       return cell
     }
-
-    typedCell.model = model?.articleCardCellVM(at: indexPath)
-    return typedCell
   }
 }

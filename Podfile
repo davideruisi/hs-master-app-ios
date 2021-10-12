@@ -8,8 +8,9 @@ target 'HSMaster' do
   pod 'PinLayout', '~> 1.10'
   pod 'Tempura', '~> 9.0'
   
-  # Remote Images
+  # User Interface
   pod 'Kingfisher', '~> 7.0'
+  pod 'SkeletonView', '~> 1.25'
 
   # Developer Tools
   pod 'SwiftGen', '~> 6.4'

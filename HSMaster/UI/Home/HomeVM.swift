@@ -25,7 +25,6 @@ extension HomeVM {
     articles.count
   }
 
-  
   /// The `ViewModel` for the `ArticleCardCell` at the specified `IndexPath`.
   /// - Parameter indexPath: The `IndexPath` of the cell.
   /// - Returns: The `ViewModel` of the cell in the specified `IndexPath`
