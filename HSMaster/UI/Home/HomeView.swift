@@ -19,6 +19,11 @@ final class HomeView: UIView, ViewControllerModellableView {
 
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
+  // MARK: - Interactions
+
+  /// Called when the user reaches the end of the articles list and we need to fetch more articles.
+  var didReachSkeletonCell: Interaction?
+
   // MARK: - SSUL
 
   func setup() {
@@ -92,7 +97,7 @@ extension HomeView: UICollectionViewDataSource {
     let numberOfArticles = model?.numberOfArticleCardCells ?? 0
 
     // If the indexPath is for an article, dequeue an ArticleCardCell.
-    // Otherwise, dequeue an ArticleCardSkeletonView.
+    // Otherwise, dequeue an ArticleCardSkeletonView and signal the reach of the end of the collection.
     if indexPath.row < numberOfArticles {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardCell.reuseIdentifier, for: indexPath)
       guard let typedCell = cell as? ArticleCardCell else {
@@ -102,6 +107,7 @@ extension HomeView: UICollectionViewDataSource {
       return typedCell
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardSkeletonCell.reuseIdentifier, for: indexPath)
+      didReachSkeletonCell?()
       return cell
     }
   }

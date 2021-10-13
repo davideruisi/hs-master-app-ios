@@ -8,4 +8,10 @@
 import Tempura
 
 /// The ViewController managing `HomeView`.
-final class HomeVC: ViewController<HomeView> {}
+final class HomeVC: ViewController<HomeView> {
+  override func setupInteraction() {
+    rootView.didReachSkeletonCell = { [weak self] in
+      self?.dispatch(Logic.Home.GetArticles())
+    }
+  }
+}
