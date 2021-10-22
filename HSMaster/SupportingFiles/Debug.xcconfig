@@ -1,0 +1,9 @@
+//
+//  Debug.xcconfig
+//  HSMaster
+//
+//  Created by Davide Ruisi on 22/10/21.
+//
+
+#include "Pods/Target Support Files/Pods-HSMaster/Pods-HSMaster.debug.xcconfig"
+#include "HSMaster/SupportingFiles/Secrets/SecretsDebug.xcconfig"

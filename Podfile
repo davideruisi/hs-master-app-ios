@@ -8,6 +8,9 @@ target 'HSMaster' do
   pod 'PinLayout', '~> 1.10'
   pod 'Tempura', '~> 9.0'
   
+  # Back-end Services
+  pod 'Contentful', '~> 5.5'
+  
   # User Interface
   pod 'Kingfisher', '~> 7.0'
   pod 'SkeletonView', '~> 1.25'

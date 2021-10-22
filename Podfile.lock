@@ -1,17 +1,21 @@
 PODS:
+  - Contentful (5.5.1):
+    - Contentful/ImageOptions (= 5.5.1)
+  - Contentful/ImageOptions (5.5.1)
   - HydraAsync (2.0.6)
   - Katana (6.0.3):
     - HydraAsync (< 3, >= 2.0.6)
-  - Kingfisher (7.0.0)
+  - Kingfisher (7.1.1)
   - PinLayout (1.10.0)
-  - SkeletonView (1.25.1)
-  - SwiftGen (6.4.0)
-  - SwiftLint (0.44.0)
-  - Tempura (9.0.1):
+  - SkeletonView (1.25.2)
+  - SwiftGen (6.5.1)
+  - SwiftLint (0.45.0)
+  - Tempura (9.0.3):
     - HydraAsync (< 3, >= 2.0.6)
     - Katana (< 7, >= 6.0)
 
 DEPENDENCIES:
+  - Contentful (~> 5.5)
   - Katana (~> 6.0)
   - Kingfisher (~> 7.0)
   - PinLayout (~> 1.10)
@@ -22,6 +26,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Contentful
     - HydraAsync
     - Katana
     - Kingfisher
@@ -32,15 +37,16 @@ SPEC REPOS:
     - Tempura
 
 SPEC CHECKSUMS:
+  Contentful: 5bc3d261fe57fa94a99fe89b904f9f11a0f04331
   HydraAsync: 8d589bd725b0224f899afafc9a396327405f8063
   Katana: 12acb436b3b473ff5379dbad98ae7d603ecb5deb
-  Kingfisher: 5efc54fec3980f92354898532e562cc17f31efb4
+  Kingfisher: f738f9c4a3415823b8e2985d10aa2d6a9f37bc4d
   PinLayout: e50e9a748b632905fca6e67043ea4b05d6c92186
-  SkeletonView: 77079530e1348a72f48b79ae30dcb966c1b18b6a
-  SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
-  SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
-  Tempura: f88a4dc78f93fe04acf313491cfdd922317ebf63
+  SkeletonView: 820b2bbd180d7408f3f03b6462cfc3cac39d2ef2
+  SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
+  SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
+  Tempura: 40f8b342e1b9e7f4edc7c4d88eb8a499c98e491e
 
-PODFILE CHECKSUM: e1de9bd1bd3d5564db32ee2a1fb98efce95420d5
+PODFILE CHECKSUM: 5013afb58aae9709ceb64d208823344a67c61471
 
 COCOAPODS: 1.11.2

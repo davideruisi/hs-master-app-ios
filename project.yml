@@ -16,9 +16,13 @@ targets:
     platform: iOS
     sources:
       - HSMaster
+    configFiles:
+      Debug: HSMaster/SupportingFiles/Debug.xcconfig
+      Release: HSMaster/SupportingFiles/Release.xcconfig
     info:
       path: HSMaster/SupportingFiles/Info.plist
       properties:
+        # System
         CFBundleDevelopmentRegion: "$(DEVELOPMENT_LANGUAGE)"
         CFBundleExecutable: "$(EXECUTABLE_NAME)"
         CFBundleIdentifier: "$(PRODUCT_BUNDLE_IDENTIFIER)"
@@ -32,6 +36,9 @@ targets:
         UILaunchStoryboardName: "LaunchScreen"
         UIRequiredDeviceCapabilities: ["armv7"]
         UISupportedInterfaceOrientations: ["UIInterfaceOrientationPortrait"]
+        # HSMaster
+        CONTENTFUL_SPACE_ID: $(CONTENTFUL_SPACE_ID)
+        CONTENTFUL_ACCESS_TOKEN: $(CONTENTFUL_ACCESS_TOKEN)
     settings:
       TARGETED_DEVICE_FAMILY: 1
     preBuildScripts:

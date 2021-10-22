@@ -20,7 +20,10 @@ final class AppDependencies: SideEffectDependencyContainer, NavigationProvider {
   let getState: GetState
 
   /// An object that helps to manage the navigation with Tempura.
-  var navigator: Navigator
+  let navigator: Navigator
+
+  /// An object that fetch app contents from Contentful.
+  let contentfulManager: ContentfulManager
 
   // MARK: Init
 
@@ -28,5 +31,6 @@ final class AppDependencies: SideEffectDependencyContainer, NavigationProvider {
     self.dispatch = dispatch
     self.getState = getState
     self.navigator = Navigator()
+    self.contentfulManager = ContentfulManager()
   }
 }

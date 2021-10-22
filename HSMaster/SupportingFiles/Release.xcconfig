@@ -1,0 +1,9 @@
+//
+//  Release.xcconfig
+//  HSMaster
+//
+//  Created by Davide Ruisi on 22/10/21.
+//
+
+#include "Pods/Target Support Files/Pods-HSMaster/Pods-HSMaster.release.xcconfig"
+#include "HSMaster/SupportingFiles/Secrets/SecretsRelease.xcconfig"
