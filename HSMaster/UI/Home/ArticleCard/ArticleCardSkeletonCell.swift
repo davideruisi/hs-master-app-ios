@@ -15,7 +15,7 @@ final class ArticleCardSkeletonCell: UICollectionViewCell, View, ReusableView {
   // MARK: Constants
 
   private static let imageViewRatio: CGFloat = 5 / 3
-  private static let labelHeight: CGFloat = 64
+  private static let labelHeight: CGFloat = 65
 
   // MARK: UI Elements
 

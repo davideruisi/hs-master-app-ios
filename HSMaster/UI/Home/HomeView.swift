@@ -40,7 +40,23 @@ final class HomeView: UIView, ViewControllerModellableView {
   }
 
   func update(oldModel: HomeVM?) {
-    collectionView.reloadData()
+    guard let model = model, model != oldModel else {
+      return
+    }
+
+    // The first time (when oldModel is nil) reload the whole collection, otherwise update only the cells that need to be updated.
+    if let oldModel = oldModel {
+      collectionView.performBatchUpdates {
+        // Delete the loading skeleton cell when no more needed.
+        if !model.shouldShowSkeletonCell {
+          collectionView.deleteItems(at: [oldModel.skeletonCellIndex])
+        }
+        // Insert the new articles cells in the collection.
+        collectionView.insertItems(at: model.newArticleCardCellsIndexes(from: oldModel))
+      }
+    } else {
+      collectionView.reloadData()
+    }
   }
 
   override func layoutSubviews() {
@@ -87,10 +103,16 @@ private extension HomeView {
 
 extension HomeView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    let numberOfArticles = model?.numberOfArticleCardCells ?? 0
+    guard let model = model else {
+      return 0
+    }
 
-    // We return 1 more than the `numberOfArticles` for the loading skeleton cell.
-    return numberOfArticles + 1
+    if model.shouldShowSkeletonCell {
+      // We return 1 more than the `numberOfArticleCardCells` for the loading skeleton cell.
+      return model.numberOfArticleCardCells + 1
+    } else {
+      return model.numberOfArticleCardCells
+    }
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
