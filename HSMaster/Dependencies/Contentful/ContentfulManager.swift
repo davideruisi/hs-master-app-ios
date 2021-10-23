@@ -40,12 +40,15 @@ final class ContentfulManager {
         QueryParameter.skip: "\(skip)"
       ]
 
+      AppLogger.debug("Fetching array from Contentful of type: \(type).")
       self?.client.fetchArray(of: type, matching: query) { result in
         switch result {
         case .success(let response):
+          AppLogger.debug("Received successful response from Contentful: \(response).")
           resolve((response.total, response.items))
 
         case .failure(let error):
+          AppLogger.error("Error trying to fetch array of type \(type): \(error)")
           reject(error)
         }
       }

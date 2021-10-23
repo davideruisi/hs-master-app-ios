@@ -10,7 +10,11 @@ import Logging
 /// The app's logger.
 enum AppLogger {
   /// The `Logger` used to log messages.
-  private static var logger = Logger(label: "com.davideruisi.HSMaster")
+  private static var logger: Logger {
+    var logger = Logger(label: "com.davideruisi.HSMaster")
+    logger.logLevel = .debug
+    return logger
+  }
 
   /// Whether the `AppLogger` is in debug mode. We log only in debug mode.
   private static var isDebug: Bool {
@@ -26,6 +30,14 @@ enum AppLogger {
   static func error(_ message: @autoclosure () -> Logger.Message) {
     if isDebug {
       logger.error(message())
+    }
+  }
+
+  /// Log a debug message.
+  /// - Parameter message: The message to be logged.
+  static func debug(_ message: @autoclosure () -> Logger.Message) {
+    if isDebug {
+      logger.debug(message())
     }
   }
 }
