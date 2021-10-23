@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Logging
 
 /// Contains values taken by app's configuration files.
 enum Configuration {
@@ -32,6 +33,7 @@ private extension Configuration {
   /// - Returns: The value in the info dictionary for the specified key.
   static func value(for key: Key) -> String {
     guard let value = Bundle.main.object(forInfoDictionaryKey: key.rawValue) as? String else {
+      AppLogger.error("Unable to find value for key: '\(key)'.")
       return ""
     }
 
