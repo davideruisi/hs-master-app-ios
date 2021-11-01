@@ -17,6 +17,7 @@ PODS:
 
 DEPENDENCIES:
   - Contentful (~> 5.5)
+  - HydraAsync (~> 2.0)
   - Katana (~> 6.0)
   - Kingfisher (~> 7.0)
   - Logging (~> 1.4)
@@ -51,6 +52,6 @@ SPEC CHECKSUMS:
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
   Tempura: 40f8b342e1b9e7f4edc7c4d88eb8a499c98e491e
 
-PODFILE CHECKSUM: 6f6d2330bbe324bc5c5d6351826f740f56acefa8
+PODFILE CHECKSUM: d68a68d9b7a2f562e0d23f7fc5a79b29da5be27d
 
 COCOAPODS: 1.11.2

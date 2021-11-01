@@ -4,6 +4,7 @@ target 'HSMaster' do
   use_frameworks!
 
   # Architecture
+  pod 'HydraAsync', '~> 2.0'
   pod 'Katana', '~> 6.0'
   pod 'PinLayout', '~> 1.10'
   pod 'Tempura', '~> 9.0'
