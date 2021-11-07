@@ -13,7 +13,7 @@ struct HomeVM: ViewModelWithState, Equatable {
   // MARK: Stored Properties
 
   /// The list of articles to show in the collection view.
-  let articles: [Model.Article]
+  let articles: [Models.Article]
 
   /// The total number of articles that can be fetched from back-end.
   let totalNumberOfArticles: UInt?
@@ -58,7 +58,7 @@ extension HomeVM {
       imageURL: article.imageURL,
       kicker: article.kicker,
       title: article.title,
-      subtitle: article.body
+      subtitle: article.subtitle
     )
   }
 

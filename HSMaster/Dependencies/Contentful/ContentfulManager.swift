@@ -17,7 +17,7 @@ final class ContentfulManager {
     client = Client(
       spaceId: Configuration.contentfulSpaceID,
       accessToken: Configuration.contentfulAccessToken,
-      contentTypeClasses: [Model.Contentful.Article.self]
+      contentTypeClasses: [Models.Contentful.Article.self]
     )
   }
 
@@ -65,8 +65,8 @@ extension ContentfulManager {
   ///   - offset: The offset from which to fetch entries. Useful for pagination. Defaults to 0.
   /// - Returns: A tuple containing the total number of entries in the Contentful CMS,
   /// and an array containing maximum `pageSize` `Articles`.
-  func getArticles(pageSize: Int = 100, offset: Int = 0) -> Promise<(totalArticles: UInt, articles: [Model.Article])> {
-    fetchArray(of: Model.Contentful.Article.self, limit: pageSize, skip: offset)
+  func getArticles(pageSize: Int = 100, offset: Int = 0) -> Promise<(totalArticles: UInt, articles: [Models.Article])> {
+    fetchArray(of: Models.Contentful.Article.self, limit: pageSize, skip: offset)
       .then { ($0.totalEntries, $0.entries.toAppModel()) }
   }
 }

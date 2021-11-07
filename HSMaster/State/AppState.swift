@@ -11,7 +11,7 @@ import Katana
 /// The state of the app.
 struct AppState: State {
   /// The list of articles already fetched from back-end to be shown in the Home tab.
-  var articles: [Model.Article]
+  var articles: [Models.Article]
 
   /// The total number of articles available on back-end.
   var totalNumberOfArticles: UInt?

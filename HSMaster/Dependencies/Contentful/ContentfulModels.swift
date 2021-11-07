@@ -22,19 +22,19 @@ protocol AppModellable: ContentfulModel {
 
 // MARK: - Contentful Models
 
-extension Model {
+extension Models {
   enum Contentful {}
 }
 
-extension Model.Contentful {
+extension Models.Contentful {
   /// The Contentful model for an Article shown in the Home tab of the app.
   final class Article: ContentfulModel {
     enum FieldKeys: String, CodingKey {
       case kicker
       case title
-      case body
       case imageURL
       case date
+      case sourceURL
     }
 
     // MARK: Contentful Properties
@@ -46,9 +46,9 @@ extension Model.Contentful {
 
     let kicker: String?
     let title: String?
-    let body: String?
-    let imageURL: String?
+    let imageURL: URL?
     let date: Date?
+    let sourceURL: URL?
 
     init(from decoder: Decoder) throws {
       sys = try decoder.sys()
@@ -56,28 +56,29 @@ extension Model.Contentful {
       let fields = try decoder.contentfulFieldsContainer(keyedBy: Self.FieldKeys.self)
       kicker = try? fields.decodeIfPresent(String.self, forKey: .kicker)
       title = try? fields.decodeIfPresent(String.self, forKey: .title)
-      body = try? fields.decodeIfPresent(String.self, forKey: .body)
-      imageURL = try? fields.decodeIfPresent(String.self, forKey: .imageURL)
+      imageURL = try? fields.decodeIfPresent(URL.self, forKey: .imageURL)
       date = try? fields.decodeIfPresent(Date.self, forKey: .date)
+      sourceURL = try? fields.decodeIfPresent(URL.self, forKey: .date)
     }
   }
 }
 
 // MARK: - App Model Translations
 
-extension Model.Contentful.Article: AppModellable {
-  func toAppModel() -> Model.Article {
-    Model.Article(
-      imageURL: URL(string: imageURL ?? ""),
+extension Models.Contentful.Article: AppModellable {
+  func toAppModel() -> Models.Article {
+    Models.Article(
+      imageURL: imageURL,
       kicker: kicker,
       title: title,
-      body: body
+      subtitle: date?.iso8601String,
+      sourceURL: sourceURL
     )
   }
 }
 
-extension Array where Element: Model.Contentful.Article {
-  func toAppModel() -> [Model.Article] {
+extension Array where Element: Models.Contentful.Article {
+  func toAppModel() -> [Models.Article] {
     map { $0.toAppModel() }
   }
 }
