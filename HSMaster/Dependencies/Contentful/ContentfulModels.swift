@@ -58,7 +58,7 @@ extension Models.Contentful {
       title = try? fields.decodeIfPresent(String.self, forKey: .title)
       imageURL = try? fields.decodeIfPresent(URL.self, forKey: .imageURL)
       date = try? fields.decodeIfPresent(Date.self, forKey: .date)
-      sourceURL = try? fields.decodeIfPresent(URL.self, forKey: .date)
+      sourceURL = try? fields.decodeIfPresent(URL.self, forKey: .sourceURL)
     }
   }
 }
