@@ -38,7 +38,7 @@ extension Logic.Home {
   /// Update the state with the `articles`.
   private struct UpdateArticlesState: AppStateUpdater {
     /// The new list of articles.
-    let articles: [Model.Article]
+    let articles: [Models.Article]
 
     /// The total number of articles available on back-end.
     let totalNumberOfArticles: UInt
