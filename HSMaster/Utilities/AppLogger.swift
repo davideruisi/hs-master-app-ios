@@ -25,6 +25,14 @@ enum AppLogger {
     #endif
   }
 
+  /// Log a critical message.
+  /// - Parameter message: The message to be logged.
+  static func critical(_ message: @autoclosure () -> Logger.Message) {
+    if isDebug {
+      logger.critical(message())
+    }
+  }
+
   /// Log an error message.
   /// - Parameter message: The message to be logged.
   static func error(_ message: @autoclosure () -> Logger.Message) {
