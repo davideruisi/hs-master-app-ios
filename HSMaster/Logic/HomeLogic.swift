@@ -7,6 +7,7 @@
 
 import Hydra
 import Katana
+import Tempura
 
 extension Logic {
   /// The Logic relative to the Home tab.
@@ -28,6 +29,26 @@ extension Logic.Home {
       articles.append(contentsOf: newArticles)
 
       context.dispatch(UpdateArticlesState(articles: articles, totalNumberOfArticles: totalArticles))
+    }
+  }
+
+  /// Show a Safari web-view with the URL of the article.
+  struct ShowArticleInWebView: AppSideEffect {
+    /// The article to be shown in the web-view.
+    let article: Models.Article?
+
+    func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+      guard let article = article else {
+        AppLogger.error("Missing instance of \(Models.Article.self)")
+        return
+      }
+
+      guard let url = article.sourceURL else {
+        AppLogger.error("Missing instance of \(URL.self)")
+        return
+      }
+
+      context.dispatch(Show(Screen.safariWebView, animated: true, context: url))
     }
   }
 }

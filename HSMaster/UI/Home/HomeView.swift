@@ -24,12 +24,16 @@ final class HomeView: UIView, ViewControllerModellableView {
   /// Called when the user reaches the end of the articles list and we need to fetch more articles.
   var didReachSkeletonCell: Interaction?
 
+  /// The user tapped an Article Card Cell.
+  var didTapArticleCardCell: CustomInteraction<Int>?
+
   // MARK: - SSUL
 
   func setup() {
     addSubview(collectionView)
 
     collectionView.dataSource = self
+    collectionView.delegate = self
     collectionView.register(ArticleCardCell.self, forCellWithReuseIdentifier: ArticleCardCell.reuseIdentifier)
     collectionView.register(ArticleCardSkeletonCell.self, forCellWithReuseIdentifier: ArticleCardSkeletonCell.reuseIdentifier)
   }
@@ -132,5 +136,13 @@ extension HomeView: UICollectionViewDataSource {
       didReachSkeletonCell?()
       return cell
     }
+  }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension HomeView: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    didTapArticleCardCell?(indexPath.item)
   }
 }

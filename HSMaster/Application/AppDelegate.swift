@@ -59,6 +59,10 @@ extension AppDelegate: RootInstaller {
       completion()
 
       return true
+
+    default:
+      AppLogger.critical("Cannot install root with identifier \(identifier)")
+      fatalError()
     }
   }
 }
