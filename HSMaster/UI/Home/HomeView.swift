@@ -64,6 +64,8 @@ final class HomeView: UIView, ViewControllerModellableView {
   }
 
   override func layoutSubviews() {
+    super.layoutSubviews()
+
     collectionView.pin
       .all()
 

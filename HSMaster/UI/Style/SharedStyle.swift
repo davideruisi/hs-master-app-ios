@@ -12,6 +12,9 @@ enum SharedStyle {
   /// The corner radius of cards in the app.
   static let cardCornerRadius: CGFloat = 32
 
+  /// The screen width with portrait orientation.
+  static let portraitOrientationScreenWidth = UIScreen.main.bounds.width
+
   /// The spacing used to arrange UI elements in the app.
   enum Spacing {
     /// A spacing of 4.

@@ -71,6 +71,6 @@ extension HomeVM {
 
   /// The `IndexPath` of the loading skeleton cell.
   var skeletonCellIndex: IndexPath {
-    IndexPath(row: articles.count, section: 0)
+    IndexPath(item: articles.count, section: 0)
   }
 }
