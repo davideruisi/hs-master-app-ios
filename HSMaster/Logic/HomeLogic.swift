@@ -55,9 +55,11 @@ extension Logic.Home {
 
 // MARK: - StateUpdaters
 
-extension Logic.Home {
+private extension Logic.Home {
   /// Update the state with the `articles`.
-  private struct UpdateArticlesState: AppStateUpdater {
+  /// The update is effectively done only if `articles` contains more articles than the current value in the state.
+  /// This is needed to avoid any possible rase condition problem that can occur in `GetArticles` SideEffect.
+  struct UpdateArticlesState: AppStateUpdater {
     /// The new list of articles.
     let articles: [Models.Article]
 
@@ -65,6 +67,10 @@ extension Logic.Home {
     let totalNumberOfArticles: UInt
 
     func updateState(_ state: inout AppState) {
+      guard state.articles.count < articles.count else {
+        return
+      }
+
       state.articles = articles
       state.totalNumberOfArticles = totalNumberOfArticles
     }
