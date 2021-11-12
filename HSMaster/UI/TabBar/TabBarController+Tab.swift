@@ -14,8 +14,8 @@ extension TabBarController {
     /// The home tab where the user can see news and articles.
     case home
 
-    /// The search tab where the user can search cards.
-    case search
+    /// The card search tab where the user can search cards.
+    case cardSearch
   }
 }
 
@@ -28,7 +28,7 @@ extension TabBarController.Tab {
     case .home:
       return UIImage(systemName: "doc.text.image.fill")
 
-    case .search:
+    case .cardSearch:
       return UIImage(systemName: "magnifyingglass.circle.fill")
     }
   }
@@ -39,7 +39,7 @@ extension TabBarController.Tab {
     case .home:
       return UIImage(systemName: "doc.text.image")
 
-    case .search:
+    case .cardSearch:
       return UIImage(systemName: "magnifyingglass.circle")
     }
   }
@@ -50,8 +50,8 @@ extension TabBarController.Tab {
     case .home:
       return Localization.HomeTab.title
 
-    case .search:
-      return Localization.SearchTab.title
+    case .cardSearch:
+      return Localization.CardSearchTab.title
     }
   }
 
@@ -75,10 +75,17 @@ extension TabBarController.Tab {
 
       return navigationController
 
-    case .search:
-      let searchViewController = UIViewController()
-      searchViewController.tabBarItem = UITabBarItem(title: title, image: deselectedImage, selectedImage: selectedImage)
-      return UINavigationController(rootViewController: searchViewController)
+    case .cardSearch:
+      let cardSearchViewController = CardSearchVC(store: store)
+
+      cardSearchViewController.tabBarItem = UITabBarItem(title: title, image: deselectedImage, selectedImage: selectedImage)
+      if #available(iOS 15.0, *) {
+        cardSearchViewController.setContentScrollView(cardSearchViewController.rootView.collectionView)
+      }
+
+      cardSearchViewController.navigationItem.title = title
+
+      return UINavigationController(rootViewController: cardSearchViewController)
     }
   }
 }
