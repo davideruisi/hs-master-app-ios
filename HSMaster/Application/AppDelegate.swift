@@ -6,6 +6,8 @@
 //
 
 import Katana
+import Kingfisher
+import PinLayout
 import Tempura
 import UIKit
 

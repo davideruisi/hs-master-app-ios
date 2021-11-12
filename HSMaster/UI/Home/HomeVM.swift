@@ -41,20 +41,20 @@ struct HomeVM: ViewModelWithState, Equatable {
 // MARK: - Helpers
 
 extension HomeVM {
-  /// The number of `ArticleCardCell`s of the collection in `HomeView`.
-  var numberOfArticleCardCells: Int {
+  /// The number of `ArticleCell`s of the collection in `HomeView`.
+  var numberOfArticleCells: Int {
     articles.count
   }
 
-  /// The `ViewModel` for the `ArticleCardCell` at the specified `IndexPath`.
+  /// The `ViewModel` for the `ArticleCell` at the specified `IndexPath`.
   /// - Parameter indexPath: The `IndexPath` of the cell.
   /// - Returns: The `ViewModel` of the cell in the specified `IndexPath`
-  func articleCardCellVM(at indexPath: IndexPath) -> ArticleCardCellVM? {
+  func articleCellVM(at indexPath: IndexPath) -> ArticleCellVM? {
     guard let article = articles[safe: indexPath.row] else {
       return nil
     }
 
-    return ArticleCardCellVM(
+    return ArticleCellVM(
       imageURL: article.imageURL,
       kicker: article.kicker,
       title: article.title,
@@ -65,7 +65,7 @@ extension HomeVM {
   /// The `IndexPath`s for the new articles fetched from back-end (not present in the `oldModel`).
   /// - Parameter oldModel: The old `HomeVM`.
   /// - Returns: The `IndexPath`s for the articles in the new `HomeVM` not present in the old `HomeVM`.
-  func newArticleCardCellsIndexes(from oldModel: HomeVM) -> [IndexPath] {
+  func newArticleCellsIndexes(from oldModel: HomeVM) -> [IndexPath] {
     (oldModel.articles.count ..< articles.count).map { IndexPath(item: $0, section: 0) }
   }
 

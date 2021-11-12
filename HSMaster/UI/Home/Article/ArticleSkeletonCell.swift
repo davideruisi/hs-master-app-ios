@@ -1,5 +1,5 @@
 //
-//  ArticleCardSkeletonCell.swift
+//  ArticleSkeletonCell.swift
 //  HSMaster
 //
 //  Created by Davide Ruisi on 11/10/21.
@@ -9,8 +9,8 @@ import PinLayout
 import SkeletonView
 import Tempura
 
-/// A skeleton of the ArticleCardCell to be used when loading content.
-final class ArticleCardSkeletonCell: UICollectionViewCell, View, ReusableView {
+/// A skeleton of the ArticleCell to be used when loading content.
+final class ArticleSkeletonCell: UICollectionViewCell, View, ReusableView {
 
   // MARK: Constants
 
@@ -96,7 +96,7 @@ final class ArticleCardSkeletonCell: UICollectionViewCell, View, ReusableView {
 
 // MARK: - Styling Functions
 
-private extension ArticleCardSkeletonCell {
+private extension ArticleSkeletonCell {
   enum Style {
     static func contentView(_ view: UIView) {
       view.layer.shadowColor = UIColor.black.cgColor
@@ -132,7 +132,7 @@ private extension ArticleCardSkeletonCell {
 
 // MARK: - Helpers
 
-private extension ArticleCardSkeletonCell {
+private extension ArticleSkeletonCell {
   /// Start the skeleton loading animation on the cell.
   func showSkeleton() {
     let skeletonGradient = SkeletonGradient(

@@ -1,18 +1,17 @@
 //
-//  ArticleCardCell.swift
+//  ArticleCell.swift
 //  HSMaster
 //
 //  Created by Davide Ruisi on 01/10/21.
 //
 
-import Kingfisher
 import PinLayout
 import Tempura
 
 // MARK: - ViewModel
 
-/// The `ViewModel` for `ArticleCardCell`.
-struct ArticleCardCellVM: ViewModel {
+/// The `ViewModel` for `ArticleCell`.
+struct ArticleCellVM: ViewModel {
   let imageURL: URL?
   let kicker: String?
   let title: String?
@@ -22,7 +21,7 @@ struct ArticleCardCellVM: ViewModel {
 // MARK: - View
 
 /// A `UICollectionViewCell` displaying a card with a title, a body and an image for the relative article.
-final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView {
+final class ArticleCell: UICollectionViewCell, ModellableView, ReusableView {
 
   // MARK: Constants
 
@@ -64,7 +63,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
     Self.Style.containerView(containerView)
   }
 
-  func update(oldModel: ArticleCardCellVM?) {
+  func update(oldModel: ArticleCellVM?) {
     Self.Style.imageView(imageView, with: model?.imageURL)
     Self.Style.kickerLabel(kickerLabel, with: model?.kicker)
     Self.Style.titleLabel(titleLabel, with: model?.title)
@@ -119,7 +118,7 @@ final class ArticleCardCell: UICollectionViewCell, ModellableView, ReusableView 
 
 // MARK: - Styling Functions
 
-private extension ArticleCardCell {
+private extension ArticleCell {
   enum Style {
     static func contentView(_ view: UIView) {
       view.layer.shadowColor = UIColor.black.cgColor

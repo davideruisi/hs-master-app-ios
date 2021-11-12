@@ -14,7 +14,7 @@ final class HomeVC: ViewController<HomeView> {
       self?.dispatch(Logic.Home.GetArticles())
     }
 
-    rootView.didTapArticleCardCell = { [weak self] index in
+    rootView.didTapArticleCell = { [weak self] index in
       self?.dispatch(Logic.Home.ShowArticleInWebView(article: self?.viewModel?.articles[safe: index]))
     }
   }

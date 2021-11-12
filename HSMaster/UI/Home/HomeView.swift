@@ -5,7 +5,6 @@
 //  Created by Davide Ruisi on 30/09/21.
 //
 
-import PinLayout
 import Tempura
 
 /// The main view of the Home tab. It contains news and articles.
@@ -24,8 +23,8 @@ final class HomeView: UIView, ViewControllerModellableView {
   /// Called when the user reaches the end of the articles list and we need to fetch more articles.
   var didReachSkeletonCell: Interaction?
 
-  /// The user tapped an Article Card Cell.
-  var didTapArticleCardCell: CustomInteraction<Int>?
+  /// The user tapped an ArticleCell.
+  var didTapArticleCell: CustomInteraction<Int>?
 
   // MARK: - SSUL
 
@@ -34,8 +33,8 @@ final class HomeView: UIView, ViewControllerModellableView {
 
     collectionView.dataSource = self
     collectionView.delegate = self
-    collectionView.register(ArticleCardCell.self, forCellWithReuseIdentifier: ArticleCardCell.reuseIdentifier)
-    collectionView.register(ArticleCardSkeletonCell.self, forCellWithReuseIdentifier: ArticleCardSkeletonCell.reuseIdentifier)
+    collectionView.register(ArticleCell.self, forCellWithReuseIdentifier: ArticleCell.reuseIdentifier)
+    collectionView.register(ArticleSkeletonCell.self, forCellWithReuseIdentifier: ArticleSkeletonCell.reuseIdentifier)
   }
 
   func style() {
@@ -56,7 +55,7 @@ final class HomeView: UIView, ViewControllerModellableView {
           collectionView.deleteItems(at: [oldModel.skeletonCellIndex])
         }
         // Insert the new articles cells in the collection.
-        collectionView.insertItems(at: model.newArticleCardCellsIndexes(from: oldModel))
+        collectionView.insertItems(at: model.newArticleCellsIndexes(from: oldModel))
       }
     } else {
       collectionView.reloadData()
@@ -114,27 +113,27 @@ extension HomeView: UICollectionViewDataSource {
     }
 
     if model.shouldShowSkeletonCell {
-      // We return 1 more than the `numberOfArticleCardCells` for the loading skeleton cell.
-      return model.numberOfArticleCardCells + 1
+      // We return 1 more than the `numberOfArticleCells` for the loading skeleton cell.
+      return model.numberOfArticleCells + 1
     } else {
-      return model.numberOfArticleCardCells
+      return model.numberOfArticleCells
     }
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let numberOfArticles = model?.numberOfArticleCardCells ?? 0
+    let numberOfArticles = model?.numberOfArticleCells ?? 0
 
-    // If the indexPath is for an article, dequeue an ArticleCardCell.
-    // Otherwise, dequeue an ArticleCardSkeletonView and signal the reach of the end of the collection.
+    // If the indexPath is for an article, dequeue an ArticleCell.
+    // Otherwise, dequeue an ArticleSkeletonView and signal the reach of the end of the collection.
     if indexPath.row < numberOfArticles {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardCell.reuseIdentifier, for: indexPath)
-      guard let typedCell = cell as? ArticleCardCell else {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCell.reuseIdentifier, for: indexPath)
+      guard let typedCell = cell as? ArticleCell else {
         return cell
       }
-      typedCell.model = model?.articleCardCellVM(at: indexPath)
+      typedCell.model = model?.articleCellVM(at: indexPath)
       return typedCell
     } else {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleCardSkeletonCell.reuseIdentifier, for: indexPath)
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArticleSkeletonCell.reuseIdentifier, for: indexPath)
       didReachSkeletonCell?()
       return cell
     }
@@ -145,6 +144,6 @@ extension HomeView: UICollectionViewDataSource {
 
 extension HomeView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    didTapArticleCardCell?(indexPath.item)
+    didTapArticleCell?(indexPath.item)
   }
 }
