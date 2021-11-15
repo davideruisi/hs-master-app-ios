@@ -12,14 +12,6 @@ import Contentful
 /// A protocol to which any Contentful model must adhere.
 protocol ContentfulModel: EntryDecodable, FieldKeysQueryable, Resource {}
 
-/// A ContentfulModel that adhere to this protocol can be translated to the corresponding AppModel.
-protocol AppModellable: ContentfulModel {
-  associatedtype AppModel
-
-  /// Obtain the corresponding `AppModel`.
-  func toAppModel() -> AppModel
-}
-
 // MARK: - Contentful Models
 
 extension Models {
@@ -74,11 +66,5 @@ extension Models.Contentful.Article: AppModellable {
       subtitle: date?.iso8601String,
       sourceURL: sourceURL
     )
-  }
-}
-
-extension Array where Element: Models.Contentful.Article {
-  func toAppModel() -> [Models.Article] {
-    map { $0.toAppModel() }
   }
 }

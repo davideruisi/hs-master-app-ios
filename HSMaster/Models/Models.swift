@@ -17,4 +17,10 @@ enum Models {
     let subtitle: String?
     let sourceURL: URL?
   }
+
+  /// The Model of a card.
+  struct Card: Equatable {
+    /// The URL of the card image.
+    let imageURL: URL?
+  }
 }
