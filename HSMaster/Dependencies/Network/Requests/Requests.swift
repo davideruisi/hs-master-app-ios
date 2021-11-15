@@ -14,12 +14,13 @@ extension Requests {
 }
 
 extension Requests.CardList {
+  /// Get the list of cards. The response is paginated.
   struct Get: Request {
     typealias ResponseModel = Models.Response.CardList
 
     let method: HTTPMethod = .get
 
-    let baseURL = URL(string: "https://us.api.blizzard.com/hearthstone")!
+    let baseURL = BaseURL.hearthstone
 
     let path = "cards"
 

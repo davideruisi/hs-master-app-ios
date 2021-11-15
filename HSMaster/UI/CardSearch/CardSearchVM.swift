@@ -21,10 +21,12 @@ struct CardSearchVM: ViewModelWithState {
 // MARK: - Helpers
 
 extension CardSearchVM {
+  /// The number of cards/cells in the `collectionView`.
   var numberOfCards: Int {
     cards.count
   }
 
+  /// The `CardCellVM` for the corresponding `IndexPath` in the `collectionView`.
   func cardCellVM(at indexPath: IndexPath) -> CardCellVM {
     CardCellVM(imageURL: cards[safe: indexPath.item]?.imageURL)
   }
