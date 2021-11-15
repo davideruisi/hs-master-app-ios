@@ -49,8 +49,25 @@ class URLRequestExecutor: RequestExecutor, URLRequestBuilder, URLResponseSeriali
 
           let serializedResponse: R.ResponseModel = try self.serialize(data)
 
+          AppLogger.debug(
+            """
+            Success on request: \(String(reflecting: R.self))
+            Response: \(response)
+            Data: \(String(describing: data.prettyPrintedJSONString))
+            Error: \(String(describing: error))
+            """
+          )
+
           resolve(serializedResponse)
         } catch {
+          AppLogger.error(
+            """
+            Error on request: \(String(reflecting: R.self))
+            Response: \(String(describing: response))
+            Data: \(String(describing: data?.prettyPrintedJSONString))
+            Error: \(error)
+            """
+          )
           reject(error)
         }
       }

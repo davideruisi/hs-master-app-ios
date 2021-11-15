@@ -23,3 +23,14 @@ final class NetworkManager {
     requestExecutor.execute(request)
   }
 }
+
+// MARK: - Requests
+
+extension NetworkManager {
+  func getCardList() -> Promise<[Models.Card]> {
+    requestExecutor.execute(Requests.CardList.Get())
+      .then { cardListResponse in
+        cardListResponse.cards.toAppModel()
+      }
+  }
+}

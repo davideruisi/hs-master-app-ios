@@ -25,6 +25,9 @@ final class AppDependencies: SideEffectDependencyContainer, NavigationProvider {
   /// An object that fetch app contents from Contentful.
   let contentfulManager: ContentfulManager
 
+  /// The manager of the app network requests.
+  let networkManager: NetworkManager
+
   // MARK: Init
 
   init(dispatch: @escaping AnyDispatch, getState: @escaping GetState) {
@@ -32,5 +35,6 @@ final class AppDependencies: SideEffectDependencyContainer, NavigationProvider {
     self.getState = getState
     self.navigator = Navigator()
     self.contentfulManager = ContentfulManager()
+    self.networkManager = NetworkManager()
   }
 }
