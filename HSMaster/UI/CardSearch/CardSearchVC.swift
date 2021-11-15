@@ -8,4 +8,10 @@
 import Tempura
 
 /// The ViewController of the `CardSearchView`.
-final class CardSearchVC: ViewController<CardSearchView> {}
+final class CardSearchVC: ViewController<CardSearchView> {
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    dispatch(Logic.CardSearch.GetCardList())
+  }
+}

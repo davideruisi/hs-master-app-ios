@@ -11,7 +11,7 @@ import Tempura
 /// The ViewModel of the `CardCell`.
 struct CardCellVM: ViewModel {
   /// The URL of the image of the card shown in the cell.
-  let imageURL: URL
+  let imageURL: URL?
 }
 
 /// A cell showing a card.

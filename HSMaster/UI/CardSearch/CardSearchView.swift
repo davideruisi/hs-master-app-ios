@@ -68,7 +68,7 @@ private extension CardSearchView {
 
 extension CardSearchView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    12
+    model?.numberOfCards ?? 0
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,7 +76,7 @@ extension CardSearchView: UICollectionViewDataSource {
     guard let typedCell = cell as? CardCell else {
       return cell
     }
-    typedCell.model = CardCellVM(imageURL: URL(string: "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/583cc7d410d87bfcd1b22f5623e348b9cc9a58cdca85524be2d7c9327c583a20.png")!)
+    typedCell.model = model?.cardCellVM(at: indexPath)
     return typedCell
   }
 }
