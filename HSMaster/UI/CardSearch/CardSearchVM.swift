@@ -10,6 +10,15 @@ import Tempura
 
 /// The ViewModel of the `CardSearchView`.
 struct CardSearchVM: ViewModelWithState {
+  /// The sections inside the `collectionView`.
+  enum Section: Int, CaseIterable {
+    /// The list of cards.
+    case cards = 0
+
+    /// The section containing a loading cell.
+    case loading = 1
+  }
+
   /// The list of cards to be shown  in the `collectionView`.
   let cards: [Models.Card]
 
@@ -21,6 +30,11 @@ struct CardSearchVM: ViewModelWithState {
 // MARK: - Helpers
 
 extension CardSearchVM {
+  /// The number of sections in the `collectionView`.
+  var numberOfSections: Int {
+    Section.allCases.count
+  }
+
   /// The number of cards/cells in the `collectionView`.
   var numberOfCards: Int {
     cards.count
