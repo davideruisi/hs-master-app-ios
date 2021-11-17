@@ -13,18 +13,19 @@ extension AppState {
     /// The list of card that can be shown in the Card Search tab.
     var cards: [Models.Card]
 
-    /// The last received page of the card list.
-    var lastReceivedPage: Int?
-
     /// The total number of cards available on back-end.
     var totalNumberOfCards: UInt?
+
+    /// The last received page of the card list.
+    /// The first page is `1`. If the value is `0`, no page has been yet received
+    var lastReceivedPage: Int
   }
 }
 
 extension AppState.CardSearch {
   init() {
     cards = []
-    lastReceivedPage = nil
     totalNumberOfCards = nil
+    lastReceivedPage = 0
   }
 }

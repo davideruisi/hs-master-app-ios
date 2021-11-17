@@ -27,10 +27,11 @@ final class NetworkManager {
 // MARK: - Requests
 
 extension NetworkManager {
-  func getCardList() -> Promise<[Models.Card]> {
-    requestExecutor.execute(Requests.CardList.Get())
+  /// Searches a list of cards.
+  func getCardList(page: Int = 1, pageSize: Int = 500) -> Promise<(UInt, [Models.Card])> {
+    requestExecutor.execute(Requests.CardList.Get(page: page, pageSize: pageSize))
       .then { cardListResponse in
-        cardListResponse.cards.toAppModel()
+        (cardListResponse.cardCount, cardListResponse.cards.toAppModel())
       }
   }
 }

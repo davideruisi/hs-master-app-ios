@@ -12,25 +12,57 @@ extension Logic {
   enum CardSearch {}
 }
 
+// MARK: - SideEffects
+
 extension Logic.CardSearch {
-  /// Execute a request to get the cards list and update the state with the received cards.
+  /// Executes a request to get a page of cards list and update the state with the received cards.
   struct GetCardList: AppSideEffect {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
-      let cards = try Hydra.await(context.dependencies.networkManager.getCardList())
+      let nextPage = context.getState().cardSearch.lastReceivedPage + 1
 
-      context.dispatch(UpdateCardsState(cards: cards))
+      var cards = context.getState().cardSearch.cards
+
+      let (totalNumberOfCards, newCards) = try Hydra.await(context.dependencies.networkManager.getCardList(page: nextPage))
+
+      cards.append(contentsOf: newCards)
+
+      context.dispatch(
+        UpdateCardsStateIfPossible(
+          cards: cards,
+          requestedPage: nextPage,
+          totalNumberOfCards: totalNumberOfCards
+        )
+      )
     }
   }
 }
 
-extension Logic.CardSearch {
-  /// Update the list of cards in the App state.
-  struct UpdateCardsState: AppStateUpdater {
+// MARK: - StateUpdaters
+
+fileprivate extension Logic.CardSearch.GetCardList {
+  /// Update the list of cards in the App state if possible.
+  /// The state is only updated if the request parameters are yet the same.
+  /// (It can happens that the user has changed filters while the request was executing).
+  struct UpdateCardsStateIfPossible: AppStateUpdater {
     /// The new list of cards to be saved in the state.
     let cards: [Models.Card]
 
+    /// The requested page.
+    let requestedPage: Int
+
+    /// The total number of cards available on back-end.
+    let totalNumberOfCards: UInt
+
     func updateState(_ state: inout AppState) {
-      state.cards = cards
+      guard requestedPage == state.cardSearch.lastReceivedPage + 1 else {
+        return
+      }
+
+      state.cardSearch = AppState.CardSearch(
+        cards: cards,
+        totalNumberOfCards: totalNumberOfCards,
+        lastReceivedPage: requestedPage
+      )
     }
   }
 }

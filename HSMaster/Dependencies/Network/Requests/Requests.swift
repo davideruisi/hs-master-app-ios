@@ -28,15 +28,23 @@ extension Requests.CardList {
 
     let timeoutInterval: TimeInterval = 30
 
-    let headers: [String: String] = ["Authorization": "Bearer USYw7z6d5FCDfB78wWDdhhyXCACsCzjPW4"]
+    let headers: [String: String] = ["Authorization": "Bearer USanWzcuQtznG31WTwYxWOn5P7D3VPYXJQ"]
 
-    let queryParameters: [String: String] = [
-      "locale": "en_US",
-      "sort": "groupByClass,manaCost,name",
-      "set": "standard",
-      "textFilter": "",
-      "page": "\(1)",
-      "pageSize": "\(500)"
-    ]
+    // The requested page of the list.
+    let page: Int
+
+    // The size of each page in the list.
+    let pageSize: Int
+
+    var queryParameters: [String: String] {
+      [
+        "locale": "en_US",
+        "sort": "groupByClass,manaCost,name",
+        "set": "standard",
+        "textFilter": "",
+        "page": "\(page)",
+        "pageSize": "\(pageSize)"
+      ]
+    }
   }
 }

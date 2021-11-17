@@ -112,7 +112,7 @@ extension Models.Response {
     let cards: [Card]
 
     /// Total number of cards that can be fetched for this request.
-    let cardCount: Int
+    let cardCount: UInt
 
     /// Total number of pages for this request.
     let pageCount: Int
