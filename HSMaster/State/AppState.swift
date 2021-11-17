@@ -10,7 +10,7 @@ import Katana
 /// The state of the app.
 struct AppState: State {
   /// The state of the Home tab.
-  var homeState: Home
+  var home: Home
 
   /// The state of the CardSearch tab.
   var cardSearch: CardSearch
@@ -20,7 +20,7 @@ struct AppState: State {
 
 extension AppState {
   init() {
-    homeState = Home()
+    home = Home()
     cardSearch = CardSearch()
   }
 }

@@ -33,8 +33,8 @@ struct HomeVM: ViewModelWithState, Equatable {
   // MARK: Init
 
   init?(state: AppState) {
-    articles = state.articles
-    totalNumberOfArticles = state.totalNumberOfArticles
+    articles = state.home.articles
+    totalNumberOfArticles = state.home.totalNumberOfArticles
   }
 }
 

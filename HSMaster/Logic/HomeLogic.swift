@@ -20,7 +20,7 @@ extension Logic.Home {
   /// Get articles from back-end. Then update the AppState with the new articles list.
   struct GetArticles: AppSideEffect {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
-      var articles = context.getState().articles
+      var articles = context.getState().home.articles
 
       let (totalArticles, newArticles) = try Hydra.await(
         context.dependencies.contentfulManager.getArticles(offset: articles.count)
@@ -67,12 +67,11 @@ private extension Logic.Home {
     let totalNumberOfArticles: UInt
 
     func updateState(_ state: inout AppState) {
-      guard state.articles.count < articles.count else {
+      guard state.home.articles.count < articles.count else {
         return
       }
 
-      state.articles = articles
-      state.totalNumberOfArticles = totalNumberOfArticles
+      state.home = AppState.Home(articles: articles, totalNumberOfArticles: totalNumberOfArticles)
     }
   }
 }

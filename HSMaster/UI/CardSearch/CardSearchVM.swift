@@ -23,7 +23,7 @@ struct CardSearchVM: ViewModelWithState {
   let cards: [Models.Card]
 
   init?(state: AppState) {
-    cards = state.cards
+    cards = state.cardSearch.cards
   }
 }
 
