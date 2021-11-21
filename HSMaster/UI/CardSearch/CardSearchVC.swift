@@ -9,9 +9,9 @@ import Tempura
 
 /// The ViewController of the `CardSearchView`.
 final class CardSearchVC: ViewController<CardSearchView> {
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    dispatch(Logic.CardSearch.GetCardList())
+  override func setupInteraction() {
+    rootView.didReachLoadingCell = { [weak self] in
+      self?.dispatch(Logic.CardSearch.GetCardList())
+    }
   }
 }

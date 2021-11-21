@@ -22,8 +22,12 @@ struct CardSearchVM: ViewModelWithState {
   /// The list of cards to be shown  in the `collectionView`.
   let cards: [Models.Card]
 
+  /// The total number of cards available on back-end.
+  let totalNumberOfCards: UInt?
+
   init?(state: AppState) {
     cards = state.cardSearch.cards
+    totalNumberOfCards = state.cardSearch.totalNumberOfCards
   }
 }
 
@@ -32,7 +36,8 @@ struct CardSearchVM: ViewModelWithState {
 extension CardSearchVM {
   /// The number of sections in the `collectionView`.
   var numberOfSections: Int {
-    Section.allCases.count
+    // Returns `2` if we should show the loading cell, otherwise 1 (only the section containing cards).
+    shouldShowLoadingCell ? Section.allCases.count : Section.allCases.count - 1
   }
 
   /// The number of cards/cells in the `collectionView`.
@@ -43,5 +48,15 @@ extension CardSearchVM {
   /// The `CardCellVM` for the corresponding `IndexPath` in the `collectionView`.
   func cardCellVM(at indexPath: IndexPath) -> CardCellVM {
     CardCellVM(imageURL: cards[safe: indexPath.item]?.imageURL)
+  }
+
+  /// Whether the loading cell should be shown.
+  /// This cell is shown only if there are more cards to be fetched from back-end.
+  var shouldShowLoadingCell: Bool {
+    guard let totalNumberOfCards = totalNumberOfCards else {
+      return true
+    }
+
+    return cards.count < totalNumberOfCards
   }
 }

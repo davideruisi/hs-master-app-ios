@@ -24,6 +24,11 @@ final class CardSearchView: UIView, ViewControllerModellableView {
     UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
   }()
 
+  // MARK: Interactions
+
+  /// Called when the user reaches the end of the cards list and we need to fetch more cards from beck-end.
+  var didReachLoadingCell: Interaction?
+
   // MARK: SSUL
 
   func setup() {
@@ -109,6 +114,10 @@ extension CardSearchView: UICollectionViewDataSource {
         return cell
       }
       typedCell.activityIndicatorView.startAnimating()
+
+      // Signals we have reached the end of the cards list.
+      didReachLoadingCell?()
+
       return typedCell
     }
   }

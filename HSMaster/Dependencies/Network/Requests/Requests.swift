@@ -28,7 +28,7 @@ extension Requests.CardList {
 
     let timeoutInterval: TimeInterval = 30
 
-    let headers: [String: String] = ["Authorization": "Bearer USanWzcuQtznG31WTwYxWOn5P7D3VPYXJQ"]
+    let headers: [String: String] = ["Authorization": "Bearer USyWeJB6e60A8BIm3rZnvORhbhWibmWhWd"]
 
     // The requested page of the list.
     let page: Int

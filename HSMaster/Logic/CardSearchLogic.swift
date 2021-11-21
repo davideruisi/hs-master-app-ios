@@ -9,6 +9,7 @@ import Hydra
 import Katana
 
 extension Logic {
+  /// The logic relative to the CardSearch tab.
   enum CardSearch {}
 }
 

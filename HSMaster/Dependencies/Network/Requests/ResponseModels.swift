@@ -131,7 +131,7 @@ extension Models.Response {
     let cardTypeId: Int
     let cardSetId: Int
     let rarityId: Int
-    let artistName: String
+    let artistName: String?
     let manaCost: Int
     let name: String
     let text: String
