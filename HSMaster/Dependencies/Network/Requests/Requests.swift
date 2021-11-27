@@ -20,15 +20,11 @@ extension Requests.CardList {
 
     let method: HTTPMethod = .get
 
+    let authenticationMethod: AuthenticationMethod = .clientCredentials
+
     let baseURL = BaseURL.hearthstone
 
     let path = "cards"
-
-    let cachePolicy: NSURLRequest.CachePolicy = .useProtocolCachePolicy
-
-    let timeoutInterval: TimeInterval = 30
-
-    let headers: [String: String] = ["Authorization": "Bearer USyWeJB6e60A8BIm3rZnvORhbhWibmWhWd"]
 
     // The requested page of the list.
     let page: Int

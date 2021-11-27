@@ -11,6 +11,9 @@ import Foundation
 
 /// Base URL constants.
 enum BaseURL {
+  /// The battle.net authentication server base URL.
+  static let authentication = URL(string: "https://us.battle.net/oauth")!
+
   /// The official Blizzard Hearthstone API base URL.
   static let hearthstone = URL(string: "https://us.api.blizzard.com/hearthstone")!
 }
