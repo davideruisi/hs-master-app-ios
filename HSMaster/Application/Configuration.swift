@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Logging
 
 /// Contains values taken by app's configuration files.
 enum Configuration {
@@ -19,6 +18,25 @@ enum Configuration {
   static var contentfulAccessToken: String {
     value(for: .contentfulAccessToken)
   }
+
+  /// The battle.net client identifier. Used for credentials to get access token from the `AuthenticationManager`.
+  static var battleNetClientID: String {
+    value(for: .battleNetClientID)
+  }
+
+  /// The battle.net client secret. Used for credentials to get access token from the `AuthenticationManager`.
+  static var battleNetClientSecret: String {
+    value(for: .battleNetClientSecret)
+  }
+
+  /// The battle.net client authentication data. Used for basic authentication header in `Requests.AccessToken.Get` request.
+  static var battleNetClientAuthenticationData: String {
+    let user = Self.battleNetClientID
+    let password = Self.battleNetClientSecret
+
+    // swiftlint:disable:next force_unwrapping
+    return "\(user):\(password)".data(using: .utf8)!.base64EncodedString()
+  }
 }
 
 private extension Configuration {
@@ -26,6 +44,9 @@ private extension Configuration {
   enum Key: String {
     case contentfulSpaceID = "CONTENTFUL_SPACE_ID"
     case contentfulAccessToken = "CONTENTFUL_ACCESS_TOKEN"
+
+    case battleNetClientID = "BATTLE_NET_CLIENT_ID"
+    case battleNetClientSecret = "BATTLE_NET_CLIENT_SECRET"
   }
 
   /// Extract the specified key's value from the app info dictionary.
