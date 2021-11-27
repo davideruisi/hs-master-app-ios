@@ -8,7 +8,7 @@
 import Hydra
 
 /// A protocol for an entry that is responsible of executing a Request and provide a serialized response.
-protocol RequestExecutor {
+protocol RequestExecutor: AnyObject {
   /// Execute the request.
   func execute<R: Request>(_ request: R) -> Promise<R.ResponseModel>
 }

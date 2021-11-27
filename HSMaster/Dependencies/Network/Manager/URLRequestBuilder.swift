@@ -6,43 +6,59 @@
 //
 
 import Foundation
+import Hydra
 
 /// A protocol for building a `URLRequest` starting from a `Request`.
 protocol URLRequestBuilder {
+  /// The `AuthenticationManager` where we can get the access token if needed.
+  var authenticationManager: AuthenticationManager { get }
+
   /// Build a `URLRequest` from the `Request`.
   /// - Parameter request: The `Request` from which to build the `URLRequest`.
   /// - Returns: The builded `URLRequest`.
-  func build<R: Request>(_ request: R) -> URLRequest
+  func build<R: Request>(_ request: R) throws -> URLRequest
 }
 
 extension URLRequestBuilder {
-  func build<R: Request>(_ request: R) -> URLRequest {
-    request.asURLRequest()
-  }
-}
+  func build<R: Request>(_ request: R) throws -> URLRequest {
+    let url = request.baseURL.appendingPathComponent(request.path)
 
-// MARK: - Helpers
+    var urlRequest = URLRequest(url: url, cachePolicy: request.cachePolicy, timeoutInterval: request.timeoutInterval)
+    urlRequest.httpMethod = request.method.rawValue
 
-fileprivate extension Request {
-  /// Creates a `URLRequest` from `self`.
-  /// - Returns: The corresponding `URLRequest`.
-  func asURLRequest() -> URLRequest {
-    let url = baseURL.appendingPathComponent(path)
-
-    var urlRequest = URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeoutInterval)
-    urlRequest.httpMethod = method.rawValue
-
-    headers.forEach {
+    request.headers.forEach {
       urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
     }
 
-    urlRequest.encode(queryParameters: queryParameters)
+    if case .clientCredentials = request.authenticationMethod {
+      let accessToken = try Hydra.await(authenticationManager.getToken())
+      urlRequest.setValue("Bearer \(accessToken.value)", forHTTPHeaderField: "Authorization")
+    }
+
+    urlRequest.encode(queryParameters: request.queryParameters)
+    urlRequest.encode(bodyParameters: request.bodyParameters)
 
     return urlRequest
   }
 }
 
+// MARK: - Helpers
+
 fileprivate extension URLRequest {
+  /// Adds `bodyParameters` to `self`.
+  /// - Parameter bodyParameters: A `[String: String]` dictionary containing all the body parameters.
+  mutating func encode(bodyParameters: [String: String]) {
+    let body = bodyParameters.map { key, value in
+      let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? ""
+      let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .afURLQueryAllowed) ?? ""
+      return "\(escapedKey)=\(escapedValue)"
+    }
+      .joined(separator: "&")
+      .data(using: .utf8)
+
+    self.httpBody = body
+  }
+
   /// Adds `queryParameters` to `self`.
   /// - Parameter queryParameters: A `[String: String]` dictionary containing all the query parameters.
   mutating func encode(queryParameters: [String: String]) {
