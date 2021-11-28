@@ -7,4 +7,5 @@
 */
 
 "homeTab.title" = "News";
-"cardSearchTab.title" = "Search";
+"cardSearchTab.title" = "Card Library";
+"cardSearchTab.searchBar.placeholder" = "Search";

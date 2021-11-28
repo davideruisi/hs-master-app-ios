@@ -28,8 +28,19 @@ final class NetworkManager {
 
 extension NetworkManager {
   /// Searches a list of cards.
-  func getCardList(page: Int = 1, pageSize: Int = 500) -> Promise<(UInt, [Models.Card])> {
-    requestExecutor.execute(Requests.CardList.Get(page: page, pageSize: pageSize))
+  /// - Parameters:
+  ///   - filter: The filter to be applied on the search request.
+  ///   - page: The requested page of the list.
+  ///   - pageSize: The dimension of each page in the returned response. Defaults to `500`.
+  /// - Returns: The promise containing a tuple with the total number of cards and the page of the cards list.
+  func getCardList(filter: Models.CardSearch.Filter, page: Int, pageSize: Int = 500) -> Promise<(UInt, [Models.Card])> {
+    requestExecutor.execute(
+      Requests.CardList.Get(
+        filter: filter,
+        page: page,
+        pageSize: pageSize
+      )
+    )
       .then { cardListResponse in
         (cardListResponse.cardCount, cardListResponse.cards.toAppModel())
       }

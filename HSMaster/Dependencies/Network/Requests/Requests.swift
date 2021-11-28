@@ -26,6 +26,9 @@ extension Requests.CardList {
 
     let path = "cards"
 
+    // The filter to be applied for the search request.
+    let filter: Models.CardSearch.Filter
+
     // The requested page of the list.
     let page: Int
 
@@ -37,7 +40,7 @@ extension Requests.CardList {
         "locale": "en_US",
         "sort": "groupByClass,manaCost,name",
         "set": "standard",
-        "textFilter": "",
+        "textFilter": filter.text,
         "page": "\(page)",
         "pageSize": "\(pageSize)"
       ]

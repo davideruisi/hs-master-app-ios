@@ -13,5 +13,9 @@ final class CardSearchVC: ViewController<CardSearchView> {
     rootView.didReachLoadingCell = { [weak self] in
       self?.dispatch(Logic.CardSearch.GetCardList())
     }
+
+    rootView.didChangeSearchBarText = { [weak self] text in
+      self?.dispatch(Logic.CardSearch.UpdateFilterState(text: text))
+    }
   }
 }

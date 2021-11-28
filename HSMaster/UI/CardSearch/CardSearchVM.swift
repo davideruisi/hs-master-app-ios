@@ -25,9 +25,13 @@ struct CardSearchVM: ViewModelWithState {
   /// The total number of cards available on back-end.
   let totalNumberOfCards: UInt?
 
+  /// The text in the search-bar.
+  let searchBarText: String?
+
   init?(state: AppState) {
     cards = state.cardSearch.cards
     totalNumberOfCards = state.cardSearch.totalNumberOfCards
+    searchBarText = state.cardSearch.filter.text
   }
 }
 

@@ -29,15 +29,16 @@ final class CardSearchView: UIView, ViewControllerModellableView {
   /// Called when the user reaches the end of the cards list and we need to fetch more cards from beck-end.
   var didReachLoadingCell: Interaction?
 
+  /// Called when the user changes the text filter in the search-bar.
+  var didChangeSearchBarText: CustomInteraction<String>?
+
   // MARK: SSUL
 
   func setup() {
     addSubview(collectionView)
 
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    collectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.reuseIdentifier)
-    collectionView.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.reuseIdentifier)
+    setupCollectionView()
+    setupSearchBar()
   }
 
   func style() {
@@ -46,6 +47,11 @@ final class CardSearchView: UIView, ViewControllerModellableView {
   }
 
   func update(oldModel: CardSearchVM?) {
+    guard let model = model else {
+      return
+    }
+
+    Self.Style.searchBar(navigationItem?.searchController?.searchBar, with: model.searchBarText)
     collectionView.reloadData()
   }
 
@@ -67,6 +73,10 @@ private extension CardSearchView {
 
     static func collectionView(_ collectionView: UICollectionView) {
       collectionView.backgroundColor = .clear
+    }
+
+    static func searchBar(_ searchBar: UISearchBar?, with text: String?) {
+      searchBar?.text = text
     }
   }
 }
@@ -150,6 +160,18 @@ extension CardSearchView: UICollectionViewDelegateFlowLayout {
   }
 }
 
+// MARK: - UISearchBarDelegate
+
+extension CardSearchView: UISearchBarDelegate {
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    didChangeSearchBarText?("")
+  }
+
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    didChangeSearchBarText?(searchBar.text ?? "")
+  }
+}
+
 // MARK: - Helpers
 
 private extension CardSearchView {
@@ -166,5 +188,25 @@ private extension CardSearchView {
     )
 
     return collectionViewLayout
+  }
+
+  func setupCollectionView() {
+    collectionView.dataSource = self
+    collectionView.delegate = self
+    collectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.reuseIdentifier)
+    collectionView.register(LoadingCell.self, forCellWithReuseIdentifier: LoadingCell.reuseIdentifier)
+  }
+
+  func setupSearchBar() {
+    guard let navigationItem = navigationItem else {
+      AppLogger.error("Missing instance of \(UINavigationItem.self).")
+      return
+    }
+
+    let search = UISearchController(searchResultsController: nil)
+    search.obscuresBackgroundDuringPresentation = false
+    search.searchBar.placeholder = Localization.CardSearchTab.SearchBar.placeholder
+    search.searchBar.delegate = self
+    navigationItem.searchController = search
   }
 }
