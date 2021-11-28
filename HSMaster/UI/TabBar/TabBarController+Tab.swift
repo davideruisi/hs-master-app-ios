@@ -85,7 +85,10 @@ extension TabBarController.Tab {
 
       cardSearchViewController.navigationItem.title = title
 
-      return UINavigationController(rootViewController: cardSearchViewController)
+      let navigationController = UINavigationController(rootViewController: cardSearchViewController)
+      navigationController.navigationBar.prefersLargeTitles = true
+
+      return navigationController
     }
   }
 }

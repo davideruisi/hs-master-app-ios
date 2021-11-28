@@ -208,5 +208,6 @@ private extension CardSearchView {
     search.searchBar.placeholder = Localization.CardSearchTab.SearchBar.placeholder
     search.searchBar.delegate = self
     navigationItem.searchController = search
+    navigationItem.hidesSearchBarWhenScrolling = false
   }
 }
