@@ -12,15 +12,15 @@ extension Models {
 }
 
 extension Models.Authentication {
+  enum Response {}
+}
+
+// MARK: - App Model
+
+extension Models.Authentication {
   /// Model of the battle.net `AccessToken`.
-  struct AccessToken: Decodable {
-
-    // MARK: CodingKeys
-
-    enum CodingKeys: String, CodingKey {
-      case accessToken = "access_token"
-      case lifetime = "expires_in"
-    }
+  /// `Codable` conformance is needed to save the token in the keychain.
+  struct AccessToken: Codable {
 
     // MARK: Stored Properties
 
@@ -36,16 +36,29 @@ extension Models.Authentication {
     var isValid: Bool {
       Date() < expiringDate
     }
+  }
+}
 
-    // MARK: Init
+// MARK: - Response Model
 
-    init(from decoder: Decoder) throws {
-      let values = try decoder.container(keyedBy: CodingKeys.self)
-
-      value = try values.decode(String.self, forKey: .accessToken)
-
-      let lifetime = try values.decode(TimeInterval.self, forKey: .lifetime)
-      expiringDate = Date().addingTimeInterval(lifetime)
+extension Models.Authentication.Response {
+  /// Model of the battle.net `AccessToken` as received in response of the `Requests.Authentication.AccessToken.Get`.
+  struct AccessToken: Decodable {
+    enum CodingKeys: String, CodingKey {
+      case accessToken = "access_token"
+      case lifetime = "expires_in"
     }
+
+    /// The effective `String` containing the access token.
+    let accessToken: String
+
+    /// The token lifetime.
+    let lifetime: TimeInterval
+  }
+}
+
+extension Models.Authentication.Response.AccessToken: AppModellable {
+  func toAppModel() -> Models.Authentication.AccessToken {
+    Models.Authentication.AccessToken(value: accessToken, expiringDate: Date().addingTimeInterval(lifetime))
   }
 }

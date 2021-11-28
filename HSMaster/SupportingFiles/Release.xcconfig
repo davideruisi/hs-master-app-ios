@@ -7,3 +7,6 @@
 
 #include "Pods/Target Support Files/Pods-HSMaster/Pods-HSMaster.release.xcconfig"
 #include "HSMaster/SupportingFiles/Secrets/SecretsRelease.xcconfig"
+
+KEYCHAIN_SERVICE_ACCESS_TOKEN = com.davideruisi.HSMaster.keychain.service.accessToken
+KEYCHAIN_ACCOUNT_BATTLE_NET = com.davideruisi.HSMaster.keychain.account.battleNet

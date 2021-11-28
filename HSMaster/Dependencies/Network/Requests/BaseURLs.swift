@@ -1,5 +1,5 @@
 //
-//  URLConstants.swift
+//  BaseURLs.swift
 //  HSMaster
 //
 //  Created by Davide Ruisi on 15/11/21.

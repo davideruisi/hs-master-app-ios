@@ -11,8 +11,23 @@ import Hydra
 /// The class responsible of network requests' authentication.
 final class AuthenticationManager {
   /// The last received access token. It can be `nil` if no tokens have been yet received.
-  #warning("TODO: Use keychain")
-  private var currentToken: Models.Authentication.AccessToken?
+  /// The token is saved in and read from the keychain.
+  private var currentToken: Models.Authentication.AccessToken? {
+    get {
+      KeychainHelper.standard.read(
+        service: Configuration.keychainServiceAccessToken,
+        account: Configuration.keychainAccountBattleNet,
+        type: Models.Authentication.AccessToken.self
+      )
+    }
+    set {
+      KeychainHelper.standard.save(
+        newValue,
+        service: Configuration.keychainServiceAccessToken,
+        account: Configuration.keychainAccountBattleNet
+      )
+    }
+  }
 
   /// The queue where `getToken()` promises are synchronized.
   /// This synchronization is needed to avoid un-needed token refresh.
@@ -81,8 +96,8 @@ private extension AuthenticationManager {
       }
 
       requestExecutor.execute(Requests.Authentication.AccessToken.Get())
-        .then(in: .background) { newToken in
-          resolve(newToken)
+        .then(in: .background) { responseToken in
+          resolve(responseToken.toAppModel())
         }
         .catch(in: .background) { _ in
           reject(NetworkError.accessTokenRequestFailed)

@@ -18,7 +18,7 @@ extension Requests.Authentication {
 extension Requests.Authentication.AccessToken {
   /// Get a new access token for API authentication.
   struct Get: Request {
-    typealias ResponseModel = Models.Authentication.AccessToken
+    typealias ResponseModel = Models.Authentication.Response.AccessToken
 
     let method: HTTPMethod = .post
 

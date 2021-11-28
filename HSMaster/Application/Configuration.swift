@@ -37,6 +37,16 @@ enum Configuration {
     // swiftlint:disable:next force_unwrapping
     return "\(user):\(password)".data(using: .utf8)!.base64EncodedString()
   }
+
+  /// The access token service identifier for saving access tokens in the keychain.
+  static var keychainServiceAccessToken: String {
+    value(for: .keychainServiceAccessToken)
+  }
+
+  /// The battle.net account identifier for saving battle.net account data in the keychain.
+  static var keychainAccountBattleNet: String {
+    value(for: .keychainAccountBattleNet)
+  }
 }
 
 private extension Configuration {
@@ -47,6 +57,9 @@ private extension Configuration {
 
     case battleNetClientID = "BATTLE_NET_CLIENT_ID"
     case battleNetClientSecret = "BATTLE_NET_CLIENT_SECRET"
+
+    case keychainServiceAccessToken = "KEYCHAIN_SERVICE_ACCESS_TOKEN"
+    case keychainAccountBattleNet = "KEYCHAIN_ACCOUNT_BATTLE_NET"
   }
 
   /// Extract the specified key's value from the app info dictionary.
