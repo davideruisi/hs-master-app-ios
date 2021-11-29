@@ -11,6 +11,8 @@ enum Requests {}
 
 extension Requests {
   enum CardList {}
+
+  enum Metadata {}
 }
 
 extension Requests.CardList {
@@ -45,5 +47,22 @@ extension Requests.CardList {
         "pageSize": "\(pageSize)"
       ]
     }
+  }
+}
+
+extension Requests.Metadata {
+  /// Gets Hearthstone game metadata.
+  struct Get: Request {
+    typealias ResponseModel = Models.Response.Metadata
+
+    let method: HTTPMethod = .get
+
+    let authenticationMethod: AuthenticationMethod = .clientCredentials
+
+    let baseURL = BaseURL.hearthstone
+
+    let path = "metadata"
+
+    let queryParameters = ["locale": "en_US"]
   }
 }

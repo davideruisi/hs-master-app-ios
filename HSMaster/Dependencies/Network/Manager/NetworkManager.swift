@@ -41,8 +41,17 @@ extension NetworkManager {
         pageSize: pageSize
       )
     )
-      .then { cardListResponse in
+      .then(in: .background) { cardListResponse in
         (cardListResponse.cardCount, cardListResponse.cards.toAppModel())
+      }
+  }
+
+  /// Get the Hearthstone game metadata.
+  /// - Returns: The promise containing the struct with all the `Metadata`.
+  func getMetadata() -> Promise<Models.Metadata> {
+    requestExecutor.execute(Requests.Metadata.Get())
+      .then(in: .background) { response in
+        response.toAppModel()
       }
   }
 }

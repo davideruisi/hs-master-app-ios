@@ -37,6 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Start the navigation.
     self.store?.dependencies?.navigator.start(using: self, in: window, at: Screen.tabBar)
 
+    // Execute AppSetup logic in background.
+    // This logic is non-blocking and can be executed after the start of the app navigation.
+    self.store?.dispatch(Logic.AppSetup.GetMetadata())
+
     return true
   }
 }

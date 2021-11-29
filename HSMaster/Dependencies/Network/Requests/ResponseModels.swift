@@ -27,7 +27,9 @@ extension Models.Response {
     let filterableFields: [String]
     let numericFields: [String]
   }
+}
 
+extension Models.Response.Metadata {
   struct CardType: Decodable {
     let slug: String
     let id: Int
@@ -151,5 +153,29 @@ extension Models.Response {
 extension Models.Response.Card: AppModellable {
   func toAppModel() -> Models.Card {
     Models.Card(imageURL: image)
+  }
+}
+
+extension Models.Response.Metadata.Class: AppModellable {
+  func toAppModel() -> Models.Metadata.Class {
+    Models.Metadata.Class(id: id, name: name)
+  }
+}
+
+extension Models.Response.Metadata.Keyword: AppModellable {
+  func toAppModel() -> Models.Metadata.Keyword {
+    Models.Metadata.Keyword(id: id, name: name, description: text)
+  }
+}
+
+extension Models.Response.Metadata.Set: AppModellable {
+  func toAppModel() -> Models.Metadata.Set {
+    Models.Metadata.Set(id: id, name: name)
+  }
+}
+
+extension Models.Response.Metadata: AppModellable {
+  func toAppModel() -> Models.Metadata {
+    Models.Metadata(classes: classes.toAppModel(), keywords: keywords.toAppModel(), sets: sets.toAppModel())
   }
 }
