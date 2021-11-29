@@ -29,7 +29,7 @@ extension TabBarController.Tab {
       return UIImage(systemName: "doc.text.image.fill")
 
     case .cardSearch:
-      return UIImage(systemName: "magnifyingglass.circle.fill")
+      return UIImage(systemName: "square.stack.fill")
     }
   }
 
@@ -40,7 +40,7 @@ extension TabBarController.Tab {
       return UIImage(systemName: "doc.text.image")
 
     case .cardSearch:
-      return UIImage(systemName: "magnifyingglass.circle")
+      return UIImage(systemName: "square.stack")
     }
   }
 
