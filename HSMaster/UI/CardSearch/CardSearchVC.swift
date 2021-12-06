@@ -17,5 +17,13 @@ final class CardSearchVC: ViewController<CardSearchView> {
     rootView.didChangeSearchBarText = { [weak self] text in
       self?.dispatch(Logic.CardSearch.UpdateFilterState(text: text))
     }
+
+    rootView.didTapCardCell = { [weak self] indexPath in
+      guard let card = self?.viewModel?.card(for: indexPath) else {
+        return
+      }
+
+      self?.dispatch(Logic.CardSearch.ShowCardDetail(card: card))
+    }
   }
 }

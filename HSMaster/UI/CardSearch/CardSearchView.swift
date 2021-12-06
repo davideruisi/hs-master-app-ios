@@ -16,7 +16,7 @@ final class CardSearchView: UIView, ViewControllerModellableView {
 
   static let collectionInset = SharedStyle.Spacing.small
   static let collectionItemsSpacing = SharedStyle.Spacing.xSmall
-  static let collectionItemHeightWidthRatio = 1.4
+  static let collectionItemHeightWidthRatio = 518.0 / 375.0
 
   // MARK: UI Elements
 
@@ -31,6 +31,9 @@ final class CardSearchView: UIView, ViewControllerModellableView {
 
   /// Called when the user changes the text filter in the search-bar.
   var didChangeSearchBarText: CustomInteraction<String>?
+
+  /// The user tapped a card cell in the `collectionView`.
+  var didTapCardCell: CustomInteraction<IndexPath>?
 
   // MARK: SSUL
 
@@ -157,6 +160,10 @@ extension CardSearchView: UICollectionViewDelegateFlowLayout {
       let itemHeight = LoadingCell.height
       return CGSize(width: itemWidth, height: itemHeight)
     }
+  }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    didTapCardCell?(indexPath)
   }
 }
 

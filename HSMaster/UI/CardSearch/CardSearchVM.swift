@@ -53,6 +53,13 @@ extension CardSearchVM {
   func cardCellVM(at indexPath: IndexPath) -> CardCellVM {
     CardCellVM(imageURL: cards[safe: indexPath.item]?.imageURL)
   }
+  
+  /// The `Models.Card` shown in the cell at `indexPath`.
+  /// - Parameter indexPath: The `IndexPath` of the cell showing the Card.
+  /// - Returns: The `Models.Card`  shown in the cell ad `indexPath`.
+  func card(for indexPath: IndexPath) -> Models.Card? {
+    cards[safe: indexPath.item]
+  }
 
   /// Whether the loading cell should be shown.
   /// This cell is shown only if there are more cards to be fetched from back-end.
