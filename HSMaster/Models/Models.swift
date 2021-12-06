@@ -28,8 +28,26 @@ extension Models {
 extension Models {
   /// The Model of a card.
   struct Card: Equatable {
+    /// The artist of the card image.
+    let artistName: String?
+
+    /// The classes ids of the card. A card can have multiple classes.
+    let classIds: [Int]
+
+    /// The flavor text of the card.
+    let flavorText: String?
+
     /// The URL of the card image.
     let imageURL: URL?
+
+    /// List of keyword ids used by this card.
+    let keywordIds: [Int]
+
+    /// The name of the card.
+    let name: String
+
+    /// The id of the set of the card.
+    let setId: Int
   }
 }
 
@@ -57,6 +75,8 @@ extension Models {
       let name: String
     }
 
+    // MARK: Properties
+
     /// The list of classes in Hearthstone.
     let classes: [Class]
 
@@ -65,6 +85,20 @@ extension Models {
 
     /// The list of Hearthstone sets.
     let sets: [Set]
+
+    // MARK: Helpers
+
+    func getClass(with id: Int) -> Class? {
+      classes.first { $0.id == id }
+    }
+
+    func getKeyword(with id: Int) -> Keyword? {
+      keywords.first { $0.id == id }
+    }
+
+    func getSet(with id: Int) -> Set? {
+      sets.first { $0.id == id }
+    }
   }
 }
 

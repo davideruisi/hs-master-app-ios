@@ -152,7 +152,15 @@ extension Models.Response {
 
 extension Models.Response.Card: AppModellable {
   func toAppModel() -> Models.Card {
-    Models.Card(imageURL: image)
+    Models.Card(
+      artistName: artistName,
+      classIds: multiClassIds.isEmpty ? [classId] : multiClassIds,
+      flavorText: flavorText,
+      imageURL: image,
+      keywordIds: keywordIds ?? [],
+      name: name,
+      setId: cardSetId
+    )
   }
 }
 
