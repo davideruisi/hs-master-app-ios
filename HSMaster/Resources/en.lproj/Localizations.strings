@@ -9,3 +9,7 @@
 "homeTab.title" = "News";
 "cardSearchTab.title" = "Card Library";
 "cardSearchTab.searchBar.placeholder" = "Search";
+"cardDetail.set" = "Set";
+"cardDetail.class" = "Class";
+"cardDetail.keywords" = "Keywords";
+"cardDetail.artist" = "Artist";
