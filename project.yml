@@ -7,7 +7,7 @@ options:
   indentWidth: 2
   xcodeVersion: "13.0"
   deploymentTarget: 
-    iOS: "13.0"
+    iOS: "14.0"
   generateEmptyDirectories: true
 
 targets:
