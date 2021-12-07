@@ -26,7 +26,7 @@ extension TabBarController.Tab {
   var selectedImage: UIImage? {
     switch self {
     case .home:
-      return UIImage(systemName: "doc.text.image.fill")
+      return UIImage(systemName: "newspaper.fill")
 
     case .cardSearch:
       return UIImage(systemName: "square.stack.fill")
@@ -37,7 +37,7 @@ extension TabBarController.Tab {
   var deselectedImage: UIImage? {
     switch self {
     case .home:
-      return UIImage(systemName: "doc.text.image")
+      return UIImage(systemName: "newspaper")
 
     case .cardSearch:
       return UIImage(systemName: "square.stack")
