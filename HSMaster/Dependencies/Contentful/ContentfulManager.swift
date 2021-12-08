@@ -17,7 +17,7 @@ final class ContentfulManager {
     client = Client(
       spaceId: Configuration.contentfulSpaceID,
       accessToken: Configuration.contentfulAccessToken,
-      contentTypeClasses: [Models.Contentful.Article.self]
+      contentTypeClasses: [Models.Contentful.Article.self, Models.Contentful.Deck.self]
     )
   }
 

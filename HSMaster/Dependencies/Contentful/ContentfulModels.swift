@@ -53,6 +53,38 @@ extension Models.Contentful {
       sourceURL = try? fields.decodeIfPresent(URL.self, forKey: .sourceURL)
     }
   }
+
+  /// The Contentful model for a Deck shown in the Meta tab of the app.
+  final class Deck: ContentfulModel {
+    enum FieldKeys: String, CodingKey {
+      case name
+      case tier
+      case position
+      case code
+    }
+
+    // MARK: Contentful Properties
+
+    static var contentTypeId: ContentTypeId = "deck"
+    let sys: Sys
+
+    // MARK: Fields
+
+    let name: String?
+    let tier: Int?
+    let position: Int?
+    let code: String?
+
+    init(from decoder: Decoder) throws {
+      sys = try decoder.sys()
+
+      let fields = try decoder.contentfulFieldsContainer(keyedBy: Self.FieldKeys.self)
+      name = try? fields.decodeIfPresent(String.self, forKey: .name)
+      tier = try? fields.decodeIfPresent(Int.self, forKey: .tier)
+      position = try? fields.decodeIfPresent(Int.self, forKey: .position)
+      code = try? fields.decodeIfPresent(String.self, forKey: .code)
+    }
+  }
 }
 
 // MARK: - App Model Translations
