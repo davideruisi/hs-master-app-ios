@@ -35,10 +35,8 @@ final class ContentfulManager {
   ) -> Promise<(totalEntries: UInt, entries: [EntryType])> {
     Promise { [weak self] resolve, reject, _ in
       let query = QueryOn<EntryType>()
-      query.parameters = [
-        QueryParameter.limit: "\(limit)",
-        QueryParameter.skip: "\(skip)"
-      ]
+      query.parameters[QueryParameter.limit] = "\(limit)"
+      query.parameters[QueryParameter.skip] = "\(skip)"
 
       AppLogger.debug("Fetching array from Contentful of type: \(type).")
       self?.client.fetchArray(of: type, matching: query) { result in
