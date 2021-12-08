@@ -51,6 +51,31 @@ extension Models {
   }
 }
 
+// MARK: - Deck
+
+extension Models {
+  /// The model of a Deck to be shown in the Meta tab.
+  struct Deck {
+    /// The detail of the deck.
+    struct Detail {}
+
+    /// The name of the deck.
+    let name: String?
+
+    /// The tier of the deck in the meta.
+    let tier: Int?
+
+    /// The position of the deck in the meta.
+    let position: Int?
+
+    /// The code string of the deck to fetch additional details.
+    let code: String?
+
+    /// The detail of the deck. It can be `nil` if the detail has not been already be fetched from back-end.
+    let detail: Detail?
+  }
+}
+
 // MARK: - Metadata
 
 extension Models {

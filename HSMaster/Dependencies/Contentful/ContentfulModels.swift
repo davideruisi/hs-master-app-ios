@@ -100,3 +100,15 @@ extension Models.Contentful.Article: AppModellable {
     )
   }
 }
+
+extension Models.Contentful.Deck: AppModellable {
+  func toAppModel() -> Models.Deck {
+    Models.Deck(
+      name: name,
+      tier: tier,
+      position: position,
+      code: code,
+      detail: nil
+    )
+  }
+}
