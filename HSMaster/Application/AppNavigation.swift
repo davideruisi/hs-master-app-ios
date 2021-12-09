@@ -32,7 +32,16 @@ extension TabBarController: RoutableWithConfiguration {
   }
 
   var navigationConfiguration: [NavigationRequest: NavigationInstruction] {
-    [:]
+    [
+      .show(Screen.cardDetail): .presentModally { [store] context in
+        guard let localState = context as? CardDetailLS else {
+          AppLogger.critical("Wrong context: expected \(CardDetailLS.self), received \(String(describing: context))")
+          fatalError()
+        }
+
+        return UINavigationController(rootViewController: CardDetailVC(store: store, localState: localState))
+      }
+    ]
   }
 }
 
@@ -61,16 +70,7 @@ extension CardSearchVC: RoutableWithConfiguration {
   }
 
   var navigationConfiguration: [NavigationRequest: NavigationInstruction] {
-    [
-      .show(Screen.cardDetail): .presentModally { [store] context in
-        guard let localState = context as? CardDetailLS else {
-          AppLogger.critical("Wrong context: expected \(CardDetailLS.self), received \(String(describing: context))")
-          fatalError()
-        }
-
-        return UINavigationController(rootViewController: CardDetailVC(store: store, localState: localState))
-      }
-    ]
+    [:]
   }
 }
 
