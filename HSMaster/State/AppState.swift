@@ -15,6 +15,9 @@ struct AppState: State {
   /// The state of the CardSearch tab.
   var cardSearch: CardSearch
 
+  /// The state of the Meta tab.
+  var meta: Meta
+
   /// The Hearthstone metadata.
   var metadata: Models.Metadata
 }
@@ -25,6 +28,7 @@ extension AppState {
   init() {
     home = Home()
     cardSearch = CardSearch()
+    meta = Meta()
     metadata = Models.Metadata()
   }
 }
