@@ -14,6 +14,9 @@ extension TabBarController {
     /// The home tab where the user can see news and articles.
     case home
 
+    /// The meta tab containing the best decks.
+    case meta
+
     /// The card search tab where the user can search cards.
     case cardSearch
   }
@@ -28,6 +31,9 @@ extension TabBarController.Tab {
     case .home:
       return UIImage(systemName: "newspaper.fill")
 
+    case .meta:
+      return UIImage(systemName: "crown.fill")
+
     case .cardSearch:
       return UIImage(systemName: "square.stack.fill")
     }
@@ -39,6 +45,9 @@ extension TabBarController.Tab {
     case .home:
       return UIImage(systemName: "newspaper")
 
+    case .meta:
+      return UIImage(systemName: "crown")
+
     case .cardSearch:
       return UIImage(systemName: "square.stack")
     }
@@ -49,6 +58,9 @@ extension TabBarController.Tab {
     switch self {
     case .home:
       return Localization.HomeTab.title
+
+    case .meta:
+      return Localization.MetaTab.title
 
     case .cardSearch:
       return Localization.CardSearchTab.title
@@ -64,9 +76,6 @@ extension TabBarController.Tab {
       let homeViewController = HomeVC(store: store)
 
       homeViewController.tabBarItem = UITabBarItem(title: title, image: deselectedImage, selectedImage: selectedImage)
-      if #available(iOS 15.0, *) {
-        homeViewController.setContentScrollView(homeViewController.rootView.collectionView)
-      }
 
       homeViewController.navigationItem.title = title
 
@@ -75,13 +84,22 @@ extension TabBarController.Tab {
 
       return navigationController
 
+    case .meta:
+      let metaViewController = MetaVC(store: store)
+
+      metaViewController.tabBarItem = UITabBarItem(title: title, image: deselectedImage, selectedImage: selectedImage)
+
+      metaViewController.navigationItem.title = title
+
+      let navigationController = UINavigationController(rootViewController: metaViewController)
+      navigationController.navigationBar.prefersLargeTitles = true
+
+      return navigationController
+
     case .cardSearch:
       let cardSearchViewController = CardSearchVC(store: store)
 
       cardSearchViewController.tabBarItem = UITabBarItem(title: title, image: deselectedImage, selectedImage: selectedImage)
-      if #available(iOS 15.0, *) {
-        cardSearchViewController.setContentScrollView(cardSearchViewController.rootView.collectionView)
-      }
 
       cardSearchViewController.navigationItem.title = title
 
