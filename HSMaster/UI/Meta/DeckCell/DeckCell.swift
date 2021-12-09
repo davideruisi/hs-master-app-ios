@@ -120,6 +120,7 @@ private extension DeckCell {
     }
 
     static func classImageView(_ view: UIImageView, with image: UIImage?) {
+      view.contentMode = .scaleAspectFit
       view.image = image
     }
 

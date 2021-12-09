@@ -14,7 +14,7 @@ class MetaView: UIView, ViewControllerModellableView {
   // MARK: - UI Constants
 
   static let collectionInset = SharedStyle.Spacing.medium
-  static let collectionLineSpacing = SharedStyle.Spacing.large
+  static let collectionLineSpacing = SharedStyle.Spacing.medium
 
   // MARK: - UI Elements
 

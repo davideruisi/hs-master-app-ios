@@ -22,8 +22,7 @@ struct MetaVM: ViewModelWithState {
 extension MetaVM {
   /// The number of cells in the `collectionView`.
   var numberOfCells: Int {
-    // decks.count
-    15
+    decks.count
   }
 
   /// Creates the `ViewModel` for the `DeckCell` at the specified `indexPath`.
@@ -32,7 +31,7 @@ extension MetaVM {
   func deckCellVM(at indexPath: IndexPath) -> DeckCellVM {
     DeckCellVM(
       classImage: TabBarController.Tab.meta.selectedImage,
-      name: "Prova"
+      name: decks[safe: indexPath.item]?.name
     )
   }
 }
