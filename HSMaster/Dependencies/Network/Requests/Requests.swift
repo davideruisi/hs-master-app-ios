@@ -12,6 +12,8 @@ enum Requests {}
 extension Requests {
   enum CardList {}
 
+  enum DeckDetail {}
+
   enum Metadata {}
 }
 
@@ -45,6 +47,31 @@ extension Requests.CardList {
         "textFilter": filter.text,
         "page": "\(page)",
         "pageSize": "\(pageSize)"
+      ]
+    }
+  }
+}
+
+extension Requests.DeckDetail {
+  /// Fetches a Deck Detail using its code.
+  struct Get: Request {
+    typealias ResponseModel = Models.Response.DeckDetail
+
+    let method: HTTPMethod = .get
+
+    let authenticationMethod: AuthenticationMethod = .clientCredentials
+
+    let baseURL = BaseURL.hearthstone
+
+    let path = "deck"
+
+    // The code of the requested deck.
+    let code: String
+
+    var queryParameters: [String: String] {
+      [
+        "locale": "en_US",
+        "code": code
       ]
     }
   }

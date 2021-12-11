@@ -11,6 +11,68 @@ extension Models {
   enum Response {}
 }
 
+// MARK: - Card
+
+extension Models.Response {
+  /// The model for the response of the CardList request.
+  struct CardList: Decodable {
+    /// Received cards.
+    let cards: [Card]
+
+    /// Total number of cards that can be fetched for this request.
+    let cardCount: UInt
+
+    /// Total number of pages for this request.
+    let pageCount: Int
+
+    /// The obtained page number.
+    let page: Int
+  }
+
+  /// The model of a Card received form API.
+  struct Card: Decodable {
+    let id: Int
+    let slug: String
+    let classId: Int
+    let multiClassIds: [Int]
+    let spellSchoolId: Int?
+    let cardTypeId: Int
+    let cardSetId: Int
+    let rarityId: Int
+    let artistName: String?
+    let manaCost: Int
+    let name: String
+    let text: String
+    let image: URL
+    let flavorText: String
+    let cropImage: String
+    let keywordIds: [Int]?
+    let health, attack, durability: Int?
+    let childIds: [Int]?
+    let minionTypeId: Int?
+    let copyOfCardId: Int?
+  }
+}
+
+// MARK: - DeckDetail
+
+extension Models.Response {
+  /// The detail of a deck.
+  struct DeckDetail: Decodable {
+    enum CodingKeys: String, CodingKey {
+      case cards
+      case deckClass = "class"
+    }
+
+    struct DeckClass: Decodable {
+      let id: Int
+    }
+
+    let cards: [Models.Response.Card]
+    let deckClass: DeckClass
+  }
+}
+
 // MARK: - Metadata
 
 extension Models.Response {
@@ -105,49 +167,6 @@ extension Models.Response.Metadata {
   }
 }
 
-// MARK: - Card
-
-extension Models.Response {
-  /// The model for the response of the CardList request.
-  struct CardList: Decodable {
-    /// Received cards.
-    let cards: [Card]
-
-    /// Total number of cards that can be fetched for this request.
-    let cardCount: UInt
-
-    /// Total number of pages for this request.
-    let pageCount: Int
-
-    /// The obtained page number.
-    let page: Int
-  }
-
-  /// The model of a Card received form API.
-  struct Card: Decodable {
-    let id: Int
-    let slug: String
-    let classId: Int
-    let multiClassIds: [Int]
-    let spellSchoolId: Int?
-    let cardTypeId: Int
-    let cardSetId: Int
-    let rarityId: Int
-    let artistName: String?
-    let manaCost: Int
-    let name: String
-    let text: String
-    let image: URL
-    let flavorText: String
-    let cropImage: String
-    let keywordIds: [Int]?
-    let health, attack, durability: Int?
-    let childIds: [Int]?
-    let minionTypeId: Int?
-    let copyOfCardId: Int?
-  }
-}
-
 // MARK: - App Model Translations
 
 extension Models.Response.Card: AppModellable {
@@ -161,6 +180,12 @@ extension Models.Response.Card: AppModellable {
       name: name,
       setId: cardSetId
     )
+  }
+}
+
+extension Models.Response.DeckDetail: AppModellable {
+  func toAppModel() -> Models.Deck.Detail {
+    Models.Deck.Detail(classId: deckClass.id, cards: cards.toAppModel())
   }
 }
 

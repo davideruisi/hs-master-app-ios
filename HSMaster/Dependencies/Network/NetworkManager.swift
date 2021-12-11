@@ -46,6 +46,16 @@ extension NetworkManager {
       }
   }
 
+  /// Gets the `Detail` of the `Deck` with the specified `code`.
+  /// - Parameter code: The Deck code.
+  /// - Returns: A promise containing the `Deck.Detail`.
+  func getDeckDetail(with code: String) -> Promise<Models.Deck.Detail> {
+    requestExecutor.execute(Requests.DeckDetail.Get(code: code))
+      .then(in: .background) { deckDetailResponse in
+        deckDetailResponse.toAppModel()
+      }
+  }
+
   /// Get the Hearthstone game metadata.
   /// - Returns: The promise containing the struct with all the `Metadata`.
   func getMetadata() -> Promise<Models.Metadata> {
