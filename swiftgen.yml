@@ -6,6 +6,14 @@ xcassets:
       enumName: Palette
     output: HSMaster/Resources/Palette.swift
 
+xcassets:
+  inputs: HSMaster/Resources/Images.xcassets
+  outputs:
+    templateName: swift5
+    params:
+      enumName: Images
+    output: HSMaster/Resources/Images.swift
+
 strings:
   inputs: HSMaster/Resources/en.lproj
   outputs:
