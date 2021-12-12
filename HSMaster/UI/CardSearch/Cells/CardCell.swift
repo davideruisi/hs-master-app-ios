@@ -62,7 +62,7 @@ private extension CardCell {
   enum Style {
     static func cardImageView(_ view: UIImageView, with url: URL?) {
       view.contentMode = .scaleAspectFit
-      view.kf.setImage(with: url)
+      view.kf.setImage(with: url, options: [.transition(.fade(0.3))])
     }
   }
 }

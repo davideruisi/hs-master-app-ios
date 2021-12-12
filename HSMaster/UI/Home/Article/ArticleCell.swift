@@ -136,7 +136,7 @@ private extension ArticleCell {
     static func imageView(_ imageView: UIImageView, with url: URL?) {
       imageView.contentMode = .scaleAspectFill
       imageView.clipsToBounds = true
-      imageView.kf.setImage(with: url)
+      imageView.kf.setImage(with: url, options: [.transition(.fade(0.3))])
     }
 
     static func kickerLabel(_ label: UILabel, with text: String?) {
@@ -149,7 +149,7 @@ private extension ArticleCell {
     static func titleLabel(_ label: UILabel, with text: String?) {
       label.text = text?.uppercased()
       label.numberOfLines = 3
-      label.font = .systemFont(ofSize: 32, weight: .bold)
+      label.font = .systemFont(ofSize: 28, weight: .bold)
       label.textColor = .label
     }
 

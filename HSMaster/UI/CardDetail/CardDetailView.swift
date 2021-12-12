@@ -128,7 +128,7 @@ extension CardDetailView {
 
     static func cardImageView(_ imageView: UIImageView, with url: URL?) {
       imageView.contentMode = .scaleAspectFit
-      imageView.kf.setImage(with: url)
+      imageView.kf.setImage(with: url, options: [.transition(.fade(0.3))])
     }
 
     static func flavorTextLabel(_ label: UILabel, with text: String?) {

@@ -137,7 +137,7 @@ private extension ArticleSkeletonCell {
   func showSkeleton() {
     let skeletonGradient = SkeletonGradient(
       baseColor: Palette.backgroundPrimary.color,
-      secondaryColor: Palette.backgroundSecondary.color
+      secondaryColor: Palette.backgroundTertiary.color
     )
     containerView.showAnimatedGradientSkeleton(usingGradient: skeletonGradient)
   }
