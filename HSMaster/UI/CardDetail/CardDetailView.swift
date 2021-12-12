@@ -52,6 +52,7 @@ final class CardDetailView: UIView, ViewControllerModellableView {
 
   func style() {
     Self.Style.view(self)
+    Self.Style.scrollView(scrollView)
   }
 
   func update(oldModel: CardDetailVM?) {
@@ -124,6 +125,10 @@ extension CardDetailView {
 
     static func navigationItem(_ navigationItem: UINavigationItem?, with title: String?) {
       navigationItem?.title = title
+    }
+
+    static func scrollView(_ scrollView: UIScrollView) {
+      scrollView.showsVerticalScrollIndicator = false
     }
 
     static func cardImageView(_ imageView: UIImageView, with url: URL?) {

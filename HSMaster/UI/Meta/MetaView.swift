@@ -93,6 +93,7 @@ private extension MetaView {
 
     static func collectionView(_ collectionView: UICollectionView) {
       collectionView.backgroundColor = .clear
+      collectionView.showsVerticalScrollIndicator = false
     }
   }
 }
