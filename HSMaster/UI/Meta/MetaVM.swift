@@ -9,11 +9,13 @@ import Foundation
 import Tempura
 
 /// The ViewModel of the `MetaView`.
-struct MetaVM: ViewModelWithState {
+struct MetaVM: ViewModelWithState, Equatable {
   let decks: [Models.Deck]
+  let metadata: Models.Metadata
 
   init?(state: AppState) {
     decks = state.meta.decks
+    metadata = state.metadata
   }
 }
 
@@ -29,9 +31,11 @@ extension MetaVM {
   /// - Parameter indexPath: The `IndexPath` of the `DeckCell` for which we want the `ViewModel`
   /// - Returns: The `DeckCellVM` for the specified `indexPath`.
   func deckCellVM(at indexPath: IndexPath) -> DeckCellVM {
-    DeckCellVM(
-      classImage: TabBarController.Tab.meta.selectedImage,
-      name: decks[safe: indexPath.item]?.name
+    let deck = decks[safe: indexPath.item]
+
+    return DeckCellVM(
+      classImage: metadata.getClass(with: deck?.detail?.classId)?.icon,
+      name: deck?.name
     )
   }
 }

@@ -43,6 +43,10 @@ class MetaView: UIView, ViewControllerModellableView {
   }
 
   func update(oldModel: MetaVM?) {
+    guard let model = model, model != oldModel else {
+      return
+    }
+
     collectionView.reloadData()
   }
 

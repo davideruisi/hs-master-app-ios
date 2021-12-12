@@ -5,7 +5,7 @@
 //  Created by Davide Ruisi on 09/10/21.
 //
 
-import Foundation
+import UIKit
 
 enum Models {}
 
@@ -55,9 +55,12 @@ extension Models {
 
 extension Models {
   /// The model of a Deck to be shown in the Meta tab.
-  struct Deck {
+  struct Deck: Equatable {
     /// The detail of the deck.
-    struct Detail {}
+    struct Detail: Equatable {
+      let classId: Int
+      let cards: [Models.Card]
+    }
 
     /// The name of the deck.
     let name: String?
@@ -69,7 +72,7 @@ extension Models {
     let position: Int?
 
     /// The code string of the deck to fetch additional details.
-    let code: String?
+    let code: String
 
     /// The detail of the deck. It can be `nil` if the detail has not been already be fetched from back-end.
     let detail: Detail?
@@ -80,22 +83,73 @@ extension Models {
 
 extension Models {
   /// The Metadata of Hearthstone game.
-  struct Metadata {
+  struct Metadata: Equatable {
     /// A playable class in Hearthstone.
-    struct Class {
+    struct Class: Equatable {
       let id: Int
       let name: String
+
+      var icon: UIImage? {
+        switch self.id {
+        case 14:
+          // Demon Hunter.
+          return Images.ClassIcons.demonHunterIcon.image
+
+        case 2:
+          // Druid.
+          return Images.ClassIcons.druidIcon.image
+
+        case 3:
+          // Hunter.
+          return Images.ClassIcons.hunterIcon.image
+
+        case 4:
+          // Mage.
+          return Images.ClassIcons.mageIcon.image
+
+        case 5:
+          // Paladin.
+          return Images.ClassIcons.paladinIcon.image
+
+        case 6:
+          // Priest.
+          return Images.ClassIcons.priestIcon.image
+
+        case 7:
+          // Rogue.
+          return Images.ClassIcons.rogueIcon.image
+
+        case 8:
+          // Shaman.
+          return Images.ClassIcons.shamanIcon.image
+
+        case 9:
+          // Warlock.
+          return Images.ClassIcons.warlockIcon.image
+
+        case 10:
+          // Warrior.
+          return Images.ClassIcons.warriorIcon.image
+
+        case 12:
+          // Neutral.
+          return nil
+
+        default:
+          return nil
+        }
+      }
     }
 
     /// A card keyword.
-    struct Keyword {
+    struct Keyword: Equatable {
       let id: Int
       let name: String
       let description: String
     }
 
     /// A set of cards in Hearthstone.
-    struct Set {
+    struct Set: Equatable {
       let id: Int
       let name: String
     }
@@ -113,7 +167,7 @@ extension Models {
 
     // MARK: Helpers
 
-    func getClass(with id: Int) -> Class? {
+    func getClass(with id: Int?) -> Class? {
       classes.first { $0.id == id }
     }
 

@@ -73,7 +73,7 @@ extension Models.Contentful {
     let name: String?
     let tier: Int?
     let position: Int?
-    let code: String?
+    let code: String
 
     init(from decoder: Decoder) throws {
       sys = try decoder.sys()
@@ -82,7 +82,7 @@ extension Models.Contentful {
       name = try? fields.decodeIfPresent(String.self, forKey: .name)
       tier = try? fields.decodeIfPresent(Int.self, forKey: .tier)
       position = try? fields.decodeIfPresent(Int.self, forKey: .position)
-      code = try? fields.decodeIfPresent(String.self, forKey: .code)
+      code = try fields.decode(String.self, forKey: .code)
     }
   }
 }

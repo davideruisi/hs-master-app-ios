@@ -11,9 +11,13 @@ import Tempura
 // MARK: - ViewModel
 
 /// The `ViewModel` for the `DeckCell`.
-struct DeckCellVM: ViewModel {
+struct DeckCellVM: ViewModel, Equatable {
   let classImage: UIImage?
   let name: String?
+
+  var isClassImageHidden: Bool {
+    classImage == nil
+  }
 }
 
 // MARK: - View
@@ -23,7 +27,8 @@ class DeckCell: UICollectionViewCell, ModellableView, ReusableView {
 
   // MARK: Constants
 
-  static let classImageSize: CGFloat = 50
+  static let classImageSize: CGFloat = 64
+  static let classImageCornerRadius: CGFloat = 32
 
   // MARK: UI Elements
 
@@ -58,10 +63,12 @@ class DeckCell: UICollectionViewCell, ModellableView, ReusableView {
   }
 
   func update(oldModel: DeckCellVM?) {
-    Self.Style.classImageView(classImageView, with: model?.classImage)
-    Self.Style.nameLabel(nameLabel, with: model?.name)
+    guard let model = model, model != oldModel else {
+      return
+    }
 
-    setNeedsLayout()
+    Self.Style.classImageView(classImageView, with: model.classImage, isHidden: model.isClassImageHidden)
+    Self.Style.nameLabel(nameLabel, with: model.name)
   }
 
   override func layoutSubviews() {
@@ -81,7 +88,7 @@ class DeckCell: UICollectionViewCell, ModellableView, ReusableView {
     nameLabel.pin
       .after(of: classImageView)
       .marginLeft(SharedStyle.Spacing.medium)
-      .right()
+      .right(SharedStyle.Spacing.medium)
       .sizeToFit(.width)
 
     containerView.pin
@@ -119,13 +126,18 @@ private extension DeckCell {
       view.clipsToBounds = true
     }
 
-    static func classImageView(_ view: UIImageView, with image: UIImage?) {
+    static func classImageView(_ view: UIImageView, with image: UIImage?, isHidden: Bool) {
       view.contentMode = .scaleAspectFit
       view.image = image
+      view.layer.cornerRadius = DeckCell.classImageCornerRadius
+      view.backgroundColor = isHidden ? Palette.backgroundTertiary.color : .clear
     }
 
     static func nameLabel(_ label: UILabel, with text: String?) {
       label.text = text
+      label.numberOfLines = 2
+      label.font = .systemFont(ofSize: 24, weight: .regular)
+      label.textColor = .label
     }
   }
 }
