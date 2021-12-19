@@ -114,7 +114,7 @@ private extension ArticleSkeletonCell {
     }
 
     static func imageView(_ imageView: UIImageView) {
-      imageView.layer.cornerRadius = SharedStyle.cardCornerRadius
+      imageView.layer.cornerRadius = SharedStyle.cardCornerRadius - SharedStyle.Spacing.xSmall
       imageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
       imageView.clipsToBounds = true
 

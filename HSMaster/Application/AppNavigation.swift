@@ -19,6 +19,12 @@ enum Screen: String {
   /// The card search tab.
   case cardSearch
 
+  /// The view showing the detail of a deck.
+  case deckDetail
+
+  /// The meta tab.
+  case meta
+
   /// Open a URL link in a Safari Web-View.
   case safariWebView
 
@@ -39,7 +45,10 @@ extension TabBarController: RoutableWithConfiguration {
           fatalError()
         }
 
-        return UINavigationController(rootViewController: CardDetailVC(store: store, localState: localState))
+        let navigationController = UINavigationController(rootViewController: CardDetailVC(store: store, localState: localState))
+        navigationController.isModalInPresentation = true
+
+        return navigationController
       }
     ]
   }
@@ -59,6 +68,28 @@ extension HomeVC: RoutableWithConfiguration {
         }
 
         return SFSafariViewController(url: url)
+      }
+    ]
+  }
+}
+
+extension MetaVC: RoutableWithConfiguration {
+  var routeIdentifier: RouteElementIdentifier {
+    Screen.meta.rawValue
+  }
+
+  var navigationConfiguration: [NavigationRequest: NavigationInstruction] {
+    [
+      .show(Screen.deckDetail): .push { [store] context in
+        guard let localState = context as? DeckDetailLS else {
+          AppLogger.critical("Wrong context: expected \(DeckDetailLS.self), received \(String(describing: context))")
+          fatalError()
+        }
+
+        let viewController = DeckDetailVC(store: store, localState: localState)
+        viewController.hidesBottomBarWhenPushed = true
+
+        return viewController
       }
     ]
   }

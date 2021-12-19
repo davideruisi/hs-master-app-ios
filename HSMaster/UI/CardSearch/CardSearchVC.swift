@@ -23,7 +23,7 @@ final class CardSearchVC: ViewController<CardSearchView> {
         return
       }
 
-      self?.dispatch(Logic.CardSearch.ShowCardDetail(card: card))
+      self?.dispatch(Logic.CardDetail.ShowCardDetail(card: card))
     }
   }
 }

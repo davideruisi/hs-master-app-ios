@@ -7,6 +7,7 @@
 
 import Hydra
 import Katana
+import Tempura
 
 extension Logic {
   /// The Logic relative to the Meta tab.
@@ -38,6 +39,22 @@ extension Logic.Meta {
       let detail = try Hydra.await(context.dependencies.networkManager.getDeckDetail(with: deck.code))
 
       context.dispatch(UpdateMetaDeckStateAddingDetail(deck: deck, detail: detail))
+    }
+  }
+
+  /// Shows the view containing the detail of the `deck`.
+  struct ShowDeckDetail: AppSideEffect {
+    /// The deck that will be shown in the detail view.
+    let deck: Models.Deck?
+
+    func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+      guard let deckIndex = context.getState().meta.decks.firstIndex(where: { $0.code == deck?.code }) else {
+        AppLogger.error("Missing Deck with code \(String(describing: deck?.code)) in state.")
+        return
+      }
+
+      let deckDetailLS = DeckDetailLS(deckIndex: deckIndex)
+      context.dispatch(Show(Screen.deckDetail, animated: true, context: deckDetailLS))
     }
   }
 }

@@ -27,11 +27,18 @@ extension MetaVM {
     decks.count
   }
 
+  /// Returns the deck at the specified IndexPath.
+  /// - Parameter indexPath: The IndexPath for which we want the deck.
+  /// - Returns The `Deck` at `indexPath`.
+  func deck(for indexPath: IndexPath) -> Models.Deck? {
+    decks[safe: indexPath.item]
+  }
+
   /// Creates the `ViewModel` for the `DeckCell` at the specified `indexPath`.
   /// - Parameter indexPath: The `IndexPath` of the `DeckCell` for which we want the `ViewModel`
   /// - Returns: The `DeckCellVM` for the specified `indexPath`.
   func deckCellVM(at indexPath: IndexPath) -> DeckCellVM {
-    let deck = decks[safe: indexPath.item]
+    let deck = deck(for: indexPath)
 
     return DeckCellVM(
       classImage: metadata.getClass(with: deck?.detail?.classId)?.icon,

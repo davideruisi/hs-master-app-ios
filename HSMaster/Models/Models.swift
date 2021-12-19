@@ -34,6 +34,9 @@ extension Models {
     /// The classes ids of the card. A card can have multiple classes.
     let classIds: [Int]
 
+    /// The cropped image of the card, to be used in deck's detail.
+    let croppedImageURL: URL?
+
     /// The flavor text of the card.
     let flavorText: String?
 
@@ -42,6 +45,9 @@ extension Models {
 
     /// List of keyword ids used by this card.
     let keywordIds: [Int]
+
+    /// The cost in mana of the card.
+    let manaCost: Int
 
     /// The name of the card.
     let name: String

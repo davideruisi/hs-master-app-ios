@@ -45,7 +45,7 @@ extension Models.Response {
     let text: String
     let image: URL
     let flavorText: String
-    let cropImage: String
+    let cropImage: URL?
     let keywordIds: [Int]?
     let health, attack, durability: Int?
     let childIds: [Int]?
@@ -174,9 +174,11 @@ extension Models.Response.Card: AppModellable {
     Models.Card(
       artistName: artistName,
       classIds: multiClassIds.isEmpty ? [classId] : multiClassIds,
+      croppedImageURL: cropImage,
       flavorText: flavorText,
       imageURL: image,
       keywordIds: keywordIds ?? [],
+      manaCost: manaCost,
       name: name,
       setId: cardSetId
     )
