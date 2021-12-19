@@ -15,8 +15,15 @@ struct DeckDetailVM: ViewModelWithLocalState, Equatable {
   /// The deck shown in  the view.
   let deck: Models.Deck?
 
+  /// The cards inside the deck, without repetitions and ordered by mana cost and name.
+  private let orderedUniqueCards: [Models.Card]
+
   init?(state: AppState?, localState: DeckDetailLS) {
-    deck = state?.meta.decks[safe: localState.deckIndex]
+    self.deck = state?.meta.decks[safe: localState.deckIndex]
+
+    /// Remove duplicates on cards and reorder by mana cost and name.
+    let cards = Array(Set(deck?.detail?.cards ?? []))
+    self.orderedUniqueCards = cards.sorted { $0.manaCost == $1.manaCost ? $0.name < $1.name : $0.manaCost < $1.manaCost }
   }
 }
 
@@ -25,14 +32,14 @@ struct DeckDetailVM: ViewModelWithLocalState, Equatable {
 extension DeckDetailVM {
   /// The number of cells in the `collectionView`.
   var numberOfCells: Int {
-    deck?.detail?.cards.count ?? 0
+    orderedUniqueCards.count
   }
 
   /// The Card for the cell at `indexPath`.
   /// - Parameter indexPath: The IndexPath for which we want the card.
   /// - Returns: The `Card` shown in the cell at `indexPath`.
   func card(for indexPath: IndexPath) -> Models.Card? {
-    deck?.detail?.cards[safe: indexPath.item]
+    orderedUniqueCards[safe: indexPath.item]
   }
 
   /// Creates the `ViewModel` for the `DeckCardCell` at the specified `indexPath`.
@@ -48,8 +55,13 @@ extension DeckDetailVM {
       croppedCardImageURL: card.croppedImageURL,
       manaCost: card.manaCost,
       name: card.name,
-      quantity: 1
+      quantity: quantity(for: card)
     )
+  }
+
+  /// The number of times the card appears in the deck.
+  private func quantity(for card: Models.Card) -> Int {
+    deck?.detail?.cards.filter{ $0 == card }.count ?? 0
   }
 }
 

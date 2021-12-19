@@ -27,7 +27,7 @@ extension Models {
 
 extension Models {
   /// The Model of a card.
-  struct Card: Equatable {
+  struct Card: Equatable, Hashable {
     /// The artist of the card image.
     let artistName: String?
 

@@ -130,12 +130,12 @@ extension DeckCardCell {
     static func contentView(_ view: UIView) {
       view.layer.shadowColor = UIColor.black.cgColor
       view.layer.shadowOpacity = 0.1
-      view.layer.shadowRadius = 2
+      view.layer.shadowRadius = 8
       view.layer.shadowOffset = CGSize(width: 0, height: 4)
     }
 
     static func containerView(_ view: UIView) {
-      view.backgroundColor = .black
+      view.backgroundColor = Palette.backgroundSecondary.color
       view.layer.cornerRadius = DeckCardCell.cornerRadius
       view.clipsToBounds = true
     }
@@ -145,7 +145,7 @@ extension DeckCardCell {
     }
 
     static func croppedCardGradientView(_ view: GradientView) {
-      view.startColor = .black
+      view.startColor = Palette.backgroundSecondary.color
       view.endColor = .clear
       view.startLocation = 0.25
       view.endLocation = 0.75
@@ -157,13 +157,13 @@ extension DeckCardCell {
       label.font = .systemFont(ofSize: 17, weight: .bold)
       label.textAlignment = .center
       label.textColor = .white
-      label.backgroundColor = .blue
+      label.backgroundColor = .systemBlue
     }
 
     static func nameLabel(_ label: UILabel, with text: String) {
       label.text = text
       label.font = .systemFont(ofSize: 17, weight: .bold)
-      label.textColor = .white
+      label.textColor = .label
     }
 
     static func quantityLabel(_ label: UILabel, with value: Int) {
