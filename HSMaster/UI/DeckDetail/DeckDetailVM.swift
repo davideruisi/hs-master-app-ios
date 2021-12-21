@@ -15,11 +15,15 @@ struct DeckDetailVM: ViewModelWithLocalState, Equatable {
   /// The deck shown in  the view.
   let deck: Models.Deck?
 
+  /// Whether the deck code has been copied in the pasteboard.
+  private let deckCodeCopied: Bool
+
   /// The cards inside the deck, without repetitions and ordered by mana cost and name.
   private let orderedUniqueCards: [Models.Card]
 
   init?(state: AppState?, localState: DeckDetailLS) {
     self.deck = state?.meta.decks[safe: localState.deckIndex]
+    self.deckCodeCopied = localState.deckCodeCopied
 
     /// Remove duplicates on cards and reorder by mana cost and name.
     let cards = Array(Set(deck?.detail?.cards ?? []))
@@ -30,6 +34,11 @@ struct DeckDetailVM: ViewModelWithLocalState, Equatable {
 // MARK: Helpers
 
 extension DeckDetailVM {
+  /// The text inside the right button in the navigation bar.
+  var navigationBarRightButtonItemTitle: String {
+    deckCodeCopied ? Localization.DeckDetail.DeckCode.copied : Localization.DeckDetail.DeckCode.copy
+  }
+
   /// The number of cells in the `collectionView`.
   var numberOfCells: Int {
     orderedUniqueCards.count
@@ -71,4 +80,7 @@ extension DeckDetailVM {
 struct DeckDetailLS: LocalState {
   /// The index of the deck inside the meta state.
   let deckIndex: Int
+
+  /// Whether the deck code has been copied in the pasteboard.
+  let deckCodeCopied: Bool
 }

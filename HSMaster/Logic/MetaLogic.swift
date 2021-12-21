@@ -53,7 +53,7 @@ extension Logic.Meta {
         return
       }
 
-      let deckDetailLS = DeckDetailLS(deckIndex: deckIndex)
+      let deckDetailLS = DeckDetailLS(deckIndex: deckIndex, deckCodeCopied: false)
       context.dispatch(Show(Screen.deckDetail, animated: true, context: deckDetailLS))
     }
   }

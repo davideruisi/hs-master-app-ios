@@ -27,6 +27,9 @@ class DeckDetailView: UIView, ViewControllerModellableView {
   /// The user tapped a CardCell.
   var didTapCardCell: CustomInteraction<IndexPath>?
 
+  /// The user tapped the button to copy the deck's code.
+  var didTapCopyCodeButton: Interaction?
+
   // MARK: - SSUL
 
   func setup() {
@@ -35,9 +38,17 @@ class DeckDetailView: UIView, ViewControllerModellableView {
     collectionView.dataSource = self
     collectionView.delegate = self
     collectionView.register(DeckCardCell.self, forCellWithReuseIdentifier: DeckCardCell.reuseIdentifier)
+
+    navigationItem?.rightBarButtonItem = UIBarButtonItem(
+      title: nil,
+      style: .plain,
+      target: self,
+      action: #selector(tappedCopyCodeButton)
+    )
   }
 
   func style() {
+    Self.Style.view(self)
     Self.Style.collectionView(collectionView)
   }
 
@@ -46,7 +57,12 @@ class DeckDetailView: UIView, ViewControllerModellableView {
       return
     }
 
-    Self.Style.view(self, with: model.deck?.name)
+    Self.Style.navigationItem(
+      navigationItem,
+      title: model.deck?.name,
+      rightBarButtonItemTitle: model.navigationBarRightButtonItemTitle
+    )
+
     collectionView.reloadData()
   }
 
@@ -87,9 +103,13 @@ extension DeckDetailView: UICollectionViewDelegate {
 
 private extension DeckDetailView {
   enum Style {
-    static func view(_ view: DeckDetailView, with title: String?) {
+    static func view(_ view: DeckDetailView) {
       view.backgroundColor = Palette.backgroundPrimary.color
-      view.navigationItem?.title = title
+    }
+
+    static func navigationItem(_ navigationItem: UINavigationItem?, title: String?, rightBarButtonItemTitle: String?) {
+      navigationItem?.title = title
+      navigationItem?.rightBarButtonItem?.title = rightBarButtonItemTitle
     }
 
     static func collectionView(_ collectionView: UICollectionView) {
@@ -118,5 +138,10 @@ private extension DeckDetailView {
     )
 
     return collectionViewLayout
+  }
+
+  @objc
+  func tappedCopyCodeButton() {
+    didTapCopyCodeButton?()
   }
 }

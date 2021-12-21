@@ -14,3 +14,5 @@
 "cardDetail.class" = "Class";
 "cardDetail.keywords" = "Keywords";
 "cardDetail.artist" = "Artist";
+"deckDetail.deckCode.copy" = "Copy code";
+"deckDetail.deckCode.copied" = "Copied!";
