@@ -26,23 +26,25 @@ extension Logic.CardSearch {
 
       var cards = context.getState().cardSearch.cards
 
-      let (totalNumberOfCards, newCards) = try Hydra.await(
-        context.dependencies.networkManager.getCardList(
-          filter: filter,
-          page: nextPage
-        )
-      )
+      context.dependencies.networkManager.getCardList(filter: filter, page: nextPage)
+        .then { totalNumberOfCards, newCards in
+          cards.append(contentsOf: newCards)
 
-      cards.append(contentsOf: newCards)
-
-      context.dispatch(
-        UpdateCardsStateIfPossible(
-          cards: cards,
-          requestFilter: filter,
-          requestedPage: nextPage,
-          totalNumberOfCards: totalNumberOfCards
-        )
-      )
+          context.dispatch(
+            UpdateCardsStateIfPossible(
+              cards: cards,
+              requestFilter: filter,
+              requestedPage: nextPage,
+              totalNumberOfCards: totalNumberOfCards
+            )
+          )
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
     }
   }
 }

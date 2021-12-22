@@ -19,8 +19,16 @@ extension Logic.AppSetup {
   /// Get the Hearthstone game metadata from back-end.
   struct GetMetadata: AppSideEffect {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
-      let metadata = try Hydra.await(context.dependencies.networkManager.getMetadata())
-      context.dispatch(UpdateMetadataState(metadata: metadata))
+      context.dependencies.networkManager.getMetadata()
+        .then { metadata in
+          context.dispatch(UpdateMetadataState(metadata: metadata))
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
     }
   }
 }

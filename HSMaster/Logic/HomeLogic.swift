@@ -22,13 +22,18 @@ extension Logic.Home {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
       var articles = context.getState().home.articles
 
-      let (totalArticles, newArticles) = try Hydra.await(
-        context.dependencies.contentfulManager.getArticles(offset: articles.count)
-      )
+      context.dependencies.contentfulManager.getArticles(offset: articles.count)
+        .then { totalArticles, newArticles in
+          articles.append(contentsOf: newArticles)
 
-      articles.append(contentsOf: newArticles)
-
-      context.dispatch(UpdateArticlesState(articles: articles, totalNumberOfArticles: totalArticles))
+          context.dispatch(UpdateArticlesState(articles: articles, totalNumberOfArticles: totalArticles))
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
     }
   }
 

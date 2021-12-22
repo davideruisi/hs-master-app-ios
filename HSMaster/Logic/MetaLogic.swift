@@ -21,13 +21,20 @@ extension Logic.Meta {
   /// For each retrieved deck then requests the detail.
   struct GetMetaDecks: AppSideEffect {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
-      let decks = try Hydra.await(context.dependencies.contentfulManager.getDecks())
+      context.dependencies.contentfulManager.getDecks()
+        .then { decks in
+          try Hydra.await(context.dispatch(UpdateMetaDecksState(decks: decks)))
 
-      try Hydra.await(context.dispatch(UpdateMetaDecksState(decks: decks)))
-
-      decks.forEach { deck in
-        context.dispatch(GetDeckDetail(deck: deck))
-      }
+          decks.forEach { deck in
+            context.dispatch(GetDeckDetail(deck: deck))
+          }
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
     }
   }
 
@@ -36,9 +43,16 @@ extension Logic.Meta {
     let deck: Models.Deck
 
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
-      let detail = try Hydra.await(context.dependencies.networkManager.getDeckDetail(with: deck.code))
-
-      context.dispatch(UpdateMetaDeckStateAddingDetail(deck: deck, detail: detail))
+      context.dependencies.networkManager.getDeckDetail(with: deck.code)
+        .then { detail in
+          context.dispatch(UpdateMetaDeckStateAddingDetail(deck: deck, detail: detail))
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
     }
   }
 
