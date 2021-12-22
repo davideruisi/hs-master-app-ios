@@ -21,6 +21,7 @@ class MetaView: UIView, ViewControllerModellableView {
   lazy var collectionView: UICollectionView = {
     UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
   }()
+  let activityIndicatorView = UIActivityIndicatorView()
 
   // MARK: - Interaction
 
@@ -31,6 +32,7 @@ class MetaView: UIView, ViewControllerModellableView {
 
   func setup() {
     addSubview(collectionView)
+    addSubview(activityIndicatorView)
 
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -52,11 +54,18 @@ class MetaView: UIView, ViewControllerModellableView {
       return
     }
 
+    Self.Style.activityIndicatorView(activityIndicatorView, isVisible: model.shouldShowLoader)
+
     collectionView.reloadData()
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
+
+    activityIndicatorView.pin
+      .vCenter()
+      .hCenter()
+      .sizeToFit()
 
     collectionView.pin
       .all()
@@ -126,6 +135,10 @@ private extension MetaView {
   enum Style {
     static func view(_ view: MetaView) {
       view.backgroundColor = Palette.backgroundPrimary.color
+    }
+
+    static func activityIndicatorView(_ view: UIActivityIndicatorView, isVisible: Bool) {
+      isVisible ? view.startAnimating() : view.stopAnimating()
     }
 
     static func collectionView(_ collectionView: UICollectionView) {

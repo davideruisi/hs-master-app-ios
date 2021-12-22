@@ -51,6 +51,11 @@ extension MetaVM: Equatable {
 // MARK: - Helpers
 
 extension MetaVM {
+  /// Whether the activity indicator spinner should be visible.
+  var shouldShowLoader: Bool {
+    tiers.isEmpty
+  }
+
   /// The number of sections in the `collectionView`.
   var numberOfSections: Int {
     tiers.count

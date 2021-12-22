@@ -39,6 +39,11 @@ extension DeckDetailVM {
     deckCodeCopied ? Localization.DeckDetail.DeckCode.copied : Localization.DeckDetail.DeckCode.copy
   }
 
+  /// Whether the activity indicator spinner should be visible.
+  var shouldShowLoader: Bool {
+    orderedUniqueCards.isEmpty
+  }
+
   /// The number of cells in the `collectionView`.
   var numberOfCells: Int {
     orderedUniqueCards.count

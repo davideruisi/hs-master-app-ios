@@ -21,6 +21,7 @@ class DeckDetailView: UIView, ViewControllerModellableView {
   lazy var collectionView: UICollectionView = {
     UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
   }()
+  let activityIndicatorView = UIActivityIndicatorView()
 
   // MARK: - Interaction
 
@@ -34,6 +35,7 @@ class DeckDetailView: UIView, ViewControllerModellableView {
 
   func setup() {
     addSubview(collectionView)
+    addSubview(activityIndicatorView)
 
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -63,11 +65,18 @@ class DeckDetailView: UIView, ViewControllerModellableView {
       rightBarButtonItemTitle: model.navigationBarRightButtonItemTitle
     )
 
+    Self.Style.activityIndicatorView(activityIndicatorView, isVisible: model.shouldShowLoader)
+
     collectionView.reloadData()
   }
 
   override func layoutSubviews() {
     super.layoutSubviews()
+
+    activityIndicatorView.pin
+      .vCenter()
+      .hCenter()
+      .sizeToFit()
 
     collectionView.pin
       .all()
@@ -110,6 +119,10 @@ private extension DeckDetailView {
     static func navigationItem(_ navigationItem: UINavigationItem?, title: String?, rightBarButtonItemTitle: String?) {
       navigationItem?.title = title
       navigationItem?.rightBarButtonItem?.title = rightBarButtonItemTitle
+    }
+
+    static func activityIndicatorView(_ view: UIActivityIndicatorView, isVisible: Bool) {
+      isVisible ? view.startAnimating() : view.stopAnimating()
     }
 
     static func collectionView(_ collectionView: UICollectionView) {
