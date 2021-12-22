@@ -16,8 +16,16 @@ extension Logic {
 // MARK: - SideEffects
 
 extension Logic.AppSetup {
+  /// Starts the app setup, executing request to load app's content.
+  struct Start: AppSideEffect {
+    func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+      context.dispatch(GetMetadata())
+      context.dispatch(Logic.CardSearch.GetCardList())
+    }
+  }
+
   /// Get the Hearthstone game metadata from back-end.
-  struct GetMetadata: AppSideEffect {
+  private struct GetMetadata: AppSideEffect {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
       context.dependencies.networkManager.getMetadata()
         .then { metadata in

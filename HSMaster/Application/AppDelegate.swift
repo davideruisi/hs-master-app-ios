@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // Execute AppSetup logic in background.
     // This logic is non-blocking and can be executed after the start of the app navigation.
-    self.store?.dispatch(Logic.AppSetup.GetMetadata())
+    self.store?.dispatch(Logic.AppSetup.Start())
 
     return true
   }
