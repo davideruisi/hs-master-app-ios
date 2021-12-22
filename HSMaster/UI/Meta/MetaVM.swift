@@ -12,7 +12,7 @@ import Tempura
 struct MetaVM: ViewModelWithState {
   /// The game metadata.
   let metadata: Models.Metadata
-  
+
   /// The meta decks grouped by `tier` and ordered by `position`.
   let tiers: [(key: Int, value: [Models.Deck])]
 

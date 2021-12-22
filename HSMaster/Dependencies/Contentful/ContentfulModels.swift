@@ -95,7 +95,7 @@ extension Models.Contentful.Article: AppModellable {
       imageURL: imageURL,
       kicker: kicker,
       title: title,
-      subtitle: date?.iso8601String,
+      subtitle: date?.appFormattedString,
       sourceURL: sourceURL
     )
   }
