@@ -72,10 +72,10 @@ extension Models {
     let name: String?
 
     /// The tier of the deck in the meta.
-    let tier: Int?
+    let tier: Int
 
     /// The position of the deck in the meta.
-    let position: Int?
+    let position: Int
 
     /// The code string of the deck to fetch additional details.
     let code: String

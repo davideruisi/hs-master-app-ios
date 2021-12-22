@@ -71,8 +71,8 @@ extension Models.Contentful {
     // MARK: Fields
 
     let name: String?
-    let tier: Int?
-    let position: Int?
+    let tier: Int
+    let position: Int
     let code: String
 
     init(from decoder: Decoder) throws {
@@ -80,8 +80,8 @@ extension Models.Contentful {
 
       let fields = try decoder.contentfulFieldsContainer(keyedBy: Self.FieldKeys.self)
       name = try? fields.decodeIfPresent(String.self, forKey: .name)
-      tier = try? fields.decodeIfPresent(Int.self, forKey: .tier)
-      position = try? fields.decodeIfPresent(Int.self, forKey: .position)
+      tier = try fields.decode(Int.self, forKey: .tier)
+      position = try fields.decode(Int.self, forKey: .position)
       code = try fields.decode(String.self, forKey: .code)
     }
   }

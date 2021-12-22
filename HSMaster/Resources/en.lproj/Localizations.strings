@@ -8,6 +8,7 @@
 
 "homeTab.title" = "News";
 "metaTab.title" = "Meta";
+"metaTab.tierTitle" = "TIER %@";
 "cardSearchTab.title" = "Card Library";
 "cardSearchTab.searchBar.placeholder" = "Search";
 "cardDetail.set" = "Set";

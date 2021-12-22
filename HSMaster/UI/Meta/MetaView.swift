@@ -35,6 +35,11 @@ class MetaView: UIView, ViewControllerModellableView {
     collectionView.dataSource = self
     collectionView.delegate = self
     collectionView.register(DeckCell.self, forCellWithReuseIdentifier: DeckCell.reuseIdentifier)
+    collectionView.register(
+      TierSectionHeader.self,
+      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+      withReuseIdentifier: TierSectionHeader.reuseIdentifier
+    )
   }
 
   func style() {
@@ -61,9 +66,41 @@ class MetaView: UIView, ViewControllerModellableView {
 // MARK: - UICollectionViewDataSource
 
 extension MetaView: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    model?.numberOfCells ?? 0
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    model?.numberOfSections ?? 0
   }
+
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    model?.numberOfCells(in: section) ?? 0
+  }
+
+  // MARK: Header
+
+  func collectionView(
+    _ collectionView: UICollectionView,
+    viewForSupplementaryElementOfKind kind: String,
+    at indexPath: IndexPath
+  ) -> UICollectionReusableView {
+    switch kind {
+    case UICollectionView.elementKindSectionHeader:
+      let header = collectionView.dequeueReusableSupplementaryView(
+        ofKind: kind,
+        withReuseIdentifier: TierSectionHeader.reuseIdentifier,
+        for: indexPath
+      )
+      guard let typedHeader = header as? TierSectionHeader else {
+        return header
+      }
+      typedHeader.model = model?.tierSectionHeaderVM(for: indexPath.section)
+      return typedHeader
+
+    default:
+      AppLogger.critical("Unexpected kind: \(kind).")
+      fatalError()
+    }
+  }
+
+  // MARK: Cell
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeckCell.reuseIdentifier, for: indexPath)
@@ -115,6 +152,10 @@ private extension MetaView {
       left: Self.collectionInset,
       bottom: Self.collectionInset,
       right: Self.collectionInset
+    )
+    collectionViewLayout.headerReferenceSize = CGSize(
+      width: SharedStyle.portraitOrientationScreenWidth,
+      height: TierSectionHeader.height
     )
 
     return collectionViewLayout
