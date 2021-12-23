@@ -10,8 +10,8 @@ import Hydra
 
 /// A protocol for building a `URLRequest` starting from a `Request`.
 protocol URLRequestBuilder {
-  /// The `AuthenticationManager` where we can get the access token if needed.
-  var authenticationManager: AuthenticationManager { get }
+  /// The `Authenticator` where we can get the access token if needed.
+  var authenticator: Authenticator? { get }
 
   /// Build a `URLRequest` from the `Request`.
   /// - Parameter request: The `Request` from which to build the `URLRequest`.
@@ -31,7 +31,12 @@ extension URLRequestBuilder {
     }
 
     if case .clientCredentials = request.authenticationMethod {
-      let accessToken = try Hydra.await(authenticationManager.getToken())
+      guard let authenticator = authenticator else {
+        AppLogger.critical("Missing instance of \(Authenticator.self)")
+        throw NetworkError.missingAuthenticator
+      }
+
+      let accessToken = try Hydra.await(authenticator.getToken(forceRefresh: false))
       urlRequest.setValue("Bearer \(accessToken.value)", forHTTPHeaderField: "Authorization")
     }
 

@@ -24,8 +24,8 @@ enum NetworkError: Error {
   /// Error occurred while serializing the received response.
   case responseSerializationError
 
-  /// Error occurring while trying to get an access token if the instance of the AuthenticationManager is missing.
-  case missingAuthenticationManager
+  /// Error occurring while trying to get an access token if the instance of the Authenticator is missing.
+  case missingAuthenticator
 
   /// Error occurring while trying to get an access token.
   case accessTokenRequestFailed

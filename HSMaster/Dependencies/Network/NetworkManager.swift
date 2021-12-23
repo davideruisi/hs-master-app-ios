@@ -12,8 +12,14 @@ final class NetworkManager {
   /// The object responsible for the request execution.
   let requestExecutor: RequestExecutor
 
-  init(requestExecutor: RequestExecutor = URLRequestExecutor()) {
+  /// The `Authenticator` responsible of generating access tokens for the requests.
+  let authenticator: Authenticator
+
+  init(requestExecutor: RequestExecutor = URLRequestExecutor(), authenticator: Authenticator = AuthenticationManager()) {
     self.requestExecutor = requestExecutor
+    self.authenticator = authenticator
+    requestExecutor.authenticator = authenticator
+    authenticator.requestExecutor = requestExecutor
   }
 
   /// Execute a `Request`.

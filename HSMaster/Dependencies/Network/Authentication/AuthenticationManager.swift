@@ -9,7 +9,10 @@ import Foundation
 import Hydra
 
 /// The class responsible of network requests' authentication.
-final class AuthenticationManager {
+final class AuthenticationManager: Authenticator {
+
+  // MARK: - Properties
+
   /// The last received access token. It can be `nil` if no tokens have been yet received.
   /// The token is saved in and read from the keychain.
   private var currentToken: Models.Authentication.AccessToken? {
@@ -35,11 +38,9 @@ final class AuthenticationManager {
 
   /// The request executor that will execute authentication request to the authentication server.
   /// This is `weak` to avoid reference cycle.
-  private weak var requestExecutor: RequestExecutor?
+  weak var requestExecutor: RequestExecutor?
 
-  init(requestExecutor: RequestExecutor?) {
-    self.requestExecutor = requestExecutor
-  }
+  // MARK: - Methods
 
   /// Gets a valid access token.
   /// If the last received token is still valid, the latter is returned.
@@ -48,11 +49,11 @@ final class AuthenticationManager {
   /// and a new token is fetched from the authentication server.
   /// - Parameter forceRefresh: Whether we want to get a new token from the authentication server in any case.
   /// - Returns: The `Promise` containing the access Token.
-  func getToken(forceRefresh: Bool = false) -> Promise<Models.Authentication.AccessToken> {
+  func getToken(forceRefresh: Bool) -> Promise<Models.Authentication.AccessToken> {
     Promise(in: .custom(queue: queue)) { [weak self] resolve, reject, _ in
       guard let self = self else {
         AppLogger.critical("Missing instance of \(Self.self).")
-        reject(NetworkError.missingAuthenticationManager)
+        reject(NetworkError.missingAuthenticator)
         return
       }
 
@@ -90,8 +91,8 @@ private extension AuthenticationManager {
         let self = self,
         let requestExecutor = self.requestExecutor
       else {
-        AppLogger.critical("Missing instance of \(Self.self) or \(AuthenticationManager.self).")
-        reject(NetworkError.missingAuthenticationManager)
+        AppLogger.critical("Missing instance of \(Self.self) or \(RequestExecutor.self).")
+        reject(NetworkError.missingAuthenticator)
         return
       }
 

@@ -14,8 +14,9 @@ class URLRequestExecutor: RequestExecutor, URLRequestBuilder, URLResponseSeriali
   /// Defaults to `URLSession.shared`.
   let session: URLSession
 
-  /// The `AuthenticationManager` responsible of generating access tokens for the requests.
-  lazy var authenticationManager = AuthenticationManager(requestExecutor: self)
+  /// The `Authenticator` responsible of generating access tokens for the requests.
+  /// This is `weak` to avoid reference cycle.
+  weak var authenticator: Authenticator?
 
   init(session: URLSession = URLSession.shared) {
     self.session = session
@@ -60,8 +61,13 @@ class URLRequestExecutor: RequestExecutor, URLRequestBuilder, URLResponseSeriali
                   """
                 )
 
+                guard let authenticator = self.authenticator else {
+                  AppLogger.critical("Missing instance of \(Authenticator.self)")
+                  throw NetworkError.missingAuthenticator
+                }
+
                 // Forces a token refresh.
-                self.authenticationManager.getToken(forceRefresh: true)
+                authenticator.getToken(forceRefresh: true)
                   .then(in: .background) { _  in
                     // Executes the same request again, this time with the new refreshed token.
                     self.execute(request)
