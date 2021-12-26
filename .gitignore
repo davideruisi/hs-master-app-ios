@@ -62,3 +62,6 @@ HSMaster/Resources/Palette.swift
 HSMaster/Resources/Localization.swift
 HSMaster/Resources/Images.swift
 
+## Secrets
+HSMaster/SupportingFiles/Secrets/
+
