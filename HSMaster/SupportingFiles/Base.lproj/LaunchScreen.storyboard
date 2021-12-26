@@ -18,15 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hsMasterIcon" translatesAutoresizingMaskIntoConstraints="NO" id="3m1-pa-8Ds">
-                                <rect key="frame" x="145" y="318.5" width="124" height="269"/>
+                                <rect key="frame" x="124" y="370" width="166" height="166"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="3m1-pa-8Ds" secondAttribute="height" multiplier="1:1" id="zfu-qP-dip"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="backgroundPrimary"/>
                         <constraints>
-                            <constraint firstItem="3m1-pa-8Ds" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.3" id="H53-B6-0cB"/>
                             <constraint firstItem="3m1-pa-8Ds" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="KNc-GR-mFt"/>
-                            <constraint firstItem="3m1-pa-8Ds" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.3" id="gZ7-a9-5V2"/>
+                            <constraint firstItem="3m1-pa-8Ds" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.4" id="gZ7-a9-5V2"/>
                             <constraint firstItem="3m1-pa-8Ds" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="iXd-nN-eL5"/>
                         </constraints>
                     </view>
