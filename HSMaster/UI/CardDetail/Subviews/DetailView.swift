@@ -132,6 +132,7 @@ extension DetailView {
     static func bodyLabel(_ label: UILabel, with attributedText: NSAttributedString?) {
       label.attributedText = attributedText
       label.numberOfLines = 0
+      label.textColor = .secondaryLabel
     }
 
     static func separatorView(_ view: UIView) {

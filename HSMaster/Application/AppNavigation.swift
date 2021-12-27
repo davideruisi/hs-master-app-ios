@@ -46,7 +46,6 @@ extension TabBarController: RoutableWithConfiguration {
         }
 
         let navigationController = UINavigationController(rootViewController: CardDetailVC(store: store, localState: localState))
-        navigationController.isModalInPresentation = true
 
         return navigationController
       }

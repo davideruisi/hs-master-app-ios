@@ -139,6 +139,7 @@ extension CardDetailView {
     static func flavorTextLabel(_ label: UILabel, with text: String?) {
       label.text = text
       label.font = .italicSystemFont(ofSize: 18)
+      label.textColor = .secondaryLabel
       label.numberOfLines = 0
       label.textAlignment = .center
     }
