@@ -2,18 +2,17 @@
   "images" : [
     {
       "filename" : "priestIcon.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "idiom" : "universal"
     },
     {
-      "filename" : "priestIcon@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "priestIcon@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Priest.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

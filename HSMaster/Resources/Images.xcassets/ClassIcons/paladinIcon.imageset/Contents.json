@@ -2,18 +2,17 @@
   "images" : [
     {
       "filename" : "paladinIcon.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "idiom" : "universal"
     },
     {
-      "filename" : "paladinIcon@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "paladinIcon@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Paladin.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

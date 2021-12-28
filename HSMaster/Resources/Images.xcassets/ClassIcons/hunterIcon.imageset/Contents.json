@@ -2,18 +2,17 @@
   "images" : [
     {
       "filename" : "hunterIcon.png",
-      "idiom" : "universal",
-      "scale" : "1x"
+      "idiom" : "universal"
     },
     {
-      "filename" : "hunterIcon@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "hunterIcon@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "Hunter.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {
