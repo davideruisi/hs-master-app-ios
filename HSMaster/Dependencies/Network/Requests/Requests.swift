@@ -65,6 +65,8 @@ extension Requests.DeckDetail {
 
     let path = "deck"
 
+    let cachePolicy: NSURLRequest.CachePolicy = .returnCacheDataElseLoad
+
     // The code of the requested deck.
     let code: String
 
