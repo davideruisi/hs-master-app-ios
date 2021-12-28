@@ -142,21 +142,21 @@ private extension ArticleCell {
     static func kickerLabel(_ label: UILabel, with text: String?) {
       label.text = text?.uppercased()
       label.numberOfLines = 1
-      label.font = .systemFont(ofSize: 16, weight: .semibold)
+      label.font = .systemFont(ofSize: 12, weight: .semibold)
       label.textColor = .secondaryLabel
     }
 
     static func titleLabel(_ label: UILabel, with text: String?) {
       label.text = text?.uppercased()
       label.numberOfLines = 3
-      label.font = .systemFont(ofSize: 28, weight: .bold)
+      label.font = .systemFont(ofSize: 20, weight: .bold)
       label.textColor = .label
     }
 
     static func subtitleLabel(_ label: UILabel, with text: String?) {
       label.text = text
       label.numberOfLines = 2
-      label.font = .systemFont(ofSize: 16, weight: .regular)
+      label.font = .systemFont(ofSize: 12, weight: .regular)
       label.textColor = .secondaryLabel
     }
   }

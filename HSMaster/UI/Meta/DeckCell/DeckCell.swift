@@ -136,7 +136,7 @@ private extension DeckCell {
     static func nameLabel(_ label: UILabel, with text: String?) {
       label.text = text
       label.numberOfLines = 2
-      label.font = .systemFont(ofSize: 24, weight: .regular)
+      label.font = .systemFont(ofSize: 20, weight: .bold)
       label.textColor = .label
     }
   }
