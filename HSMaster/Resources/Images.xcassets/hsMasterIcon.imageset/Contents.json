@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "hs_master_icon_light.pdf",
+      "filename" : "hsMasterIconLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "hs_master_icon_dark.pdf",
+      "filename" : "hsMasterIconDark.pdf",
       "idiom" : "universal"
     }
   ],
