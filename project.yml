@@ -36,6 +36,7 @@ targets:
         UILaunchStoryboardName: "LaunchScreen"
         UIRequiredDeviceCapabilities: ["armv7"]
         UISupportedInterfaceOrientations: ["UIInterfaceOrientationPortrait"]
+        UIRequiresFullScreen: true
         # HSMaster
         CONTENTFUL_SPACE_ID: $(CONTENTFUL_SPACE_ID)
         CONTENTFUL_ACCESS_TOKEN: $(CONTENTFUL_ACCESS_TOKEN)
@@ -44,7 +45,7 @@ targets:
         KEYCHAIN_SERVICE_ACCESS_TOKEN: $(KEYCHAIN_SERVICE_ACCESS_TOKEN)
         KEYCHAIN_ACCOUNT_BATTLE_NET: $(KEYCHAIN_ACCOUNT_BATTLE_NET)
     settings:
-      TARGETED_DEVICE_FAMILY: 1
+      TARGETED_DEVICE_FAMILY: 1,2
     preBuildScripts:
       - script: |
           if which "${PODS_ROOT}/SwiftLint/swiftlint" >/dev/null; then
