@@ -15,6 +15,9 @@ extension AppState {
 
     /// The total number of articles available on back-end.
     var totalNumberOfArticles: UInt?
+
+    /// Whether the Home is refreshing.
+    var isRefreshing: Bool
   }
 }
 
@@ -22,5 +25,6 @@ extension AppState.Home {
   init() {
     articles = []
     totalNumberOfArticles = nil
+    isRefreshing = false
   }
 }

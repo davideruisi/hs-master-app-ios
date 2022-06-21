@@ -17,5 +17,9 @@ final class HomeVC: ViewController<HomeView> {
     rootView.didTapArticleCell = { [weak self] index in
       self?.dispatch(Logic.Home.ShowArticleInWebView(article: self?.viewModel?.articles[safe: index]))
     }
+
+    rootView.didPullToRefresh = { [weak self] in
+      self?.dispatch(Logic.Home.Refresh())
+    }
   }
 }

@@ -26,6 +26,9 @@ final class HomeView: UIView, ViewControllerModellableView {
   /// The user tapped an ArticleCell.
   var didTapArticleCell: CustomInteraction<Int>?
 
+  /// The user pulled down the collection view to refresh.
+  var didPullToRefresh: Interaction?
+
   // MARK: - SSUL
 
   func setup() {
@@ -35,6 +38,8 @@ final class HomeView: UIView, ViewControllerModellableView {
     collectionView.delegate = self
     collectionView.register(ArticleCell.self, forCellWithReuseIdentifier: ArticleCell.reuseIdentifier)
     collectionView.register(ArticleSkeletonCell.self, forCellWithReuseIdentifier: ArticleSkeletonCell.reuseIdentifier)
+    collectionView.refreshControl = UIRefreshControl()
+    collectionView.refreshControl?.addTarget(self, action: #selector(onPullToRefresh), for: .valueChanged)
   }
 
   func style() {
@@ -49,6 +54,11 @@ final class HomeView: UIView, ViewControllerModellableView {
 
     // The first time (when oldModel is nil) reload the whole collection, otherwise update only the cells that need to be updated.
     if let oldModel = oldModel {
+      if model.shouldEndRefreshing(from: oldModel) {
+        // End the loading animation of the pull tu refresh control, if needed.
+        collectionView.refreshControl?.endRefreshing()
+      }
+
       collectionView.performBatchUpdates {
         // Delete the loading skeleton cell when no more needed.
         if !model.shouldShowSkeletonCell {
@@ -145,5 +155,13 @@ extension HomeView: UICollectionViewDataSource {
 extension HomeView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     didTapArticleCell?(indexPath.item)
+  }
+}
+
+// MARK: - Helpers
+
+extension HomeView {
+  @objc func onPullToRefresh() {
+    didPullToRefresh?()
   }
 }

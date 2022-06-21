@@ -18,6 +18,9 @@ struct HomeVM: ViewModelWithState, Equatable {
   /// The total number of articles that can be fetched from back-end.
   let totalNumberOfArticles: UInt?
 
+  /// Whether the view is refreshing after a pull to refresh.
+  let isRefreshing: Bool
+
   // MARK: Computed Properties
 
   /// Whether the loading skeleton cell should be shown.
@@ -35,6 +38,7 @@ struct HomeVM: ViewModelWithState, Equatable {
   init?(state: AppState) {
     articles = state.home.articles
     totalNumberOfArticles = state.home.totalNumberOfArticles
+    isRefreshing = state.home.isRefreshing
   }
 }
 
@@ -66,11 +70,22 @@ extension HomeVM {
   /// - Parameter oldModel: The old `HomeVM`.
   /// - Returns: The `IndexPath`s for the articles in the new `HomeVM` not present in the old `HomeVM`.
   func newArticleCellsIndexes(from oldModel: HomeVM) -> [IndexPath] {
-    (oldModel.articles.count ..< articles.count).map { IndexPath(item: $0, section: 0) }
+    if shouldEndRefreshing(from: oldModel) {
+      // If the new articles come after a refresh we should add them on top of the list
+      return (0 ..< articles.count - oldModel.articles.count).map { IndexPath(item: $0, section: 0) }
+    } else {
+      // Otherwise they come after scrolling for a new page. In this case we should add them on the bottom of the list.
+      return (oldModel.articles.count ..< articles.count).map { IndexPath(item: $0, section: 0) }
+    }
   }
 
   /// The `IndexPath` of the loading skeleton cell.
   var skeletonCellIndex: IndexPath {
     IndexPath(item: articles.count, section: 0)
+  }
+
+  /// Whether we should handle the end of a refreshing.
+  func shouldEndRefreshing(from oldModel: HomeVM) -> Bool {
+    return oldModel.isRefreshing && !isRefreshing
   }
 }

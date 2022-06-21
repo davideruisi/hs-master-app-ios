@@ -56,6 +56,34 @@ extension Logic.Home {
       context.dispatch(Show(Screen.safariWebView, animated: true, context: url))
     }
   }
+
+  /// Refresh the Home tab. This side effect is dispatched when the user pull to refresh in the home tab.
+  struct Refresh: AppSideEffect {
+    func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+      try Hydra.await(context.dispatch(UpdateStateBeforeRefresh()))
+
+      context.dependencies.contentfulManager.getArticles(offset: 0)
+        .then { totalArticles, articles in
+          // If the new total number of articles is larger, we have some new articles to put on top of the list.
+          guard
+            let oldTotalArticles = context.getState().home.totalNumberOfArticles,
+            totalArticles > oldTotalArticles
+          else {
+            context.dispatch(UpdateStateAfterRefresh(newArticles: [], totalNumberOfArticles: totalArticles))
+            return
+          }
+
+          let newArticles = Array(articles.prefix(Int(totalArticles - oldTotalArticles)))
+          context.dispatch(UpdateStateAfterRefresh(newArticles: newArticles, totalNumberOfArticles: totalArticles))
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
+    }
+  }
 }
 
 // MARK: - StateUpdaters
@@ -76,7 +104,33 @@ private extension Logic.Home {
         return
       }
 
-      state.home = AppState.Home(articles: articles, totalNumberOfArticles: totalNumberOfArticles)
+      state.home = AppState.Home(
+        articles: articles,
+        totalNumberOfArticles: totalNumberOfArticles,
+        isRefreshing: state.home.isRefreshing
+      )
+    }
+  }
+
+  /// Update the state before doing a refresh of the Home tab.
+  struct UpdateStateBeforeRefresh: AppStateUpdater {
+    func updateState(_ state: inout AppState) {
+      state.home.isRefreshing = true
+    }
+  }
+
+  /// Update the state after a refresh.
+  struct UpdateStateAfterRefresh: AppStateUpdater {
+    /// The new articles to add on top of the list of articles.
+    let newArticles: [Models.Article]
+
+    /// The total number of articles available on back-end.
+    let totalNumberOfArticles: UInt
+
+    func updateState(_ state: inout AppState) {
+      state.home.articles.insert(contentsOf: newArticles, at: 0)
+      state.home.totalNumberOfArticles = totalNumberOfArticles
+      state.home.isRefreshing = false
     }
   }
 }
