@@ -10,12 +10,6 @@ import Tempura
 
 /// The ViewController of the `MetaView`.
 class MetaVC: ViewController<MetaView> {
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    dispatch(Logic.Meta.GetMetaDecks())
-  }
-
   override func setupInteraction() {
     rootView.didTapDeckCell = { [weak self] indexPath in
       let deck = self?.viewModel?.deck(for: indexPath)

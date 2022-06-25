@@ -21,6 +21,7 @@ extension Logic.AppSetup {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
       context.dispatch(GetMetadata())
       context.dispatch(Logic.CardSearch.GetCardList())
+      context.dispatch(Logic.Meta.GetMetaDecks())
     }
   }
 
