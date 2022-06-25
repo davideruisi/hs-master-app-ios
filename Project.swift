@@ -32,8 +32,8 @@ let project = Project(
                 "KEYCHAIN_SERVICE_ACCESS_TOKEN": "$(KEYCHAIN_SERVICE_ACCESS_TOKEN)",
                 "KEYCHAIN_ACCOUNT_BATTLE_NET": "$(KEYCHAIN_ACCOUNT_BATTLE_NET)"
             ]),
-            sources: ["HSMaster/**"],
-            resources: ["HSMaster/Resources/**", "HSMaster/SupportingFiles/**"],
+            sources: ["HSMaster/Sources/**"],
+            resources: ["HSMaster/Resources/**"],
             scripts: [
                 .pre(
                     script: """
@@ -47,8 +47,8 @@ let project = Project(
                 )
             ],
             settings: .settings(configurations: [
-                .debug(name: .debug, xcconfig: .relativeToRoot("HSMaster/SupportingFiles/Debug.xcconfig")),
-                .release(name: .release, xcconfig: .relativeToRoot("HSMaster/SupportingFiles/Release.xcconfig"))
+                .debug(name: .debug, xcconfig: .relativeToRoot("HSMaster/Resources/Configs/Debug.xcconfig")),
+                .release(name: .release, xcconfig: .relativeToRoot("HSMaster/Resources/Configs/Release.xcconfig"))
             ])
         )
     ]

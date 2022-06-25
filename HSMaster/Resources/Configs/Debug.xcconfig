@@ -1,12 +1,12 @@
 //
-//  Release.xcconfig
+//  Debug.xcconfig
 //  HSMaster
 //
 //  Created by Davide Ruisi on 22/10/21.
 //
 
-#include "Pods/Target Support Files/Pods-HSMaster/Pods-HSMaster.release.xcconfig"
-#include "HSMaster/SupportingFiles/Secrets/SecretsRelease.xcconfig"
+#include "Pods/Target Support Files/Pods-HSMaster/Pods-HSMaster.debug.xcconfig"
+#include "HSMaster/Resources/Configs/Secrets/SecretsDebug.xcconfig"
 
 KEYCHAIN_SERVICE_ACCESS_TOKEN = com.davideruisi.HSMaster.keychain.service.accessToken
 KEYCHAIN_ACCOUNT_BATTLE_NET = com.davideruisi.HSMaster.keychain.account.battleNet
