@@ -22,3 +22,7 @@ fi
 # Install pods.
 echo "Installing pods."
 pod install
+
+# Open workspace
+echo "Opening HSMaster.xcworkspace"
+open HSMaster.xcworkspace
