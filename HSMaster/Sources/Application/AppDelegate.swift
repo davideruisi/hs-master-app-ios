@@ -20,6 +20,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var store: Store<AppState, AppDependencies>?
 
+  // MARK: Store Interceptors
+
+  var storeInterceptors: [StoreInterceptor] {
+    var interceptors: [StoreInterceptor] = []
+
+    let observerInterceptor = ObserverInterceptor.observe([
+      .onStart([Logic.AppSetup.Start.self])
+    ])
+    interceptors.append(observerInterceptor)
+
+    #if DEBUG
+    let dispatchableLogger = DispatchableLogger.interceptor()
+    interceptors.append(dispatchableLogger)
+    #endif
+
+    return interceptors
+  }
+
   // MARK: App Lifecycle
 
   func application(
@@ -32,14 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window.makeKeyAndVisible()
 
     // Initialize the store.
-    self.store = Store<AppState, AppDependencies>(interceptors: [], stateInitializer: AppState.init)
+    self.store = Store<AppState, AppDependencies>(interceptors: storeInterceptors, stateInitializer: AppState.init)
 
     // Start the navigation.
     self.store?.dependencies?.navigator.start(using: self, in: window, at: Screen.tabBar)
-
-    // Execute AppSetup logic in background.
-    // This logic is non-blocking and can be executed after the start of the app navigation.
-    self.store?.dispatch(Logic.AppSetup.Start())
 
     return true
   }

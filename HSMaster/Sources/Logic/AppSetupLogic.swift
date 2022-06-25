@@ -17,7 +17,7 @@ extension Logic {
 
 extension Logic.AppSetup {
   /// Starts the app setup, executing request to load app's content.
-  struct Start: AppSideEffect {
+  struct Start: AppSideEffect, OnStartObserverDispatchable {
     func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
       context.dispatch(GetMetadata())
       context.dispatch(Logic.CardSearch.GetCardList())
