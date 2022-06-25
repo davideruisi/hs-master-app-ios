@@ -106,7 +106,7 @@ private extension ArticleSkeletonCell {
     }
 
     static func containerView(_ view: UIView) {
-      view.backgroundColor = Palette.backgroundSecondary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundSecondary.color
       view.layer.cornerRadius = SharedStyle.cardCornerRadius
       view.clipsToBounds = true
 
@@ -136,8 +136,8 @@ private extension ArticleSkeletonCell {
   /// Start the skeleton loading animation on the cell.
   func showSkeleton() {
     let skeletonGradient = SkeletonGradient(
-      baseColor: Palette.backgroundPrimary.color,
-      secondaryColor: Palette.backgroundTertiary.color
+      baseColor: HSMasterAsset.Colors.backgroundPrimary.color,
+      secondaryColor: HSMasterAsset.Colors.backgroundTertiary.color
     )
     containerView.showAnimatedGradientSkeleton(usingGradient: skeletonGradient)
   }

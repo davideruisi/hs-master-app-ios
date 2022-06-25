@@ -69,10 +69,10 @@ extension MetaVM {
   /// The view model for the header in the specified section of the `collectionView`.
   func tierSectionHeaderVM(for section: Int) -> TierSectionHeaderVM {
     guard let tier = tiers[safe: section]?.key else {
-      return TierSectionHeaderVM(title: Localization.MetaTab.tierTitle("?"))
+      return TierSectionHeaderVM(title: HSMasterStrings.MetaTab.tierTitle("?"))
     }
 
-    return TierSectionHeaderVM(title: Localization.MetaTab.tierTitle(tier))
+    return TierSectionHeaderVM(title: HSMasterStrings.MetaTab.tierTitle(tier))
   }
 
   /// Returns the deck at the specified IndexPath.

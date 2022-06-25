@@ -52,15 +52,10 @@ xcuserdata/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-## Ignore project files as we generate them with xcodegen ([https://github.com/yonaskolb/XcodeGen](https://github.com/yonaskolb/XcodeGen))  
+## Ignore Tuist generated files
 *.xcodeproj  
 *.xcworkspace
-Info.plist
-
-## Ignore SwiftGen generated files
-HSMaster/Resources/Palette.swift
-HSMaster/Resources/Localization.swift
-HSMaster/Resources/Images.swift
+Derived/
 
 ## Secrets
 HSMaster/SupportingFiles/Secrets/

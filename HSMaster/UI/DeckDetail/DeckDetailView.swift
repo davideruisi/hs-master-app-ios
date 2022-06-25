@@ -113,7 +113,7 @@ extension DeckDetailView: UICollectionViewDelegate {
 private extension DeckDetailView {
   enum Style {
     static func view(_ view: DeckDetailView) {
-      view.backgroundColor = Palette.backgroundPrimary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundPrimary.color
     }
 
     static func navigationItem(_ navigationItem: UINavigationItem?, title: String?, rightBarButtonItemTitle: String?) {

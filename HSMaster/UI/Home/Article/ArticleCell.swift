@@ -128,7 +128,7 @@ private extension ArticleCell {
     }
 
     static func containerView(_ view: UIView) {
-      view.backgroundColor = Palette.backgroundSecondary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundSecondary.color
       view.layer.cornerRadius = SharedStyle.cardCornerRadius
       view.clipsToBounds = true
     }

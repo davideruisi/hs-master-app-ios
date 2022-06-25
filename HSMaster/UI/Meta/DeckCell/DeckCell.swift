@@ -121,7 +121,7 @@ private extension DeckCell {
     }
 
     static func containerView(_ view: UIView) {
-      view.backgroundColor = Palette.backgroundSecondary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundSecondary.color
       view.layer.cornerRadius = SharedStyle.cardCornerRadius
       view.clipsToBounds = true
     }
@@ -130,7 +130,7 @@ private extension DeckCell {
       view.contentMode = .scaleAspectFit
       view.image = image
       view.layer.cornerRadius = DeckCell.classImageCornerRadius
-      view.backgroundColor = isHidden ? Palette.backgroundTertiary.color : .clear
+      view.backgroundColor = isHidden ? HSMasterAsset.Colors.backgroundTertiary.color : .clear
     }
 
     static func nameLabel(_ label: UILabel, with text: String?) {

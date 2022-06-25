@@ -71,7 +71,7 @@ final class CardSearchView: UIView, ViewControllerModellableView {
 private extension CardSearchView {
   enum Style {
     static func view(_ view: CardSearchView) {
-      view.backgroundColor = Palette.backgroundPrimary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundPrimary.color
     }
 
     static func collectionView(_ collectionView: UICollectionView) {
@@ -212,7 +212,7 @@ private extension CardSearchView {
 
     let search = UISearchController(searchResultsController: nil)
     search.obscuresBackgroundDuringPresentation = false
-    search.searchBar.placeholder = Localization.CardSearchTab.SearchBar.placeholder
+    search.searchBar.placeholder = HSMasterStrings.CardSearchTab.SearchBar.placeholder
     search.searchBar.delegate = self
     navigationItem.searchController = search
   }

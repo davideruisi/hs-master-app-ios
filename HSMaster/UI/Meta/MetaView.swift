@@ -134,7 +134,7 @@ extension MetaView: UICollectionViewDelegate {
 private extension MetaView {
   enum Style {
     static func view(_ view: MetaView) {
-      view.backgroundColor = Palette.backgroundPrimary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundPrimary.color
     }
 
     static func activityIndicatorView(_ view: UIActivityIndicatorView, isVisible: Bool) {

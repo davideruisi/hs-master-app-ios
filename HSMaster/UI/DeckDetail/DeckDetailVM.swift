@@ -36,7 +36,7 @@ struct DeckDetailVM: ViewModelWithLocalState, Equatable {
 extension DeckDetailVM {
   /// The text inside the right button in the navigation bar.
   var navigationBarRightButtonItemTitle: String {
-    deckCodeCopied ? Localization.DeckDetail.DeckCode.copied : Localization.DeckDetail.DeckCode.copy
+    deckCodeCopied ? HSMasterStrings.DeckDetail.DeckCode.copied : HSMasterStrings.DeckDetail.DeckCode.copy
   }
 
   /// Whether the activity indicator spinner should be visible.

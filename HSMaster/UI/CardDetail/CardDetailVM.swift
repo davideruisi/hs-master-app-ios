@@ -48,7 +48,7 @@ extension CardDetailVM {
   }
 
   var setDetailVM: DetailVM {
-    DetailVM(title: Localization.CardDetail.set, body: setDetailBody, isHidden: isSetDetailHidden)
+    DetailVM(title: HSMasterStrings.CardDetail.set, body: setDetailBody, isHidden: isSetDetailHidden)
   }
 
   // MARK: Class Detail
@@ -72,7 +72,7 @@ extension CardDetailVM {
   }
 
   var classDetailVM: DetailVM {
-    DetailVM(title: Localization.CardDetail.class, body: classDetailBody, isHidden: isClassDetailHidden)
+    DetailVM(title: HSMasterStrings.CardDetail.class, body: classDetailBody, isHidden: isClassDetailHidden)
   }
 
   // MARK: Keyword Detail
@@ -107,7 +107,7 @@ extension CardDetailVM {
   }
 
   var keywordDetailVM: DetailVM {
-    DetailVM(title: Localization.CardDetail.keywords, body: keywordDetailBody, isHidden: isKeywordDetailHidden)
+    DetailVM(title: HSMasterStrings.CardDetail.keywords, body: keywordDetailBody, isHidden: isKeywordDetailHidden)
   }
 
   // MARK: Artist Detail
@@ -117,7 +117,7 @@ extension CardDetailVM {
       return DetailVM(title: nil, body: nil, isHidden: true)
     }
 
-    return DetailVM(title: Localization.CardDetail.artist, body: NSAttributedString(string: artistName), isHidden: false)
+    return DetailVM(title: HSMasterStrings.CardDetail.artist, body: NSAttributedString(string: artistName), isHidden: false)
   }
 }
 

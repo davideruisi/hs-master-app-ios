@@ -17,7 +17,6 @@ target 'HSMaster' do
   pod 'SkeletonView', '~> 1.25'
 
   # Tools
-  pod 'SwiftGen', '~> 6.4'
   pod 'SwiftLint', '~> 0.44'
 end
 

@@ -1,20 +1,16 @@
 #!/bin/sh
 set -e
 
-# Create SwiftGen files if not existing yet.
-touch HSMaster/Resources/Palette.swift
-touch HSMaster/Resources/Localization.swift
-
-# Install XcodeGen if needed.
-if ! command -v xcodegen &> /dev/null
+# Install Tuist if needed.
+if ! command -v tuist &> /dev/null
 then
-    echo "XcodeGen could not be found and will be installed."
-    brew install xcodegen
+    echo "Tuist could not be found and will be installed."
+    curl -Ls https://install.tuist.io | bash
 fi
 
 # Generate xcodeproj file.
 echo "Generating xcodeproj file."
-xcodegen generate
+tuist generate --no-open
 
 # Install Cocoapods if needed.
 if ! command -v pod &> /dev/null

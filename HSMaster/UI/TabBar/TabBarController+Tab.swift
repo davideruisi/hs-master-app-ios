@@ -57,13 +57,13 @@ extension TabBarController.Tab {
   var title: String {
     switch self {
     case .home:
-      return Localization.HomeTab.title
+      return HSMasterStrings.HomeTab.title
 
     case .meta:
-      return Localization.MetaTab.title
+      return HSMasterStrings.MetaTab.title
 
     case .cardSearch:
-      return Localization.CardSearchTab.title
+      return HSMasterStrings.CardSearchTab.title
     }
   }
 

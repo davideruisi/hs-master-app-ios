@@ -135,7 +135,7 @@ extension DeckCardCell {
     }
 
     static func containerView(_ view: UIView) {
-      view.backgroundColor = Palette.backgroundSecondary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundSecondary.color
       view.layer.cornerRadius = DeckCardCell.cornerRadius
       view.clipsToBounds = true
     }
@@ -145,7 +145,7 @@ extension DeckCardCell {
     }
 
     static func croppedCardGradientView(_ view: GradientView) {
-      view.startColor = Palette.backgroundSecondary.color
+      view.startColor = HSMasterAsset.Colors.backgroundSecondary.color
       view.endColor = .clear
       view.startLocation = 0.25
       view.endLocation = 0.75
@@ -171,7 +171,7 @@ extension DeckCardCell {
       label.font = .systemFont(ofSize: 17, weight: .bold)
       label.textAlignment = .center
       label.textColor = .label
-      label.backgroundColor = Palette.backgroundTertiary.color
+      label.backgroundColor = HSMasterAsset.Colors.backgroundTertiary.color
     }
   }
 }

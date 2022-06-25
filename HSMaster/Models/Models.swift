@@ -99,43 +99,43 @@ extension Models {
         switch self.id {
         case 14:
           // Demon Hunter.
-          return Images.ClassIcons.demonHunterIcon.image
+          return HSMasterAsset.Images.ClassIcons.demonHunterIcon.image
 
         case 2:
           // Druid.
-          return Images.ClassIcons.druidIcon.image
+          return HSMasterAsset.Images.ClassIcons.druidIcon.image
 
         case 3:
           // Hunter.
-          return Images.ClassIcons.hunterIcon.image
+          return HSMasterAsset.Images.ClassIcons.hunterIcon.image
 
         case 4:
           // Mage.
-          return Images.ClassIcons.mageIcon.image
+          return HSMasterAsset.Images.ClassIcons.mageIcon.image
 
         case 5:
           // Paladin.
-          return Images.ClassIcons.paladinIcon.image
+          return HSMasterAsset.Images.ClassIcons.paladinIcon.image
 
         case 6:
           // Priest.
-          return Images.ClassIcons.priestIcon.image
+          return HSMasterAsset.Images.ClassIcons.priestIcon.image
 
         case 7:
           // Rogue.
-          return Images.ClassIcons.rogueIcon.image
+          return HSMasterAsset.Images.ClassIcons.rogueIcon.image
 
         case 8:
           // Shaman.
-          return Images.ClassIcons.shamanIcon.image
+          return HSMasterAsset.Images.ClassIcons.shamanIcon.image
 
         case 9:
           // Warlock.
-          return Images.ClassIcons.warlockIcon.image
+          return HSMasterAsset.Images.ClassIcons.warlockIcon.image
 
         case 10:
           // Warrior.
-          return Images.ClassIcons.warriorIcon.image
+          return HSMasterAsset.Images.ClassIcons.warriorIcon.image
 
         case 12:
           // Neutral.

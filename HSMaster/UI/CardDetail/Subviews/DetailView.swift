@@ -136,7 +136,7 @@ extension DetailView {
     }
 
     static func separatorView(_ view: UIView) {
-      view.backgroundColor = Palette.backgroundTertiary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundTertiary.color
     }
   }
 }

@@ -120,7 +120,7 @@ final class CardDetailView: UIView, ViewControllerModellableView {
 extension CardDetailView {
   enum Style {
     static func view(_ view: CardDetailView) {
-      view.backgroundColor = Palette.backgroundPrimary.color
+      view.backgroundColor = HSMasterAsset.Colors.backgroundPrimary.color
     }
 
     static func navigationItem(_ navigationItem: UINavigationItem?, with title: String?) {
