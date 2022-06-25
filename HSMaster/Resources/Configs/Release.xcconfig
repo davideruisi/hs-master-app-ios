@@ -6,7 +6,7 @@
 //
 
 #include "Pods/Target Support Files/Pods-HSMaster/Pods-HSMaster.release.xcconfig"
-#include "HSMaster/Resources/Configs/Secrets/SecretsRelease.xcconfig"
+#include "HSMaster/Resources/Configs/Secrets/ReleaseSecrets.xcconfig"
 
 KEYCHAIN_SERVICE_ACCESS_TOKEN = com.davideruisi.HSMaster.keychain.service.accessToken
 KEYCHAIN_ACCOUNT_BATTLE_NET = com.davideruisi.HSMaster.keychain.account.battleNet

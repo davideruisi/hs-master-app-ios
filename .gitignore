@@ -58,5 +58,6 @@ xcuserdata/
 Derived/
 
 ## Secrets
-HSMaster/Resources/Configs/Secrets/
+HSMaster/Resources/Configs/Secrets/DebugSecrets.xcconfig
+HSMaster/Resources/Configs/Secrets/ReleaseSecrets.xcconfig
 
