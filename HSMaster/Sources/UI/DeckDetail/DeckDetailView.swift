@@ -118,6 +118,7 @@ private extension DeckDetailView {
 
     static func navigationItem(_ navigationItem: UINavigationItem?, title: String?, rightBarButtonItemTitle: String?) {
       navigationItem?.title = title
+      navigationItem?.largeTitleDisplayMode = .never
       navigationItem?.rightBarButtonItem?.title = rightBarButtonItemTitle
     }
 
