@@ -12,11 +12,15 @@ extension AppState {
   struct Meta {
     /// The list of decks fetched from back-end to be shown in the Meta tab.
     var decks: [Models.Deck]
+
+    /// Whether the Meta tab is refreshing.
+    var isRefreshing: Bool
   }
 }
 
 extension AppState.Meta {
   init() {
     decks = []
+    isRefreshing = false
   }
 }

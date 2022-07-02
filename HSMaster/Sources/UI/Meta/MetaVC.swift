@@ -16,5 +16,9 @@ class MetaVC: ViewController<MetaView> {
 
       self?.dispatch(Logic.Meta.ShowDeckDetail(deck: deck))
     }
+
+    rootView.didPullToRefresh = { [weak self] in
+      self?.dispatch(Logic.Meta.Refresh())
+    }
   }
 }

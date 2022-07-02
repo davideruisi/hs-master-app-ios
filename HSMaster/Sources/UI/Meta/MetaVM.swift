@@ -16,6 +16,9 @@ struct MetaVM: ViewModelWithState {
   /// The meta decks grouped by `tier` and ordered by `position`.
   let tiers: [(key: Int, value: [Models.Deck])]
 
+  /// Whether the view is refreshing after a pull to refresh.
+  let isRefreshing: Bool
+
   init?(state: AppState) {
     metadata = state.metadata
 
@@ -24,6 +27,8 @@ struct MetaVM: ViewModelWithState {
       groupedDecksByTier[tier] = decks.sorted(by: { $0.position < $1.position })
     }
     tiers = groupedDecksByTier.sorted(by: { $0.key < $1.key })
+
+    isRefreshing = state.meta.isRefreshing
   }
 }
 
@@ -33,7 +38,8 @@ extension MetaVM: Equatable {
   static func == (lhs: MetaVM, rhs: MetaVM) -> Bool {
     guard
       lhs.metadata == rhs.metadata,
-      lhs.tiers.count == rhs.tiers.count
+      lhs.tiers.count == rhs.tiers.count,
+      lhs.isRefreshing == rhs.isRefreshing
     else {
       return false
     }
@@ -92,5 +98,10 @@ extension MetaVM {
       classImage: metadata.getClass(with: deck?.detail?.classId)?.icon,
       name: deck?.name
     )
+  }
+
+  /// Whether we should handle the end of a refreshing.
+  func shouldEndRefreshing(from oldModel: MetaVM?) -> Bool {
+    return oldModel?.isRefreshing ?? false && !isRefreshing
   }
 }

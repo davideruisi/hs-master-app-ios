@@ -71,6 +71,38 @@ extension Logic.Meta {
       context.dispatch(Show(Screen.deckDetail, animated: true, context: deckDetailLS))
     }
   }
+
+  /// Refresh the Meta tab. This side effect is dispatched when the user pull to refresh in the Meta tab.
+  struct Refresh: AppSideEffect {
+    func sideEffect(_ context: SideEffectContext<AppState, AppDependencies>) throws {
+      try Hydra.await(context.dispatch(UpdateRefreshingState(isRefreshing: true)))
+
+      context.dependencies.contentfulManager.getDecks()
+        .then { decks in
+          try Hydra.await(context.dispatch(UpdateRefreshingState(isRefreshing: false)))
+
+          let oldDecksCodes = context.getState().meta.decks.map { $0.code }
+          let newDecksCodes = decks.map { $0.code }
+
+          guard oldDecksCodes != newDecksCodes else {
+            // Same decks as before: no need to update.
+            return
+          }
+
+          try Hydra.await(context.dispatch(UpdateMetaDecksState(decks: decks)))
+
+          decks.forEach { deck in
+            context.dispatch(GetDeckDetail(deck: deck))
+          }
+        }
+        .catch { _ in
+          // Executes again the request after a delay of 1 second.
+          DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+            context.dispatch(self)
+          }
+        }
+    }
+  }
 }
 
 // MARK: - StateUpdaters
@@ -106,6 +138,17 @@ extension Logic.Meta {
         code: deck.code,
         detail: detail
       )
+    }
+  }
+}
+
+private extension Logic.Meta.Refresh {
+  /// Update the refreshing state of the Meta tab.
+  struct UpdateRefreshingState: AppStateUpdater {
+    let isRefreshing: Bool
+
+    func updateState(_ state: inout AppState) {
+      state.meta.isRefreshing = isRefreshing
     }
   }
 }

@@ -28,6 +28,9 @@ class MetaView: UIView, ViewControllerModellableView {
   /// The user tapped a DeckCell.
   var didTapDeckCell: CustomInteraction<IndexPath>?
 
+  /// The user pulled down the collection view to refresh.
+  var didPullToRefresh: Interaction?
+
   // MARK: - SSUL
 
   func setup() {
@@ -42,6 +45,8 @@ class MetaView: UIView, ViewControllerModellableView {
       forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
       withReuseIdentifier: TierSectionHeader.reuseIdentifier
     )
+    collectionView.refreshControl = UIRefreshControl()
+    collectionView.refreshControl?.addTarget(self, action: #selector(onPullToRefresh), for: .valueChanged)
   }
 
   func style() {
@@ -55,6 +60,11 @@ class MetaView: UIView, ViewControllerModellableView {
     }
 
     Self.Style.activityIndicatorView(activityIndicatorView, isVisible: model.shouldShowLoader)
+
+    if model.shouldEndRefreshing(from: oldModel) {
+      // End the loading animation of the pull tu refresh control, if needed.
+      collectionView.refreshControl?.endRefreshing()
+    }
 
     collectionView.reloadData()
   }
@@ -172,5 +182,9 @@ private extension MetaView {
     )
 
     return collectionViewLayout
+  }
+
+  @objc func onPullToRefresh() {
+    didPullToRefresh?()
   }
 }
