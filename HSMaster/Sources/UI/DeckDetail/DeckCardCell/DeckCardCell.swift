@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Kingfisher
 import Tempura
 import UIKit
 
@@ -141,6 +142,7 @@ extension DeckCardCell {
     }
 
     static func croppedCardImageView(_ imageView: UIImageView, with url: URL?) {
+      imageView.backgroundColor = HSMasterAsset.Colors.backgroundTertiary.color
       imageView.kf.setImage(with: url, options: [.transition(.fade(0.3))])
     }
 
